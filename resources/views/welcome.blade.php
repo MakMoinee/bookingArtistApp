@@ -42,11 +42,13 @@
                             <a class="nav-link" href="#">About</a>
                         </li>
                     </ul>
-                    <form class="d-flex" style="background: #afafafc5">
-                        <button class="btn btn-light"
-                            style="background: transparent !important; color:white;">Login</button>
-                        <button class="btn btn-primary" style="margin-left: 20px;">Signup</button>
-                    </form>
+                    <div class="d-flex" style="background: #afafafc5">
+                        <a
+                            style="background: transparent;color:black;text-decoration: none;margin-top: 5px;font-family: 'Roboto',sans-serif;cursor:pointer;">Login</a>
+                        <a href="/signup"
+                            style="margin-left: 20px;font-family:'Roboto',sans-serif;background: #5F939A;text-decoration:none;color:white;padding-left:15px;padding-right:15px;padding-top: 5px;padding-bottom: 5px;"
+                            class="rounded-pill">Signup</a>
+                    </div>
                 </div>
             </div>
         </nav>
