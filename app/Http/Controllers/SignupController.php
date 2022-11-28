@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Iusers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class SignupController extends Controller
@@ -18,6 +19,36 @@ class SignupController extends Controller
         if ($request['as'] && $request['step']) {
             if ($request['as'] == 'BAND' || $request['as'] == 'HOST') {
 
+                $tmpProfile = session()->pull('tmpProfile');
+                if ($tmpProfile) {
+                    $affectedRows = DB::table('profiles')->where(['profileID' => $tmpProfile[0]['profileID']])
+                        ->delete();
+                    session()->forget('tmpProfile');
+                }
+
+                $isFromStep1 = session()->pull('isFromStep1');
+                if ($isFromStep1) {
+                    session()->put('isFromStep1', true);
+                    if ($request['step'] != 2) {
+                        return redirect('/signup?as=' . $request['as'] . '&step=2');
+                    }
+                    if ($request['step'] == 2 && $request['as'] == 'HOST') {
+                        return view('signupstep2a', [
+                            'step' => $request['step'],
+                            'as' => $request['as']
+                        ]);
+                    } else if ($request['step'] == 2 && $request['as'] == 'BAND') {
+                        return view('signupstep2b', [
+                            'step' => $request['step'],
+                            'as' => $request['as']
+                        ]);
+                    }
+                } else {
+                    if ($request['step'] == 2) {
+                        return redirect('/signup?as=' . $request['as'] . '&step=1');
+                    }
+                }
+
                 if ($request['step'] == 1 && $request['as'] == 'BAND') {
                     return view('signup', [
                         'step' => $request['step'],
@@ -25,18 +56,6 @@ class SignupController extends Controller
                     ]);
                 } else if ($request['step'] == 1 && $request['as'] == 'HOST') {
                     return view('signuphost', [
-                        'step' => $request['step'],
-                        'as' => $request['as']
-                    ]);
-                }
-
-                if ($request['step'] == 2 && $request['as'] == 'HOST') {
-                    return view('signupstep2a', [
-                        'step' => $request['step'],
-                        'as' => $request['as']
-                    ]);
-                } else if ($request['step'] == 2 && $request['as'] == 'BAND') {
-                    return view('signupstep2b', [
                         'step' => $request['step'],
                         'as' => $request['as']
                     ]);
@@ -85,7 +104,22 @@ class SignupController extends Controller
             $isSave = $iuser->save();
 
             if ($isSave) {
-                session()->put('successCreate', true);
+                $queryResult = DB::table('iusers')->where([
+                    'email' => $iuser->email,
+                ])->get();
+                $data = json_decode($queryResult, true);
+                $tmpUser = array();
+
+                foreach ($data as $d) {
+                    if (password_verify($request->password, $d['password'])) {
+                        array_push($tmpUser, $d);
+                        break;
+                    }
+                }
+
+                session()->put('tmpUser', $tmpUser);
+                session()->put('isFromStep1', true);
+                session()->put('AS', $as);
                 $step = $step + 1;
             } else {
                 session()->put('errorCreate', true);

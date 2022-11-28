@@ -17,6 +17,6 @@ class Iusers extends Model
         'email',
         'password',
         'userType',
-        'phonenum'
+        'phonenum',
     ];
 }

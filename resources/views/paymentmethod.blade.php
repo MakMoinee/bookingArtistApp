@@ -21,7 +21,7 @@
         .columnBody {
             float: left;
             width: 50%;
-            height: 400px;
+            height: 50px;
         }
 
         .columnHead {
@@ -198,13 +198,13 @@
                                 <div class="columnHead" style="left: 20%">
                                     <br>
                                     <center>
-
+                                        <p style="padding-left: 80px;">PROFILE</p>
                                     </center>
                                 </div>
                                 <div class="columnHead" style="left: 20%">
                                     <br>
                                     <center>
-                                        <p style="padding-left: 80px;">PROFILE</p>
+                                        <p style="padding-left: 80px;">PAYMENT METHOD</p>
                                     </center>
                                 </div>
                             </div>
@@ -212,14 +212,8 @@
                             <div class="row">
                                 <center>
                                     <ul class="progress_bar" style="margin-left: 169px;">
-                                        @if ($step == 1)
-                                            <li class='activated'><span></span></li>
-                                            <li><span></span></li>
-                                        @endif
-                                        @if ($step == 2)
-                                            <li><span></span></li>
-                                            <li class='activated'><span></span></li>
-                                        @endif
+                                        <li><span></span></li>
+                                        <li class='activated'><span></span></li>
 
                                     </ul>
                                 </center>
@@ -231,113 +225,51 @@
                                 <br>
                                 <div class="row">
                                     <h3
-                                        style="font-family: 'Roboto Regular',sans-serif; color: #979797;filter: drop-shadow(0.5px 0.5px 0.5px #2D2E2E);">
-                                        PROFILE</h3>
+                                        style="font-family: 'Roboto Regular',sans-serif; color: #000000;filter: drop-shadow(0.5px 0.5px 0.5px #2D2E2E);">
+                                        Payment Method</h3>
                                 </div>
                                 <br>
-                                <form action="/profile?as={{ $as }}&step={{ $step }}" method="POST"
-                                    autocomplete="off" enctype="multipart/form-data">
+                                <br>
+                                <br>
+                                <form action="#" method="POST" autocomplete="off" enctype="multipart/form-data">
                                     @csrf
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <h6 style="margin-left: 50px;">Add a payment method</h6>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <center>
-                                                <img class="file-upload-image" src="/storage/images/user.png"
-                                                    alt="" srcset="" width="150px" height="150px"
-                                                    style="margin-bottom: 20px;">
-                                                <p>Add Picture <a onclick="fileOpen()"
-                                                        style="border:none;background: transparent;cursor: pointer;">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                            height="24" fill="currentColor"
-                                                            class="bi bi-file-plus" viewBox="0 0 16 16">
-                                                            <path
-                                                                d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5V6z" />
-                                                            <path
-                                                                d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z" />
-                                                        </svg>
-                                                    </a></p>
-                                                <input required type="file" name="files" id="mFile"
-                                                    style="visibility: hidden;" accept=".jpg, .png, .jpeg, .bitmap"
-                                                    onchange="readURL(this)">
+                                                <div class="form-group">
+                                                    <a class="btn btn-primary" id="gcash"
+                                                        style="background: transparent;"><img src="/images/gcash.png"
+                                                            alt="" srcset="" width="150px"
+                                                            height="50px" onclick="gcashClick()"></a>
+                                                    <a class="btn btn-primary" id="credit"
+                                                        style="background: transparent;margin-left: 20px;"><img
+                                                            src="/images/mastercard.png" alt=""
+                                                            srcset="" width="150px" height="50px"
+                                                            onclick="creditClick()"></a>
+                                                    <input required type="hidden" name="paymentmethod"
+                                                        id="payment">
+                                                </div>
                                             </center>
                                         </div>
                                     </div>
                                     <br>
+                                    <br>
+                                    <br>
+                                    <br>
                                     <div class="rowHead">
-                                        {{-- LEFT --}}
                                         <div class="columnBody">
-                                            <div class="form-group" style="padding-left: 30px;padding-right: 30px;">
-                                                <label for="profile" class="for">Which type of profile best
-                                                    describes you?</label>
-                                                <br>
-                                                <select name="profile" id="profile" style="width: 100%;">
-                                                    <option value="Event Planner">Event Planner</option>
-                                                    <option value="Manager">Manager</option>
-                                                    <option value="Promoter">Promoter</option>
-                                                    <option value="Venue Manager">Venue Manager</option>
-                                                    <option value="Wedding Planner">Wedding Planner</option>
-                                                    <option value="Producer">Producer</option>
-                                                    <option value="Individual">Individual</option>
-                                                    <option value="Talent Buyer">Talent Buyer</option>
-                                                    <option value="Composer/Arranger">Composer/Arranger</option>
-
-                                                </select>
-                                            </div>
-                                            <br>
-                                            <br>
-                                            <br>
-                                            <div class="form-group" style="padding-left: 30px;padding-right: 30px;">
-                                                <label for="bio" class="for">BIO</label>
-                                                <br>
-                                                <input required type="text" name="bio" id="bio"
-                                                    style="width: 100%;">
-                                            </div>
+                                            <a href="/signup?as={{ $as }}&step=2" class="btn btn-primary"
+                                                style="background:transparent;color:#464646;border:none;">Back</a>
                                         </div>
-                                        {{-- RIGHT --}}
                                         <div class="columnBody">
-                                            <div class="form-group" style="padding-left: 30px;padding-right: 30px;">
-                                                <label for="company" class="for">Company Name</label>
-                                                <br>
-                                                <input required type="text" name="company" id="company"
-                                                    style="width: 100%;">
-                                            </div>
-                                            <br>
-                                            <br>
-                                            <br>
-                                            <div class="form-group" style="padding-left: 30px;padding-right: 30px;">
-                                                <label for="location" class="for">Location</label>
-                                                <br>
-                                                <select name="location" id="" style="width: 100%;">
-                                                    <option value="Valencia City">Valencia City</option>
-                                                    <option value="Malaybalay City">Malaybalay City</option>
-                                                    <option value="Kibawe">Kibawe</option>
-                                                    <option value="Cabanglasan">Cabanglasan</option>
-                                                    <option value="Quezon">Quezon</option>
-                                                    <option value="Maramag">Maramag</option>
-                                                    <option value="Lantapan">Lantapan</option>
-                                                    <option value="San Fernando">San Fernando</option>
-                                                </select>
-                                            </div>
-                                            <br>
-                                            <button type="submit"
-                                                style="float: right;margin-top: 30px;border:none;background:transparent;"
-                                                name="btnStep1" value="true">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
-                                                    fill="#5F939A" class="bi bi-arrow-right-circle-fill"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
-                                                </svg>
-                                            </button>
-                                            <button type="reset" data-bs-toggle="modal"
-                                                data-bs-target="#cancelModal"
-                                                style="float: right;margin-top: 30px;border:none;background:transparent;">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
-                                                    fill="#5F939A" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
-                                                </svg>
-                                            </button>
-
+                                            <a class="btn btn-primary"
+                                                style="background:transparent;color:#5F939A;border:none;float:right;"
+                                                onclick="onDone()">Done</a>
                                         </div>
                                     </div>
                                 </form>
@@ -351,39 +283,67 @@
         </div>
     </section>
 
+    <div class="div" style="background: #EDEDED">
+        <button style="visibility: hidden;" data-bs-toggle="modal" data-bs-target="#gcashModal"
+            id="btnGcash"></button>
+        <button style="visibility: hidden;" data-bs-toggle="modal" data-bs-target="#creditModal"
+            id="btnCredit"></button>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
     <script src="js/jquery-2.1.0.min.js"></script>
     <script>
-        function fileOpen() {
-            let tFile = document.getElementById("mFile");
-            tFile.click();
+        function gcashClick() {
+            let gcash = document.getElementById('gcash');
+            let credit = document.getElementById('credit');
+
+            gcash.removeAttribute("style");
+            credit.removeAttribute("style");
+            credit.setAttribute("style", "background: transparent;");
+
+            let pment = document.getElementById('payment');
+            pment.value = "gcash";
         }
 
-        function readURL(input) {
-            if (input.files && input.files[0]) {
+        function creditClick() {
+            let gcash = document.getElementById('gcash');
+            let credit = document.getElementById('credit');
 
-                var reader = new FileReader();
+            credit.removeAttribute("style");
+            gcash.removeAttribute("style");
+            gcash.setAttribute("style", "background: transparent;");
 
-                reader.onload = function(e) {
-                    // $('.image-upload-wrap').hide();
+            let pment = document.getElementById('payment');
+            pment.value = "credit";
 
-                    $('.file-upload-image').attr('src', e.target.result);
-                    // $('.file-upload-content').show();
+        }
 
-                    // $('.image-title').html(input.files[0].name);
-                };
+        function onDone() {
+            let pment = document.getElementById('payment');
 
-                reader.readAsDataURL(input.files[0]);
-
+            if (pment.value == "" || pment === undefined) {
+                setTimeout(() => {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'warning',
+                        title: 'Please choose first your payment method',
+                        showConfirmButton: false,
+                        timer: 1300
+                    });
+                }, 500);
             } else {
-                removeUpload();
-            }
-        }
+                if (pment.value == "gcash") {
+                    let btnGcash = document.getElementById('btnGcash');
+                    btnGcash.click();
 
-        function removeUpload() {
-            $('.file-upload-image').attr('src', '/storage/images/user.png');
+                } else {
+                    let btnCredit = document.getElementById('btnCredit');
+                    btnCredit.click();
+
+                }
+            }
         }
     </script>
     @if (session()->pull('errorCreate'))
@@ -401,6 +361,79 @@
         {{ session()->forget('errorCreate') }}
     @endif
 
+    <div class="modal fade" id="creditModal" tabindex="-1" role="dialog" aria-labelledby="creditModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="{{ route('paymentmethod.store') }}" method="POST">
+                    @csrf
+                    <div class="modal-body" style="background: #EDEDED;border:none;">
+                        <div class="row">
+                            <div class="form-group" style="margin-left: 30px;">
+                                <label for="accountname" class="for">Account Name</label>
+                                <br>
+                                <input required type="text" name="accountname" id=""
+                                    style="background: #EDEDED;width: 85%;">
+                            </div>
+                            <br>
+                            <div class="form-group" style="margin-left: 30px;">
+                                <label for="acountnumber" class="for">Account Number</label>
+                                <br>
+                                <input required type="number" name="accountnumber" id=""
+                                    style="background: #EDEDED;width: 85%;">
+                            </div>
+                            <br>
+                            <div class="form-group" style="margin-left: 30px;">
+                                <label for="cardnumber" class="for">Card Number</label>
+                                <br>
+                                <input required type="number" name="cardnumber" id=""
+                                    style="background: #EDEDED;width: 85%;">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="background: #EDEDED;border:none;">
+                        <button type="submit" class="btn btn-primary" style="background: #5F939A;border:none;"
+                            name="btnCredit" value="true">Proceed</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="gcashModal" tabindex="-1" role="dialog" aria-labelledby="gcashModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="{{ route('paymentmethod.store') }}" method="POST">
+                    @csrf
+                    <div class="modal-body" style="background: #EDEDED;border:none;">
+                        <div class="row">
+                            <div class="form-group" style="margin-left: 30px;">
+                                <label for="gcashnumber" class="for">Gcash Number</label>
+                                <br>
+                                <input required type="number" name="accountnumber" id=""
+                                    style="background: #EDEDED;width: 85%;">
+                            </div>
+                            <br>
+
+                            <div class="form-group" style="margin-left: 30px;">
+                                <label for="gcashname" class="for">Gcash Account Name</label>
+                                <br>
+                                <input required type="text" name="accountname" id=""
+                                    style="background: #EDEDED;width: 85%;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="background: #EDEDED;border:none;">
+                        <button type="submit" class="btn btn-primary" style="background: #5F939A;border:none;"
+                            name="btnGcash" value="true">Proceed</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">

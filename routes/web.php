@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaymentMethodController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SignupController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::resource('/signup', SignupController::class);
+Route::resource('/profile', ProfileController::class);
+Route::resource('/paymentmethod', PaymentMethodController::class);

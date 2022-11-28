@@ -133,7 +133,7 @@
     <header style="background: #464646;padding:15px;">
         <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: transparent !important;">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#"
+                <a class="navbar-brand" href="/"
                     style="font-family: 'Roboto Medium',sans-serif;font-size: 20px;color:#FFFFFF;filter: drop-shadow(0.5px 0.5px 0.5px #2D2E2E);line-height: 18px;">BUKIDNON
                     <span style="margin-top: -20px;"><br>GROOVE</span></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
