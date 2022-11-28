@@ -71,7 +71,7 @@
         }
 
         ul.progress_bar li {
-            width: 23%;
+            width: 35%;
             float: left;
             height: 100%;
             list-style: none;
@@ -170,7 +170,8 @@
         <div class="container" style="padding-top: 100px;">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card"style="filter: drop-shadow(-2px 2px 4px #464646);">
+                    <div
+                        class="card"style="filter: drop-shadow(-2px 2px 4px #464646);width:1050px;margin-bottom:30px;margin-left:30px;">
                         <div class="card-header">
                             <div class="rowHead">
                                 <div class="columnHead">
@@ -183,13 +184,13 @@
                                 <div class="columnHead" style="left: 20%">
                                     <br>
                                     <center>
-                                        PROFILE
+
                                     </center>
                                 </div>
                                 <div class="columnHead" style="left: 20%">
                                     <br>
                                     <center>
-                                        RATE 7 SERVICES
+                                        <p style="padding-left: 80px;">PROFILE</p>
                                     </center>
                                 </div>
                             </div>
@@ -200,12 +201,10 @@
                                         @if ($step == 1)
                                             <li class='activated'><span></span></li>
                                             <li><span></span></li>
-                                            <li><span></span></li>
                                         @endif
                                         @if ($step == 2)
                                             <li><span></span></li>
                                             <li class='activated'><span></span></li>
-                                            <li><span></span></li>
                                         @endif
 
                                     </ul>

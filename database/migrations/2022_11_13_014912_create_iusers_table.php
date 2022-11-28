@@ -17,6 +17,7 @@ class CreateIusersTable extends Migration
             $table->id('userID')->autoIncrement();
             $table->string('email');
             $table->string('password');
+            $table->string('phonenum')->nullable(true);
             $table->integer('userType');
             $table->timestamps();
         });

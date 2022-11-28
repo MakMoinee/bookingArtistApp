@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Iusers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class SignupController extends Controller
 {
@@ -11,9 +13,40 @@ class SignupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('signup');
+        if ($request['as'] && $request['step']) {
+            if ($request['as'] == 'BAND' || $request['as'] == 'HOST') {
+
+                if ($request['step'] == 1 && $request['as'] == 'BAND') {
+                    return view('signup', [
+                        'step' => $request['step'],
+                        'as' => $request['as']
+                    ]);
+                } else if ($request['step'] == 1 && $request['as'] == 'HOST') {
+                    return view('signuphost', [
+                        'step' => $request['step'],
+                        'as' => $request['as']
+                    ]);
+                }
+
+                if ($request['step'] == 2 && $request['as'] == 'HOST') {
+                    return view('signupstep2a', [
+                        'step' => $request['step'],
+                        'as' => $request['as']
+                    ]);
+                } else if ($request['step'] == 2 && $request['as'] == 'BAND') {
+                    return view('signupstep2b', [
+                        'step' => $request['step'],
+                        'as' => $request['as']
+                    ]);
+                }
+            } else {
+                return redirect('/');
+            }
+        } else {
+            return redirect('/');
+        }
     }
 
     /**
@@ -34,7 +67,34 @@ class SignupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        if ($request['btnStep1']) {
+            $as = $request->query('as');
+            $step = $request->query('step');
+
+            $iuser = new Iusers();
+            $iuser->email = $request->email;
+            $iuser->password = Hash::make($request->password);
+            $iuser->phonenum = $request->phonenum;
+            if ($as == 'HOST') {
+                $iuser->userType = 2;
+            } else if ($as == 'BAND') {
+                $iuser->userType = 3;
+            }
+
+            $isSave = $iuser->save();
+
+            if ($isSave) {
+                session()->put('successCreate', true);
+                $step = $step + 1;
+            } else {
+                session()->put('errorCreate', true);
+            }
+
+            return redirect('/signup?as=' . $as . '&step=' . $step . '');
+        } else {
+            return redirect('/signup');
+        }
     }
 
     /**

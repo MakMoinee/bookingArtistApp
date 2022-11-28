@@ -10,8 +10,52 @@
     <title>Bukidnon Groove</title>
     <link href="https://fonts.cdnfonts.com/css/slasher-film" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .columnModal {
+            float: left;
+            width: 50%;
+            height: 400px;
+        }
+
+        /* Clear floats after the columns */
+        .rowModal:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .columnSignupModal {
+            float: left;
+            width: 50%;
+            height: 80px;
+        }
+
+        /* Clear floats after the columns */
+        .rowSignupModal:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        input[type="email"] {
+            background: #EDEDED;
+            border: 0;
+            border-bottom: 1.5px solid #5F939A;
+            outline: 0;
+        }
+
+        input[type="password"] {
+            background: #EDEDED;
+            border: 0;
+            border-bottom: 1.5px solid #5F939A;
+            outline: 0;
+        }
+    </style>
 </head>
 
 <body style="background: #afafafc5;">
@@ -43,11 +87,11 @@
                         </li>
                     </ul>
                     <div class="d-flex" style="background: #afafafc5">
-                        <a
-                            style="background: transparent;color:black;text-decoration: none;margin-top: 5px;font-family: 'Roboto',sans-serif;cursor:pointer;">Login</a>
-                        <a href="/signup"
+                        <a style="background: transparent;color:black;text-decoration: none;margin-top: 5px;font-family: 'Roboto',sans-serif;cursor:pointer;"
+                            data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+                        <a href="#"
                             style="margin-left: 20px;font-family:'Roboto',sans-serif;background: #5F939A;text-decoration:none;color:white;padding-left:15px;padding-right:15px;padding-top: 5px;padding-bottom: 5px;"
-                            class="rounded-pill">Signup</a>
+                            class="rounded-pill" onclick="openSignUpModal()">Signup</a>
                     </div>
                 </div>
             </div>
@@ -265,20 +309,315 @@
             </div>
             <div class="row">
                 <div class="col-md-4">
-
+                    <div class="card">
+                        <div class="card-body p-3" style="background: #444444;color:white;">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="..." class="img-fluid rounded-start" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">This is a wider card with supporting text below as a
+                                            natural lead-in to additional content. This content is a little bit longer.
+                                        </p>
+                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-4">
-
+                    <div class="card">
+                        <div class="card-body p-3" style="background: #444444;color:white;">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="..." class="img-fluid rounded-start" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">This is a wider card with supporting text below as a
+                                            natural lead-in to additional content. This content is a little bit longer.
+                                        </p>
+                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-4">
-
+                    <div class="card">
+                        <div class="card-body p-3" style="background: #444444;color:white;">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="..." class="img-fluid rounded-start" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">This is a wider card with supporting text below as a
+                                            natural lead-in to additional content. This content is a little bit longer.
+                                        </p>
+                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            {{-- SECOND ROW --}}
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body p-3" style="background: #444444;color:white;">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="..." class="img-fluid rounded-start" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">This is a wider card with supporting text below as a
+                                            natural lead-in to additional content. This content is a little bit longer.
+                                        </p>
+                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body p-3" style="background: #444444;color:white;">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="..." class="img-fluid rounded-start" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">This is a wider card with supporting text below as a
+                                            natural lead-in to additional content. This content is a little bit longer.
+                                        </p>
+                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body p-3" style="background: #444444;color:white;">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="..." class="img-fluid rounded-start" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">This is a wider card with supporting text below as a
+                                            natural lead-in to additional content. This content is a little bit longer.
+                                        </p>
+                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+    <div>
+        <button class="btn" id="btnShowSignup" style="visibility: hidden;" data-bs-toggle="modal"
+            data-bs-target="#signUpModal">open</button>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
+
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background: #EDEDED;border:none;">
+                    <h5 class="modal-title" id="loginModalLabel"></h5>
+                    <button style="background: #EDEDED;color:black;border:none;" type="button" class="close"
+                        data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="background: #EDEDED;">
+                    <div class="rowModal">
+
+                        <div class="columnModal">
+                            <div class="group" style="margin-top: 70px;">
+                                <center>
+                                    <img src="/storage/images/favicon.ico" alt="" srcset=""
+                                        height="80px" width="80px">
+                                    <h5
+                                        style="font-size: 20px; margin-top: 13px; float:right;;margin-right: 100px;margin-left: -100px;color:black;font-family: 'Roboto Medium',sans-serif;filter: drop-shadow(0.5px 0.5px 0.5px #2D2E2E);">
+                                        BUKIDNON<br>GROOVE</h5>
+                                    <br>
+                                    <br>
+                                    <button class="btn btn-primary rounded-pill"
+                                        style="background-color: #F8F8F6;width: 75%;margin-top: 85px;border:1px solid black;color:black;"
+                                        onclick="openSignUpModal();" data-bs-dismiss="modal" aria-label="Close">Sign
+                                        Up</button>
+                                </center>
+
+                            </div>
+                        </div>
+                        <form action="/login" method="POST" enctype="multipart/form-data" autocomplete="off">
+                            @csrf
+                            <div class="columnModal" style="left: 50%;border-left: 1.5px solid black;">
+
+                                <center>
+                                    <h3 style="font-family: 'Roboto Medium',sans-serif;margin-top: 50px;">Login</h3>
+                                </center>
+                                <div class="form-group" style="margin-left: 60px;">
+                                    <label for="email" class="for">Email:</label>
+                                    <br>
+                                    <input required type="email" name="email" id="email" style="width: 85%">
+                                </div>
+                                <br>
+                                <div class="form-group" style="margin-left: 60px;margin-top: 20px;">
+                                    <label for="password" class="for">Pasword:</label>
+                                    <br>
+                                    <input required type="password" name="password" id="password"
+                                        style="width: 85%">
+                                </div>
+                                <center>
+                                    <button type="submit" class="btn btn-primary rounded-pill"
+                                        style="background-color: #5F939A;width: 75%;margin-top: 20px;border:none;">Login</button>
+                                    <br>
+                                    <br>
+                                    <a href="#"
+                                        style="text-decoration: none;color:black;font-family: 'Roboto Medium',sans-serif;filter: drop-shadow(0.5px 0.5px 0.5px #2D2E2E);">Forgot
+                                        Your
+                                        Password?</a>
+                                </center>
+
+                            </div>
+                    </div>
+
+
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document" style="background: #EDEDED">
+            <div class="modal-content">
+                <div class="modal-header" style="background: #EDEDED;border:none;">
+                    <h5 class="modal-title" id="signUpModalLabel"></h5>
+                    <button style="background: #EDEDED;color:black;border:none;" type="button" class="close"
+                        data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="background: #EDEDED;border:none;">
+                    <center>
+                        <img src="/storage/images/favicon.ico" alt="" srcset="" height="80px"
+                            width="80px">
+                        <h5
+                            style="font-size: 20px; margin-top: 13px; float:right;;margin-right: 130px;margin-left: -130px;color:black;font-family: 'Roboto Medium',sans-serif;filter: drop-shadow(0.5px 0.5px 0.5px #2D2E2E);">
+                            BUKIDNON<br>GROOVE</h5>
+                        <br>
+                    </center>
+                    <br>
+                    <br>
+                    <div class="rowSignupModal">
+                        <div class="columnSignupModal">
+                            <center>
+                                <a href="/signup?as=BAND&step=1" class="btn btn-primary rounded-pill"
+                                    style="background-color: #5F939A;width: 75%;margin-top: 20px;border:none;">SIGN UP
+                                    AS A
+                                    BAND</a>
+                            </center>
+                            <br>
+                        </div>
+                        <div class="columnSignupModal" style="left: 50%;border-left: 1.5px solid black;">
+                            <center>
+                                <a href="/signup?as=HOST&step=1" class="btn btn-primary rounded-pill"
+                                    style="background-color: #5F939A;width: 75%;margin-top: 20px;border:none;">SIGN UP
+                                    AS A
+                                    HOST</a>
+                            </center>
+                            <br>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery-2.1.0.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugins -->
+    <script src="js/owl-carousel.js"></script>
+    <script src="js/scrollreveal.min.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/imgfix.min.js"></script>
+
+    <script>
+        function openSignUpModal() {
+            let md = document.getElementById("btnShowSignup");
+            setTimeout(() => {
+                md.click();
+            }, 200);
+        }
+    </script>
+
+    @if (session()->pull('successCreate'))
+        <script>
+            setTimeout(() => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Successfully Created Account',
+                    showConfirmButton: false,
+                    timer: 1300
+                });
+            }, 1500);
+        </script>;
+        {{ session()->forget('successCreate') }}
+    @endif
+    @if (session()->pull('errorCreate'))
+        <script>
+            setTimeout(() => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'warning',
+                    title: 'Failed to Create Account, Please Try Again!',
+                    showConfirmButton: false,
+                    timer: 1300
+                });
+            }, 1500);
+        </script>;
+        {{ session()->forget('errorCreate') }}
+    @endif
 </body>
 
 </html>

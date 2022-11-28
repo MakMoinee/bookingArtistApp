@@ -60,7 +60,7 @@
         }
 
         ul.progress_bar {
-            max-width: 179em;
+            max-width: 199em;
             width: 100%;
             padding: 0 18px;
             height: 2em;
@@ -88,7 +88,7 @@
             left: 0;
             right: 0;
             margin: auto;
-            background: #E2E2E2;
+            background: #5F939A;
             height: .4em;
             z-index: 1;
         }
@@ -106,7 +106,7 @@
             position: absolute;
             left: 0;
             top: 0;
-            background: #E2E2E2;
+            background: #5F939A;
             width: 2em;
             height: 2em;
             border-radius: 2em;
@@ -201,11 +201,14 @@
                                             <li class='activated'><span></span></li>
                                             <li><span></span></li>
                                             <li><span></span></li>
+
+
                                         @endif
                                         @if ($step == 2)
                                             <li><span></span></li>
                                             <li class='activated'><span></span></li>
                                             <li><span></span></li>
+
                                         @endif
 
                                     </ul>
@@ -219,13 +222,14 @@
                                 <div class="row">
                                     <h3
                                         style="font-family: 'Roboto Regular',sans-serif; color: #979797;filter: drop-shadow(0.5px 0.5px 0.5px #2D2E2E);">
-                                        ACCOUNT</h3>
+                                        PROFILE</h3>
                                 </div>
                                 <br>
                                 <form action="/signup?as={{ $as }}&step={{ $step }}" method="POST"
                                     autocomplete="off" enctype="multipart/form-data">
                                     @csrf
                                     <div class="rowHead">
+                                        {{-- LEFT --}}
                                         <div class="columnBody">
                                             <div class="form-group" style="padding-left: 30px;padding-right: 30px;">
                                                 <label for="email" class="for">Email</label>
@@ -243,6 +247,7 @@
                                                     style="width: 100%;">
                                             </div>
                                         </div>
+                                        {{-- RIGHT --}}
                                         <div class="columnBody">
                                             <div class="form-group" style="padding-left: 30px;padding-right: 30px;">
                                                 <label for="phonenum" class="for">Phone Number</label>

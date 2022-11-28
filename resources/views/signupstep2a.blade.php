@@ -51,6 +51,13 @@
             outline: 0;
         }
 
+        select {
+            background: #FFFFFF;
+            border: 0;
+            border-bottom: 1.5px solid #5F939A;
+            outline: 0;
+        }
+
 
         input[type="password"] {
             background: #FFFFFF;
@@ -59,8 +66,15 @@
             outline: 0;
         }
 
+        input[type="text"] {
+            background: #FFFFFF;
+            border: 0;
+            border-bottom: 1.5px solid #5F939A;
+            outline: 0;
+        }
+
         ul.progress_bar {
-            max-width: 179em;
+            max-width: 199em;
             width: 100%;
             padding: 0 18px;
             height: 2em;
@@ -71,7 +85,7 @@
         }
 
         ul.progress_bar li {
-            width: 23%;
+            width: 35%;
             float: left;
             height: 100%;
             list-style: none;
@@ -88,7 +102,7 @@
             left: 0;
             right: 0;
             margin: auto;
-            background: #E2E2E2;
+            background: #5F939A;
             height: .4em;
             z-index: 1;
         }
@@ -106,7 +120,7 @@
             position: absolute;
             left: 0;
             top: 0;
-            background: #E2E2E2;
+            background: #5F939A;
             width: 2em;
             height: 2em;
             border-radius: 2em;
@@ -130,7 +144,7 @@
 </head>
 
 <body>
-    <header style="background: #464646;padding:15px;">
+    <header style="background: #464646;padding:15px;width:100%;">
         <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: transparent !important;">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#"
@@ -166,11 +180,12 @@
             </div>
         </nav>
     </header>
-    <section style="background: #EDEDED;height:900px;">
+    <section style="background: #EDEDED;height:auto;width:auto;">
         <div class="container" style="padding-top: 100px;">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card"style="filter: drop-shadow(-2px 2px 4px #464646);">
+                    <div
+                        class="card"style="filter: drop-shadow(-2px 2px 4px #464646);width:1050px;margin-bottom:30px;margin-left:30px;">
                         <div class="card-header">
                             <div class="rowHead">
                                 <div class="columnHead">
@@ -183,13 +198,13 @@
                                 <div class="columnHead" style="left: 20%">
                                     <br>
                                     <center>
-                                        PROFILE
+
                                     </center>
                                 </div>
                                 <div class="columnHead" style="left: 20%">
                                     <br>
                                     <center>
-                                        RATE 7 SERVICES
+                                        <p style="padding-left: 80px;">PROFILE</p>
                                     </center>
                                 </div>
                             </div>
@@ -200,12 +215,10 @@
                                         @if ($step == 1)
                                             <li class='activated'><span></span></li>
                                             <li><span></span></li>
-                                            <li><span></span></li>
                                         @endif
                                         @if ($step == 2)
                                             <li><span></span></li>
                                             <li class='activated'><span></span></li>
-                                            <li><span></span></li>
                                         @endif
 
                                     </ul>
@@ -219,45 +232,79 @@
                                 <div class="row">
                                     <h3
                                         style="font-family: 'Roboto Regular',sans-serif; color: #979797;filter: drop-shadow(0.5px 0.5px 0.5px #2D2E2E);">
-                                        ACCOUNT</h3>
+                                        PROFILE</h3>
                                 </div>
                                 <br>
                                 <form action="/signup?as={{ $as }}&step={{ $step }}" method="POST"
                                     autocomplete="off" enctype="multipart/form-data">
                                     @csrf
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <center>
+                                                <img src="/storage/images/user.png" alt="" srcset=""
+                                                    width="150px" height="150px" style="margin-bottom: 20px;">
+                                                <p>Add Picture <a onclick="fileOpen()"
+                                                        style="border:none;background: transparent;cursor: pointer;">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                            height="24" fill="currentColor"
+                                                            class="bi bi-file-plus" viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5V6z" />
+                                                            <path
+                                                                d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z" />
+                                                        </svg>
+                                                    </a></p>
+                                                <input required type="file" name="file" id="mFile"
+                                                    style="visibility: hidden;" accept=".jpg, .png, .jpeg, .bitmap">
+                                            </center>
+                                        </div>
+                                    </div>
+                                    <br>
                                     <div class="rowHead">
+                                        {{-- LEFT --}}
                                         <div class="columnBody">
                                             <div class="form-group" style="padding-left: 30px;padding-right: 30px;">
-                                                <label for="email" class="for">Email</label>
+                                                <label for="profile" class="for">Which type of profile best
+                                                    describes you?</label>
                                                 <br>
-                                                <input required type="email" name="email" id="email"
-                                                    style="width: 100%;">
+                                                <select name="profile" id="profile" style="width: 100%;">
+                                                    <option value="Venue Manager">Venue Manager</option>
+                                                </select>
                                             </div>
                                             <br>
                                             <br>
                                             <br>
                                             <div class="form-group" style="padding-left: 30px;padding-right: 30px;">
-                                                <label for="password" class="for">Password</label>
+                                                <label for="bio" class="for">BIO</label>
                                                 <br>
-                                                <input required type="password" name="password" id="password"
+                                                <input required type="text" name="bio" id="bio"
                                                     style="width: 100%;">
                                             </div>
                                         </div>
+                                        {{-- RIGHT --}}
                                         <div class="columnBody">
                                             <div class="form-group" style="padding-left: 30px;padding-right: 30px;">
-                                                <label for="phonenum" class="for">Phone Number</label>
+                                                <label for="company" class="for">Company Name</label>
                                                 <br>
-                                                <input required type="number" name="phonenum" id="phonenum"
+                                                <input required type="text" name="company" id="company"
                                                     style="width: 100%;">
                                             </div>
                                             <br>
                                             <br>
                                             <br>
                                             <div class="form-group" style="padding-left: 30px;padding-right: 30px;">
-                                                <label for="repassword" class="for">Confirm Password</label>
+                                                <label for="location" class="for">Location</label>
                                                 <br>
-                                                <input required type="password" name="repassword" id="repassword"
-                                                    style="width: 100%;">
+                                                <select name="location" id="" style="width: 100%;">
+                                                    <option value="Valencia City">Valencia City</option>
+                                                    <option value="Malaybalay City">Malaybalay City</option>
+                                                    <option value="Kibawe">Kibawe</option>
+                                                    <option value="Cabanglasan">Cabanglasan</option>
+                                                    <option value="Quezon">Quezon</option>
+                                                    <option value="Maramag">Maramag</option>
+                                                    <option value="Lantapan">Lantapan</option>
+                                                    <option value="San Fernando">San Fernando</option>
+                                                </select>
                                             </div>
                                             <br>
                                             <button type="submit"
@@ -287,19 +334,10 @@
     </script>
 
     <script>
-        var password = document.getElementById("password"),
-            confirm_password = document.getElementById("repassword");
-
-        function validatePassword() {
-            if (password.value != confirm_password.value) {
-                confirm_password.setCustomValidity("Passwords Don't Match");
-            } else {
-                confirm_password.setCustomValidity('');
-            }
+        function fileOpen() {
+            let tFile = document.getElementById("mFile");
+            tFile.click();
         }
-
-        password.onchange = validatePassword;
-        confirm_password.onkeyup = validatePassword;
     </script>
     @if (session()->pull('errorCreate'))
         <script>
