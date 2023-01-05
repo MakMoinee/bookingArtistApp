@@ -228,10 +228,31 @@
                                     <div class="rowHead">
                                         {{-- LEFT --}}
                                         <div class="columnBody">
+                                            <div class="form-group">
+                                                <center>
+                                                    <img class="file-upload-image" src="/storage/images/user.png"
+                                                        alt="" srcset="" width="150px" height="150px"
+                                                        style="margin-bottom: 20px;">
+                                                    <p>Add Picture <a onclick="fileOpen()"
+                                                            style="border:none;background: transparent;cursor: pointer;">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                height="24" fill="currentColor"
+                                                                class="bi bi-file-plus" viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5V6z" />
+                                                                <path
+                                                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z" />
+                                                            </svg>
+                                                        </a></p>
+                                                    <input required type="file" name="files" id="mFile"
+                                                        style="visibility: hidden;"
+                                                        accept=".jpg, .png, .jpeg, .bitmap" onchange="readURL(this)">
+                                                </center>
+                                            </div>
                                             <div class="form-group" style="padding-left: 30px;padding-right: 30px;">
-                                                <label for="email" class="for">Email</label>
+                                                <label for="email" class="for">Band Size</label>
                                                 <br>
-                                                <input required type="email" name="email" id="email"
+                                                <input required type="number" name="bandsize" id="bandsize"
                                                     style="width: 100%;">
                                             </div>
                                             <br>
@@ -242,6 +263,8 @@
                                                 <br>
                                                 <input required type="password" name="password" id="password"
                                                     style="width: 100%;">
+                                                <i class="bi bi-eye" id="togglePassword"
+                                                    style="margin-left: -30px; cursor: pointer;"></i>
                                             </div>
                                         </div>
                                         {{-- RIGHT --}}
@@ -260,6 +283,8 @@
                                                 <br>
                                                 <input required type="password" name="repassword" id="repassword"
                                                     style="width: 100%;">
+                                                <i class="bi bi-eye" id="toggleRePassword"
+                                                    style="margin-left: -30px; cursor: pointer;"></i>
                                             </div>
                                             <br>
                                             <button type="submit"
@@ -299,6 +324,9 @@
     </script>
 
     <script>
+        const togglePassword = document.querySelector('#togglePassword');
+        const toggleRePassword = document.querySelector('#toggleRePassword');
+
         var password = document.getElementById("password"),
             confirm_password = document.getElementById("repassword");
 
@@ -312,6 +340,26 @@
 
         password.onchange = validatePassword;
         confirm_password.onkeyup = validatePassword;
+
+        togglePassword.addEventListener('click', function(e) {
+            // toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            // toggle the eye slash icon
+            // togglePassword.setAttribute('class','bi bi-eye-slash');
+            // togglePassword.toggle('bi bi-eye-slash');
+            this.classList.toggle('bi-eye');
+            this.classList.toggle('bi-eye-slash');
+        });
+
+        toggleRePassword.addEventListener('click', function(e) {
+            // toggle the type attribute
+            const type = confirm_password.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirm_password.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('bi-eye');
+            this.classList.toggle('bi-eye-slash');
+        });
     </script>
     @if (session()->pull('errorCreate'))
         <script>

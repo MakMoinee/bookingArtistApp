@@ -91,6 +91,23 @@ class SignupController extends Controller
             $as = $request->query('as');
             $step = $request->query('step');
 
+            $queryResult = DB::table('iusers')->where([['email', '=', $request->email]])->get();
+            $oldUsers = json_decode($queryResult, true);
+            // dd($oldUsers);
+            if (count($oldUsers) > 0) {
+                session()->put('errorExistingUser', true);
+                return redirect('/signup?as=' . $as . '&step=1');
+            }
+
+            $queryResult2 = DB::table('iusers')->where([['phonenum', '=', $request->phonenum]])->get();
+            $oldUsers2 = json_decode($queryResult2, true);
+            // dd($oldUsers);
+            if (count($oldUsers2) > 0) {
+                session()->put('errorExistingPhoneNum', true);
+                return redirect('/signup?as=' . $as . '&step=1');
+            }
+
+
             $iuser = new Iusers();
             $iuser->email = $request->email;
             $iuser->password = Hash::make($request->password);

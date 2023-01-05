@@ -10,9 +10,10 @@
     <title>Bukidnon Groove</title>
     <link href="https://fonts.cdnfonts.com/css/slasher-film" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/roboto" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <style>
         body {
             margin: 0;
@@ -51,6 +52,13 @@
             outline: 0;
         }
 
+
+        input[type="text"] {
+            background: #FFFFFF;
+            border: 0;
+            border-bottom: 1.5px solid #5F939A;
+            outline: 0;
+        }
 
         input[type="password"] {
             background: #FFFFFF;
@@ -240,6 +248,9 @@
                                                 <br>
                                                 <input required type="password" name="password" id="password"
                                                     style="width: 100%;">
+                                                <i class="bi bi-eye" id="togglePassword"
+                                                    style="margin-left: -30px; cursor: pointer"></i>
+
                                             </div>
                                         </div>
                                         <div class="columnBody">
@@ -257,6 +268,8 @@
                                                 <br>
                                                 <input required type="password" name="repassword" id="repassword"
                                                     style="width: 100%;">
+                                                <i class="bi bi-eye" id="toggleRePassword"
+                                                    style="margin-left: -30px; cursor: pointer;"></i>
                                             </div>
                                             <br>
                                             <button type="submit"
@@ -281,11 +294,15 @@
         </div>
     </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
     </script>
 
     <script>
+        const togglePassword = document.querySelector('#togglePassword');
+        const toggleRePassword = document.querySelector('#toggleRePassword');
+        const inputPassword = document.querySelector('#password');
+
         var password = document.getElementById("password"),
             confirm_password = document.getElementById("repassword");
 
@@ -299,6 +316,26 @@
 
         password.onchange = validatePassword;
         confirm_password.onkeyup = validatePassword;
+
+        togglePassword.addEventListener('click', function(e) {
+            // toggle the type attribute
+            const type = inputPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            // toggle the eye slash icon
+            // togglePassword.setAttribute('class','bi bi-eye-slash');
+            // togglePassword.toggle('bi bi-eye-slash');
+            this.classList.toggle('bi-eye');
+            this.classList.toggle('bi-eye-slash');
+        });
+
+        toggleRePassword.addEventListener('click', function(e) {
+            // toggle the type attribute
+            const type = confirm_password.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirm_password.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('bi-eye');
+            this.classList.toggle('bi-eye-slash');
+        });
     </script>
     @if (session()->pull('errorCreate'))
         <script>
@@ -313,6 +350,34 @@
             }, 1500);
         </script>;
         {{ session()->forget('errorCreate') }}
+    @endif
+    @if (session()->pull('errorExistingUser'))
+        <script>
+            setTimeout(() => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'warning',
+                    title: 'Failed to Create Account, Existing User, Please Try New Email!',
+                    showConfirmButton: false,
+                    timer: 800
+                });
+            }, 500);
+        </script>;
+        {{ session()->forget('errorExistingUser') }}
+    @endif
+    @if (session()->pull('errorExistingPhoneNum'))
+        <script>
+            setTimeout(() => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'warning',
+                    title: 'Failed to Create Account, Existing Phone Number, Please Try New Number!',
+                    showConfirmButton: false,
+                    timer: 800
+                });
+            }, 500);
+        </script>;
+        {{ session()->forget('errorExistingPhoneNum') }}
     @endif
 </body>
 

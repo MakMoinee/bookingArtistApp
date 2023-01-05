@@ -87,8 +87,10 @@
                         </li>
                     </ul>
                     <div class="d-flex" style="background: #afafafc5">
-                        <a style="background: transparent;color:black;text-decoration: none;margin-top: 5px;font-family: 'Roboto',sans-serif;cursor:pointer;"
-                            data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+                        <button
+                            style="background: #afafafc5;border:none;color:black;text-decoration: none;margin-top: 5px;font-family: 'Roboto',sans-serif;cursor:pointer;"
+                            data-bs-toggle="modal" data-bs-target="#loginModal"
+                            onclick="clearLoginFields()">Login</button>
                         <a href="#"
                             style="margin-left: 20px;font-family:'Roboto',sans-serif;background: #5F939A;text-decoration:none;color:white;padding-left:15px;padding-right:15px;padding-top: 5px;padding-bottom: 5px;"
                             class="rounded-pill" onclick="openSignUpModal()">Signup</a>
@@ -133,14 +135,18 @@
                         <div class="row">
                             <div class="col-xs-1">
                                 <h5 style="color:#2D2E2E;">ARTIST</h5>
-                                <button class="btn btn-outline-secondary rounded-pill p-3 mt-3"
-                                    style="color:#2D2E2E;margin-left: -40px;width: 200px;">SIGNUP AS A
-                                    ARTIST</button>
+                                <a href="/signup?as=BAND&step=1">
+                                    <button class="btn btn-outline-secondary rounded-pill p-3 mt-3"
+                                        style="color:#2D2E2E;margin-left: -40px;width: 200px;">SIGNUP AS AN
+                                        ARTIST</button>
+                                </a>
                             </div>
                             <div class="col-xs-1" style="margin-top: -110px;margin-left: 220px; color:#2D2E2E;">
                                 <h5 style="padding-left: 20px;">INDUSTRY</h5>
-                                <button class="btn btn-outline-secondary rounded-pill p-3 mt-3"
-                                    style="color:#2D2E2E; width: 200px;">SIGNUP AS A HOST</button>
+                                <a href="/signup?as=HOST&step=1">
+                                    <button class="btn btn-outline-secondary rounded-pill p-3 mt-3"
+                                        style="color:#2D2E2E; width: 200px;">SIGNUP AS A HOST</button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -313,7 +319,7 @@
                         <div class="card-body p-3" style="background: #444444;color:white;">
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <img src="..." class="img-fluid rounded-start" alt="...">
+                                    <img src="" class="img-fluid rounded-start" alt="...">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -334,7 +340,7 @@
                         <div class="card-body p-3" style="background: #444444;color:white;">
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <img src="..." class="img-fluid rounded-start" alt="...">
+                                    <img src="" class="img-fluid rounded-start" alt="...">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -355,7 +361,7 @@
                         <div class="card-body p-3" style="background: #444444;color:white;">
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <img src="..." class="img-fluid rounded-start" alt="...">
+                                    <img src="" class="img-fluid rounded-start" alt="...">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -380,7 +386,7 @@
                         <div class="card-body p-3" style="background: #444444;color:white;">
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <img src="..." class="img-fluid rounded-start" alt="...">
+                                    <img src="" class="img-fluid rounded-start" alt="...">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -401,7 +407,7 @@
                         <div class="card-body p-3" style="background: #444444;color:white;">
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <img src="..." class="img-fluid rounded-start" alt="...">
+                                    <img src="" class="img-fluid rounded-start" alt="...">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -422,7 +428,7 @@
                         <div class="card-body p-3" style="background: #444444;color:white;">
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <img src="..." class="img-fluid rounded-start" alt="...">
+                                    <img src="" class="img-fluid rounded-start" alt="...">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -481,7 +487,8 @@
 
                             </div>
                         </div>
-                        <form action="/login" method="POST" enctype="multipart/form-data" autocomplete="off">
+                        <form action="/login" method="POST" autocomplete="off" enctype="multipart/form-data"
+                            autocomplete="off">
                             @csrf
                             <div class="columnModal" style="left: 50%;border-left: 1.5px solid black;">
 
@@ -549,7 +556,7 @@
                                 <a href="/signup?as=BAND&step=1" class="btn btn-primary rounded-pill"
                                     style="background-color: #5F939A;width: 75%;margin-top: 20px;border:none;">SIGN UP
                                     AS A
-                                    BAND</a>
+                                    ARTIST</a>
                             </center>
                             <br>
                         </div>
@@ -587,6 +594,13 @@
             setTimeout(() => {
                 md.click();
             }, 200);
+        }
+
+        function clearLoginFields() {
+            let email = document.getElementById("email");
+            let password = document.getElementById("password")
+            email.value = "";
+            password.value = "";
         }
     </script>
 
