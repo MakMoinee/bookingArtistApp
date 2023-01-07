@@ -14,7 +14,17 @@ class CreateBandProfilesTable extends Migration
     public function up()
     {
         Schema::create('band_profiles', function (Blueprint $table) {
-            $table->id();
+            $table->id('profileID')->autoIncrement();
+            $table->integer('userID');
+            $table->integer('bandSize');
+            $table->string('reper');
+            $table->string('address');
+            $table->string('bandName');
+            $table->string('bio');
+            $table->string('artistType');
+            $table->string('genres');
+            $table->string('exp');
+            $table->string('youtube');
             $table->timestamps();
         });
     }
