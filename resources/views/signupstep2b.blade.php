@@ -14,14 +14,16 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
+        html,
         body {
             margin: 0;
+            padding: 0;
         }
 
         .columnBody {
             float: left;
             width: 50%;
-            height: 400px;
+            height: 550px;
         }
 
         .columnHead {
@@ -51,8 +53,37 @@
             outline: 0;
         }
 
+        input[type="url"] {
+            background: #FFFFFF;
+            border: 0;
+            border-bottom: 1.5px solid #5F939A;
+            outline: 0;
+        }
+
+        input[type="search"] {
+            background: #FFFFFF;
+            border: 0;
+            border-bottom: 1.5px solid #5F939A;
+            outline: 0;
+        }
+
+
+        select {
+            background: #FFFFFF;
+            border: 0;
+            border-bottom: 1.5px solid #5F939A;
+            outline: 0;
+        }
+
 
         input[type="password"] {
+            background: #FFFFFF;
+            border: 0;
+            border-bottom: 1.5px solid #5F939A;
+            outline: 0;
+        }
+
+        input[type="text"] {
             background: #FFFFFF;
             border: 0;
             border-bottom: 1.5px solid #5F939A;
@@ -125,6 +156,90 @@
             border-radius: 2em;
             z-index: 2;
         }
+
+        @media screen and (max-width: 600px) {
+            .progress_bar {
+                margin-left: 59px !important;
+            }
+        }
+
+        /***     Tags input             ***/
+        .tags-input {
+            background: #FFFFFF;
+            border: 0;
+            border-bottom: 1.5px solid #5F939A;
+            outline: 0;
+            height: 40px;
+            padding: 0 11px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            color: #888;
+        }
+
+        .tags-input span {
+            background: #bbb;
+            margin-right: 7px;
+            color: #fff;
+            padding: 4px 7px;
+            border-radius: 20px;
+        }
+
+        .tags-input span[data-selected] {
+            background: #71ccd5;
+        }
+
+        .tags-input::after {
+            content: '';
+            background: #888;
+            width: 1px;
+            height: 19px;
+            margin: -1px 0 0 -1px;
+            display: none;
+            animation: blink 0.5s infinite alternate;
+        }
+
+        .tags-input:focus {
+            border-color: #71ccd5;
+            outline: none;
+        }
+
+        .tags-input:focus[data-cursor]::after {
+            display: block;
+        }
+
+        @media screen and (max-width: 736px) {
+            .tags-input:focus[data-cursor]::after {
+                display: none;
+            }
+        }
+
+        .tags-input:focus+h1 {
+            color: #71ccd5;
+        }
+
+        .tags-input:focus+h1 span {
+            border-color: #71ccd5;
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+
+            49% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
     </style>
 
 </head>
@@ -166,11 +281,11 @@
             </div>
         </nav>
     </header>
-    <section style="background: #EDEDED;height:900px;">
+    <section style="background: #EDEDED;height:990px;">
         <div class="container" style="padding-top: 100px;">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card"style="filter: drop-shadow(-2px 2px 4px #464646);">
+                    <div class="card" style="filter: drop-shadow(-2px 2px 4px #464646); height:auto;">
                         <div class="card-header">
                             <div class="rowHead">
                                 <div class="columnHead">
@@ -213,7 +328,7 @@
                             </div>
                             <br>
                         </div>
-                        <div class="card-body" style="border-top: 5px solid #FFFFFF;">
+                        <div class="card-body" style="border-top: 5px solid #FFFFFF;height: auto;">
                             <div class="container">
                                 <br>
                                 <div class="row">
@@ -232,7 +347,7 @@
                                                 <center>
                                                     <img class="file-upload-image" src="/storage/images/user.png"
                                                         alt="" srcset="" width="150px" height="150px"
-                                                        style="margin-bottom: 20px;">
+                                                        style="margin-bottom: 25px;">
                                                     <p>Add Picture <a onclick="fileOpen()"
                                                             style="border:none;background: transparent;cursor: pointer;">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -249,47 +364,99 @@
                                                         accept=".jpg, .png, .jpeg, .bitmap" onchange="readURL(this)">
                                                 </center>
                                             </div>
-                                            <div class="form-group" style="padding-left: 30px;padding-right: 30px;">
+                                            <div class="form-group"
+                                                style="padding-left: 30px;padding-right: 30px; margin-top: -23px;">
                                                 <label for="email" class="for">Band Size</label>
                                                 <br>
                                                 <input required type="number" name="bandsize" id="bandsize"
-                                                    style="width: 100%;">
+                                                    style="width: 100%;margin-top: 10px;">
                                             </div>
                                             <br>
                                             <br>
+                                            <div class="form-group"
+                                                style="padding-left: 30px;padding-right: 30px;margin-top: -6px;">
+                                                <label for="repertoire" class="for">Repertoire</label>
+                                                <br>
+                                                <select name="reper" id="reper" style="width: 100%;">
+                                                    <option value="Cover">Cover</option>
+                                                </select>
+                                            </div>
+                                            <br>
                                             <br>
                                             <div class="form-group" style="padding-left: 30px;padding-right: 30px;">
-                                                <label for="password" class="for">Password</label>
+                                                <label for="address" class="for">Address</label>
                                                 <br>
-                                                <input required type="password" name="password" id="password"
-                                                    style="width: 100%;">
-                                                <i class="bi bi-eye" id="togglePassword"
-                                                    style="margin-left: -30px; cursor: pointer;"></i>
+                                                <select name="address" id="address" style="width: 100%;">
+                                                    <option value="Valencia City">Valencia City</option>
+                                                    <option value="Malaybalay City">Malaybalay City</option>
+                                                    <option value="Kibawe">Kibawe</option>
+                                                    <option value="Cabanglasan">Cabanglasan</option>
+                                                    <option value="Quezon">Quezon</option>
+                                                    <option value="Maramag">Maramag</option>
+                                                    <option value="Lantapan">Lantapan</option>
+                                                    <option value="San Fernando">San Fernando</option>
+                                                </select>
                                             </div>
                                         </div>
                                         {{-- RIGHT --}}
                                         <div class="columnBody">
                                             <div class="form-group" style="padding-left: 30px;padding-right: 30px;">
-                                                <label for="phonenum" class="for">Phone Number</label>
+                                                <label for="artist" class="for">Artist/Band Name</label>
                                                 <br>
-                                                <input required type="number" name="phonenum" id="phonenum"
+                                                <input required type="text" name="artist" id="artist"
                                                     style="width: 100%;">
                                             </div>
-                                            <br>
-                                            <br>
                                             <br>
                                             <div class="form-group" style="padding-left: 30px;padding-right: 30px;">
-                                                <label for="repassword" class="for">Confirm Password</label>
+                                                <label for="bio" class="for">Bio</label>
                                                 <br>
-                                                <input required type="password" name="repassword" id="repassword"
+                                                <input required type="text" name="bio" id="bio"
                                                     style="width: 100%;">
-                                                <i class="bi bi-eye" id="toggleRePassword"
-                                                    style="margin-left: -30px; cursor: pointer;"></i>
                                             </div>
                                             <br>
+                                            <div class="form-group" style="padding-left: 30px;padding-right: 30px;">
+                                                <label for="type" class="for">Artist Type</label>
+                                                <br>
+                                                <select name="type" id="type" style="width: 100%">
+                                                    <option value="Band">Band</option>
+                                                    <option value="Solo">Solo</option>
+                                                </select>
+                                            </div>
+                                            <br>
+                                            <div class="form-group" style="padding-left: 30px;padding-right: 30px;">
+                                                <label for="genre" class="for">Genre <span>(Max
+                                                        3)</span></label>
+                                                <br>
+                                                {{-- <input required multiple type="search" name="genre" id="genre"> --}}
+                                                <div class="tags-input"></div>
+                                                <input required type="hidden" name="genre" id="genre"
+                                                    multiple>
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <div class="form-group"
+                                                style="padding-left: 30px;padding-right: 30px;margin-top: -10px;">
+                                                <label for="exp" class="for">Years of Experience</label>
+                                                <br>
+                                                <select name="exp" id="exp" style="width: 100%;">
+                                                    <option value="1-2 years">1-2 years</option>
+                                                    <option value="2-3 years">2-3 years</option>
+                                                    <option value="3-5 years">3-5 years</option>
+                                                    <option value="5 years above">5 years above</option>
+                                                </select>
+                                            </div>
+                                            <br>
+                                            <div class="form-group" style="padding-left: 30px;padding-right: 30px;">
+                                                <label for="exp" class="for"><b>Video Demo</b></label>
+                                                <br>
+                                                <label for="link" style="font-size: 12px;">Link To Youtube
+                                                    Video</label>
+                                                <input required type="url" name="youtube" id="youtube"
+                                                    style="width: 100%">
+                                            </div>
                                             <button type="submit"
                                                 style="float: right;margin-top: 30px;border:none;background:transparent;"
-                                                name="btnStep1" value="true">
+                                                name="btnStep2" value="true">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
                                                     fill="#5F939A" class="bi bi-arrow-right-circle-fill"
                                                     viewBox="0 0 16 16">
@@ -322,44 +489,216 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
-
+    <script src="js/jquery-2.1.0.min.js"></script>
     <script>
-        const togglePassword = document.querySelector('#togglePassword');
-        const toggleRePassword = document.querySelector('#toggleRePassword');
+        function fileOpen() {
+            let tFile = document.getElementById("mFile");
+            tFile.click();
+        }
 
-        var password = document.getElementById("password"),
-            confirm_password = document.getElementById("repassword");
+        function readURL(input) {
+            if (input.files && input.files[0]) {
 
-        function validatePassword() {
-            if (password.value != confirm_password.value) {
-                confirm_password.setCustomValidity("Passwords Don't Match");
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    // $('.image-upload-wrap').hide();
+
+                    $('.file-upload-image').attr('src', e.target.result);
+                    // $('.file-upload-content').show();
+
+                    // $('.image-title').html(input.files[0].name);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+
             } else {
-                confirm_password.setCustomValidity('');
+                removeUpload();
             }
         }
 
-        password.onchange = validatePassword;
-        confirm_password.onkeyup = validatePassword;
+        function removeUpload() {
+            $('.file-upload-image').attr('src', '/storage/images/user.png');
+        }
 
-        togglePassword.addEventListener('click', function(e) {
-            // toggle the type attribute
-            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-            password.setAttribute('type', type);
-            // toggle the eye slash icon
-            // togglePassword.setAttribute('class','bi bi-eye-slash');
-            // togglePassword.toggle('bi bi-eye-slash');
-            this.classList.toggle('bi-eye');
-            this.classList.toggle('bi-eye-slash');
-        });
+        var TagsInput = function(element) {
+            var self = this;
+            var initChar = "\u200B";
+            var initCharPattern = new RegExp(initChar, 'g');
 
-        toggleRePassword.addEventListener('click', function(e) {
-            // toggle the type attribute
-            const type = confirm_password.getAttribute('type') === 'password' ? 'text' : 'password';
-            confirm_password.setAttribute('type', type);
-            // toggle the eye slash icon
-            this.classList.toggle('bi-eye');
-            this.classList.toggle('bi-eye-slash');
-        });
+            var insert = function(element) {
+                if (self.textNode) self.element.insertBefore(element, self.textNode);
+                else self.element.appendChild(element);
+            };
+
+            var updateCursor = function() {
+                self.cursor = self.blank;
+            };
+
+            var keydown = function(event) {
+                if (event.keyCode == 188) {
+                    event.preventDefault();
+                    setTimeout(function() {
+                        var text = self.text;
+                        if (text) {
+                            self.text = initChar;
+                            self.add(text);
+                        }
+                    }, 1);
+                } else if (event.keyCode == 8) {
+                    var input = document.getElementById('genre');
+                    if (self.text.replace(initCharPattern, '') == '') {
+                        self.text = initChar + initChar;
+                        if (self.selected) {
+                            self.element.removeChild(self.selected);
+                            let mVal = input.value;
+                            let sliceVal = mVal.split(",");
+                            if (sliceVal.length == 1) {
+                                input.value = "";
+                            } else {
+                                input.value = sliceVal.shift();
+                            }
+
+                        } else {
+                            var tags = self.tags;
+                            var keys = Object.keys(tags)
+                            if (keys.length > 0) {
+                                var tag = tags[keys[keys.length - 1]];
+                                tag.setAttribute('data-selected', '');
+
+                            }
+
+
+                        }
+                    }
+                }
+
+                if (event.keyCode !== 8) {
+                    if (self.selected) self.selected.removeAttribute('data-selected');
+                }
+                setTimeout(function() {
+                    updateCursor();
+                }, 1);
+            };
+
+            var focus = function() {
+                updateCursor();
+            };
+
+            Object.defineProperties(this, {
+                element: {
+                    get: function() {
+                        return element;
+                    },
+                    set: function(v) {
+                        if (typeof v == 'string') v = document.querySelector(v);
+                        element = v instanceof Node ? v : document.createElement('div');
+                        if (!element.className.match(/\btags-input\b/)) element.className += ' tags-input';
+                        if (element.getAttribute('contenteditable') != 'true') element.setAttribute(
+                            'contenteditable', 'true');
+
+                        element.removeEventListener('keydown', keydown);
+                        element.addEventListener('keydown', keydown);
+
+                        element.removeEventListener('focus', focus);
+                        element.addEventListener('focus', focus);
+                        this.text = initChar;
+                    }
+                },
+                tags: {
+                    get: function() {
+                        var element;
+                        var elements = this.element.querySelectorAll('span');
+                        var tags = {};
+                        for (var i = 0; i < elements.length; i++) {
+                            element = elements[i]
+                            tags[element.innerText] = element;
+                        }
+
+                        return tags;
+                    }
+                },
+                lastChild: {
+                    get: function() {
+                        return this.element.lastChild;
+                    }
+                },
+                textNode: {
+                    get: function() {
+                        return this.element.lastChild instanceof Text ? this.element.lastChild : null;
+                    }
+                },
+                text: {
+                    get: function() {
+                        return this.textNode ? this.textNode.data : null;
+                    },
+                    set: function(v) {
+                        if (!this.textNode) this.element.appendChild(document.createTextNode(','));
+                        this.textNode.data = v;
+                    },
+                },
+                cursor: {
+                    get: function() {
+                        return this.element.getAttribute('data-cursor') !== null;
+                    },
+                    set: function(v) {
+                        if (v) this.element.setAttribute('data-cursor', '');
+                        else this.element.removeAttribute('data-cursor');
+                    }
+                },
+                focused: {
+                    get: function() {
+                        return document.activeElement == this.element;
+                    }
+                },
+                blank: {
+                    get: function() {
+                        return this.text.replace(initCharPattern, '') == '';
+                    }
+                },
+                selected: {
+                    get: function() {
+                        return this.element.querySelector('span[data-selected]');
+                    }
+                }
+            });
+
+            this.add = function(tag) {
+                tag = tag.replace(initCharPattern, '');
+                tag = tag.replace(/^\s+/, '').replace(/\s+$/, '');
+                tag = tag[0].toUpperCase() + tag.toLowerCase().slice(1);
+                if (tag != '' && this.tags[tag] === undefined) {
+
+                    var input = document.getElementById('genre');
+                    let mVal = input.value;
+                    let sliceVal = mVal.split(",");
+                    if (sliceVal.length <= 2) {
+                        var element = document.createElement('span');
+                        element.appendChild(document.createTextNode(tag));
+                        element.setAttribute('contenteditable', 'false');
+                        let mVal = input.value;
+                        if (mVal) {
+                            input.value = mVal + "," + tag;
+                        } else {
+                            input.value = tag;
+                        }
+
+
+                        insert(element);
+                    }
+
+                }
+            };
+
+            this.remove = function(tag) {
+                var element = this.tags[tag];
+                if (element) this.element.removeChild(element);
+            };
+
+            this.element = element;
+        };
+
+        var input = new TagsInput('.tags-input');
     </script>
     @if (session()->pull('errorCreate'))
         <script>

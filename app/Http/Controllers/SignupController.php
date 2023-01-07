@@ -143,6 +143,8 @@ class SignupController extends Controller
             }
 
             return redirect('/signup?as=' . $as . '&step=' . $step . '');
+        } else if ($request['btnStep2']) {
+            dd($request);
         } else {
             return redirect('/signup');
         }
