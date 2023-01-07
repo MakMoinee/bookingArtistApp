@@ -14,6 +14,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -180,20 +183,23 @@
                     <div class="card"style="filter: drop-shadow(-2px 2px 4px #464646);">
                         <div class="card-header">
                             <div class="rowHead">
-                                <div class="columnHead">
+                                <div class="columnHead"
+                                    style="font-family: 'Bebas Neue', cursive;font-size:23px;color:#5F939A;">
                                     <br>
                                     <center>
-                                        <h6>ACCOUNT</h6>
+                                        ACCOUNT
                                     </center>
 
                                 </div>
-                                <div class="columnHead" style="left: 20%">
+                                <div class="columnHead"
+                                    style="left: 20%;font-family: 'Bebas Neue', cursive;font-size:23px;">
                                     <br>
                                     <center>
                                         PROFILE
                                     </center>
                                 </div>
-                                <div class="columnHead" style="left: 20%">
+                                <div class="columnHead"
+                                    style="left: 20%;font-family: 'Bebas Neue', cursive;font-size:23px;">
                                     <br>
                                     <center>
                                         RATE 7 SERVICES
@@ -224,9 +230,9 @@
                             <div class="container">
                                 <br>
                                 <div class="row">
-                                    <h3
-                                        style="font-family: 'Roboto Regular',sans-serif; color: #979797;filter: drop-shadow(0.5px 0.5px 0.5px #2D2E2E);">
-                                        ACCOUNT</h3>
+                                    <h1
+                                        style="font-family: 'Bebas Neue', cursive; color: #2D2E2E;filter: drop-shadow(0.5px 0.5px 0.5px #2D2E2E);">
+                                        ACCOUNT</h1>
                                 </div>
                                 <br>
                                 <form action="/signup?as={{ $as }}&step={{ $step }}" method="POST"

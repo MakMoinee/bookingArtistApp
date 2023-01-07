@@ -141,7 +141,7 @@
                                         ARTIST</button>
                                 </a>
                             </div>
-                            <div class="col-xs-1" style="margin-top: -110px;margin-left: 220px; color:#2D2E2E;">
+                            <div class="col-xs-1" style="margin-top: -105px;margin-left: 220px; color:#2D2E2E;">
                                 <h5 style="padding-left: 20px;">INDUSTRY</h5>
                                 <a href="/signup?as=HOST&step=1">
                                     <button class="btn btn-outline-secondary rounded-pill p-3 mt-3"

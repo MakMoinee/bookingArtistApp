@@ -13,6 +13,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
         html,
         body {
@@ -288,20 +291,22 @@
                     <div class="card" style="filter: drop-shadow(-2px 2px 4px #464646); height:auto;">
                         <div class="card-header">
                             <div class="rowHead">
-                                <div class="columnHead">
+                                <div class="columnHead" style="font-family: 'Bebas Neue', cursive;font-size:23px;">
                                     <br>
                                     <center>
-                                        <h6>ACCOUNT</h6>
+                                        ACCOUNT
                                     </center>
 
                                 </div>
-                                <div class="columnHead" style="left: 20%">
+                                <div class="columnHead"
+                                    style="left: 20%;font-family: 'Bebas Neue', cursive;font-size:23px;color:#5F939A;">
                                     <br>
                                     <center>
                                         PROFILE
                                     </center>
                                 </div>
-                                <div class="columnHead" style="left: 20%">
+                                <div class="columnHead"
+                                    style="left: 20%;font-family: 'Bebas Neue', cursive;font-size:23px;">
                                     <br>
                                     <center>
                                         RATE 7 SERVICES
@@ -337,8 +342,8 @@
                                         PROFILE</h3>
                                 </div>
                                 <br>
-                                <form action="/signup?as={{ $as }}&step={{ $step }}" method="POST"
-                                    autocomplete="off" enctype="multipart/form-data">
+                                <form action="/bandprofile?as={{ $as }}&step={{ $step }}"
+                                    method="POST" autocomplete="off" enctype="multipart/form-data">
                                     @csrf
                                     <div class="rowHead">
                                         {{-- LEFT --}}
@@ -447,7 +452,7 @@
                                             </div>
                                             <br>
                                             <div class="form-group" style="padding-left: 30px;padding-right: 30px;">
-                                                <label for="exp" class="for"><b>Video Demo</b></label>
+                                                <label for="demo" class="for"><b>Video Demo</b></label>
                                                 <br>
                                                 <label for="link" style="font-size: 12px;">Link To Youtube
                                                     Video</label>
@@ -700,6 +705,20 @@
 
         var input = new TagsInput('.tags-input');
     </script>
+    @if (session()->pull('errorExistArtist'))
+        <script>
+            setTimeout(() => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'warning',
+                    title: 'Failed to Create Profile, Artist Exist Already, Please Try Again!',
+                    showConfirmButton: false,
+                    timer: 800
+                });
+            }, 500);
+        </script>;
+        {{ session()->forget('errorExistArtist') }}
+    @endif
     @if (session()->pull('errorCreate'))
         <script>
             setTimeout(() => {

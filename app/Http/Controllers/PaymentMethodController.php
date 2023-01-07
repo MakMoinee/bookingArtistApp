@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PaymentMethod;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PaymentMethodController extends Controller
 {
@@ -14,9 +15,30 @@ class PaymentMethodController extends Controller
      */
     public function index(Request $request)
     {
-        return view('paymentmethod', [
-            'as' => $request->query('as')
-        ]);
+        if (session()->exists("tmpProfile")) {
+            $tmpUser = session()->pull('tmpUser');
+            session()->put('tmpUser', $tmpUser);
+            $uid = $tmpUser[0]['userID'];
+            if ($request->query('as') == "HOST") {
+                return view('paymentmethod', [
+                    'as' => $request->query('as')
+                ]);
+            } else if ($request->query('as') == "BAND") {
+                $queryResult = DB::table('services')->where([['userID', '=', $uid]])->get();
+                $allServices = json_decode($queryResult, true);
+                $hasService = count($allServices) > 0;
+                return view('paymentmethod2', [
+                    'as' => $request->query('as'),
+                    'step' => $request->query('step'),
+                    'services' => $allServices,
+                    'hasService' => $hasService
+                ]);
+            } else {
+                return redirect('/');
+            }
+        } else {
+            return redirect('/');
+        }
     }
 
     /**

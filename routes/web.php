@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\BandProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SignupController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +26,5 @@ Route::resource('/signup', SignupController::class);
 Route::resource('/profile', ProfileController::class);
 Route::resource('/paymentmethod', PaymentMethodController::class);
 Route::resource('/login', LoginController::class);
+Route::resource('/bandprofile', BandProfileController::class);
+Route::resource('/addservices', ServicesController::class);

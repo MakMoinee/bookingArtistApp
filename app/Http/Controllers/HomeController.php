@@ -16,6 +16,10 @@ class HomeController extends Controller
                 $uid = $tmpUser[0];
                 $affectedRows = DB::table('iusers')->where(['userID' => $uid])
                     ->delete();
+                $affectedRows2 = DB::table('services')->where(['userID' => $uid])
+                    ->delete();
+                $affectedRows3 = DB::table('band_profiles')->where(['userID' => $uid])
+                    ->delete();
             }
             $tmpProfile = session()->pull('tmpProfile');
             if ($tmpProfile) {
