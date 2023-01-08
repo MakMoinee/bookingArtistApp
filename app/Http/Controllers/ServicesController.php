@@ -38,6 +38,8 @@ class ServicesController extends Controller
     public function store(Request $request)
     {
         if (session()->exists('tmpProfile')) {
+            $tmpProfile = session()->pull('tmpProfile');
+            session()->put('tmpProfile', $tmpProfile);
             $tmpUser = session()->pull('tmpUser');
             session()->put('tmpUser', $tmpUser);
             $uid = $tmpUser[0]['userID'];
@@ -105,8 +107,22 @@ class ServicesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        if (session()->exists('tmpUser')) {
+            $tmpUser = session()->pull('tmpUser');
+            session()->put('tmpUser', $tmpUser);
+            $uid = $tmpUser[0]['userID'];
+
+            $queryResult = DB::table('services')->where([['serviceID', '=', $id]])->delete();
+            if ($queryResult > 0) {
+                session()->put('successDeleteService', true);
+            } else {
+                session()->put('errorDeleteService', true);
+            }
+            return redirect("/paymentmethod?as=" . $request->as . "&step=3");
+        } else {
+            return redirect("/paymentmethod?as=" . $request->as . "&step=3");
+        }
     }
 }

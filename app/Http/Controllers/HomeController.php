@@ -35,12 +35,21 @@ class HomeController extends Controller
         }
 
         $isFromStep1 = session()->pull('isFromStep1');
+        $isFromStep2 = session()->pull('isFromStep2');
         if ($isFromStep1) {
             session()->put('isFromStep1', true);
             $AS = session()->pull('AS');
             session()->put('AS', $AS);
 
             return redirect('/signup?as=' . $AS . '&step=2');
+        }
+
+        if ($isFromStep2) {
+            session()->put('isFromStep2', true);
+            $AS = session()->pull('AS');
+            session()->put('AS', $AS);
+
+            return redirect('/paymentmethod?as=' . $AS . '&step=3');
         }
 
         if (session()->exists('users')) {

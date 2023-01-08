@@ -10,17 +10,31 @@
     <title>Bukidnon Groove</title>
     <link href="https://fonts.cdnfonts.com/css/slasher-film" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/roboto" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
     <style>
         body {
             margin: 0;
+        }
+
+        .modal-backdrop {
+            display: none;
+            visibility: hidden;
+            position: relative
+        }
+
+        .modal {
+            background: url("http://bin.smwcentral.net/u/11361/BlackTransparentBackground.png");
+            /* translucent image from google images*/
+            z-index: 1100;
         }
 
         .columnBody {
@@ -264,10 +278,10 @@
                                                     <button class="btn btn-primary"
                                                         style="background:transparent;font-family: 'Bebas Neue', cursive;color:black; width:100%; text-align: start;">
                                                         <div class="row">
-                                                            <div class="col-md-3" style="font-size: 23px;">
+                                                            <div class="col-md-3" style="font-size: 20px;">
                                                                 {{ $item['serviceName'] }}
                                                             </div>
-                                                            <div class="col-md-2" style="font-size: 23px;">
+                                                            <div class="col-md-2" style="font-size: 20px;">
                                                                 {{ $item['price'] }}
                                                             </div>
                                                             <div class="col-md-4"
@@ -277,7 +291,10 @@
 
                                                             </div>
                                                             <div class="col-md-1" style="display: inline-block">
-                                                                <a style="float: right;">
+
+                                                                <a style="float: right;"
+                                                                    data-bs-target="#cancelServiceModal{{ $item['serviceID'] }}"
+                                                                    data-bs-toggle="modal">
                                                                     <svg style="margin-right: -140px; color:white;background:red;border-radius: 9px;margin-top: 7px;"
                                                                         xmlns="http://www.w3.org/2000/svg"
                                                                         width="21" height="21"
@@ -289,7 +306,10 @@
                                                                             d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                                                                     </svg>
                                                                 </a>
+
                                                             </div>
+
+
                                                         </div>
                                                     </button>
                                                     {{-- <button class="btn btn-primary"
@@ -298,12 +318,44 @@
                                                             style="margin-left: 50px;margin-right: 30px;">{{ $item['price'] }}</span>view
                                                         details</button> --}}
                                                 </div>
+
+                                                <div class="modal fade"
+                                                    id="cancelServiceModal{{ $item['serviceID'] }}" tabindex="-1"
+                                                    role="dialog"
+                                                    aria-labelledby="cancelServiceModal{{ $item['serviceID'] }}"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <form
+                                                                action="{{ route('addservices.destroy', ['addservice' => $item['serviceID'], 'as' => $as]) }}"
+                                                                method="POST">
+                                                                @method('delete')
+                                                                @csrf
+                                                                <div class="modal-body">
+                                                                    <input type="hidden" name="cancel"
+                                                                        value="true">
+                                                                    <h5 class="modal-title" id="cancelModalLabel">Do
+                                                                        you
+                                                                        want to remove this service?
+                                                                    </h5>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-primary"
+                                                                        style="background: #5F939A;border:none;">Yes,
+                                                                        Proceed</button>
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             @endforeach
                                         @endif
                                         <div class="col-md-6" style="float: left;">
                                             <button class="btn btn-primary" data-bs-toggle="modal"
                                                 data-bs-target="#addServicesModal"
-                                                style="background:transparent;font-size: 25px;font-family: 'Bebas Neue', cursive;color:black; width:100%; text-align: start;">Add
+                                                style="background:transparent;padding:8px;font-size: 20px;font-family: 'Bebas Neue', cursive;color:black; width:100%; text-align: start;">Add
                                                 Services &nbsp;&nbsp;&nbsp;&nbsp;+</button>
                                         </div>
 
@@ -375,6 +427,8 @@
             id="btnGcash"></button>
         <button style="visibility: hidden;" data-bs-toggle="modal" data-bs-target="#creditModal"
             id="btnCredit"></button>
+        <button style="visibility: hidden;" data-bs-toggle="modal" data-bs-target="#cashModal"
+            id="btnCashPayment"></button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -452,10 +506,41 @@
                 } else if (pment.value == "credit") {
                     let btnCredit = document.getElementById('btnCredit');
                     btnCredit.click();
+                } else if (pment.value == "cash") {
+                    let btnCashPayment = document.getElementById('btnCashPayment');
+                    btnCashPayment.click();
                 }
             }
         }
     </script>
+    @if (session()->pull('successDeleteService'))
+        <script>
+            setTimeout(() => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Successfully Deleted Service',
+                    showConfirmButton: false,
+                    timer: 1300
+                });
+            }, 1500);
+        </script>;
+        {{ session()->forget('successDeleteService') }}
+    @endif
+    @if (session()->pull('errorDeleteService'))
+        <script>
+            setTimeout(() => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'warning',
+                    title: 'Failed to Delete Service, Please Try Again!',
+                    showConfirmButton: false,
+                    timer: 1300
+                });
+            }, 1500);
+        </script>;
+        {{ session()->forget('errorDeleteService') }}
+    @endif
     @if (session()->pull('errorCreate'))
         <script>
             setTimeout(() => {
@@ -517,7 +602,6 @@
             </div>
         </div>
     </div>
-
     <div class="modal fade" id="creditModal" tabindex="-1" role="dialog" aria-labelledby="creditModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -558,6 +642,40 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="cashModal" tabindex="-1" role="dialog" aria-labelledby="cashModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="{{ route('paymentmethod.store') }}" method="POST">
+                    @csrf
+                    <div class="modal-body" style="background: #EDEDED;border:none;">
+                        <div class="row">
+                            <div class="form-group" style="margin-left: 30px;">
+                                <label for="accountname" class="for">Full Name</label>
+                                <br>
+                                <input required type="text" name="accountname" id=""
+                                    style="background: #EDEDED;width: 85%;">
+                            </div>
+                            <br>
+                            <div class="form-group" style="margin-left: 30px;">
+                                <label for="acountnumber" class="for">Phone Number</label>
+                                <br>
+                                <input required type="number" name="accountnumber" id=""
+                                    style="background: #EDEDED;width: 85%;" value="{{ $phoneNum }}">
+                            </div>
+                            <br>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="background: #EDEDED;border:none;">
+                        <button type="submit" class="btn btn-primary" style="background: #5F939A;border:none;"
+                            name="btnCashPayment" value="true">Proceed</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="gcashModal" tabindex="-1" role="dialog" aria-labelledby="gcashModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -591,6 +709,7 @@
             </div>
         </div>
     </div>
+
     <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">

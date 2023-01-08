@@ -16,9 +16,13 @@ class PaymentMethodController extends Controller
     public function index(Request $request)
     {
         if (session()->exists("tmpProfile")) {
+            $tmpProfile = session()->pull('tmpProfile');
+            session()->put('tmpProfile', $tmpProfile);
+            session()->put('isFromStep2', true);
             $tmpUser = session()->pull('tmpUser');
             session()->put('tmpUser', $tmpUser);
             $uid = $tmpUser[0]['userID'];
+            $phoneNum = $tmpUser[0]['phonenum'];
             if ($request->query('as') == "HOST") {
                 return view('paymentmethod', [
                     'as' => $request->query('as')
@@ -31,7 +35,8 @@ class PaymentMethodController extends Controller
                     'as' => $request->query('as'),
                     'step' => $request->query('step'),
                     'services' => $allServices,
-                    'hasService' => $hasService
+                    'hasService' => $hasService,
+                    'phoneNum' => $phoneNum,
                 ]);
             } else {
                 return redirect('/');
@@ -85,6 +90,21 @@ class PaymentMethodController extends Controller
                 $newPayment->accountname = $request->accountname;
                 $newPayment->card = $request->cardnumber;
                 $newPayment->type = 'credit/debit';
+                $isSave = $newPayment->save();
+                session()->flush();
+                if ($isSave) {
+                    session()->put('successCreate', true);
+                } else {
+                    session()->put('errorCreate', true);
+                }
+                return redirect('/');
+            } else if ($request->btnCashPayment) {
+                $newPayment = new PaymentMethod();
+                $newPayment->userID = $tmpUser[0]['userID'];
+                $newPayment->accountnumber = $request->accountnumber;
+                $newPayment->accountname = $request->accountname;
+                $newPayment->card = $request->cardnumber;
+                $newPayment->type = 'cash';
                 $isSave = $newPayment->save();
                 session()->flush();
                 if ($isSave) {
