@@ -25,5 +25,6 @@ class BandProfile extends Model
         'genres',
         'exp',
         'youtube',
+        'bandPic'
     ];
 }

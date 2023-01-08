@@ -25,6 +25,7 @@ class CreateBandProfilesTable extends Migration
             $table->string('genres');
             $table->string('exp');
             $table->string('youtube');
+            $table->string('bandPic')->nullable(true);
             $table->timestamps();
         });
     }

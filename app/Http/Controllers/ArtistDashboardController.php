@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class LoginController extends Controller
+class ArtistDashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,28 @@ class LoginController extends Controller
      */
     public function index(Request $request)
     {
-        //
+        if (session()->exists("users")) {
+            $user = session()->pull("users");
+            session()->put("users", $user);
+            $uType = $user['userType'];
+            $uid = $user['userID'];
+
+
+            if ($uType == 3) {
+
+                $queryResult = DB::table('band_profiles')->where(['userID' => $uid])->get();
+                $pic = "";
+                if (count($queryResult) > 0) {
+                    $profiles = json_decode($queryResult, true);
+                    $pic = $profiles[0]['bandPic'];
+                }
+                return view('artist.dashboard', [
+                    'pic' => $pic
+                ]);
+            }
+        } else {
+            return redirect("/");
+        }
     }
 
     /**
@@ -35,29 +56,7 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        $email = $request->email;
-        $password = $request->password;
-
-        $queryResult = DB::table("iusers")->where([['email', '=', $email]])->get();
-        $users = json_decode($queryResult, true);
-        $isFound = false;
-        $user = array();
-        foreach ($users as $us) {
-            if (password_verify($password, $us['password'])) {
-                $isFound = true;
-                $user = $us;
-                break;
-            }
-        }
-
-        if ($isFound) {
-            session()->put('users', $user);
-            session()->put('successLogin', true);
-        } else {
-            session()->put('errorLogin', true);
-        }
-
-        return redirect("/");
+        //
     }
 
     /**
