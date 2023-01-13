@@ -385,11 +385,11 @@
                                                         style="background: transparent;margin-left: 20px;"><img
                                                             src="/images/gcash.png" alt="" srcset=""
                                                             width="150px" height="50px" onclick="gcashClick()"></a>
-                                                    <a class="btn btn-primary" id="credit"
+                                                    {{-- <a class="btn btn-primary" id="credit"
                                                         style="background: transparent;margin-left: 20px;"><img
                                                             src="/images/mastercard.png" alt=""
                                                             srcset="" width="150px" height="50px"
-                                                            onclick="creditClick()"></a>
+                                                            onclick="creditClick()"></a> --}}
                                                     <input required type="hidden" name="paymentmethod"
                                                         id="payment">
                                                 </div>
@@ -439,12 +439,12 @@
         function cashClick() {
             let cash = document.getElementById('cash');
             let gcash = document.getElementById('gcash');
-            let credit = document.getElementById('credit');
+            // let credit = document.getElementById('credit');
 
             cash.removeAttribute("style");
             gcash.removeAttribute("style");
-            credit.removeAttribute("style");
-            credit.setAttribute("style", "background: transparent;margin-left: 20px;");
+            // credit.removeAttribute("style");
+            // credit.setAttribute("style", "background: transparent;margin-left: 20px;");
             gcash.setAttribute("style", "background: transparent;margin-left: 20px;");
 
             let pment = document.getElementById('payment');
@@ -454,12 +454,12 @@
         function gcashClick() {
             let cash = document.getElementById('cash');
             let gcash = document.getElementById('gcash');
-            let credit = document.getElementById('credit');
+            // let credit = document.getElementById('credit');
 
             cash.removeAttribute("style");
             gcash.removeAttribute("style");
-            credit.removeAttribute("style");
-            credit.setAttribute("style", "background: transparent;margin-left: 20px;");
+            // credit.removeAttribute("style");
+            // credit.setAttribute("style", "background: transparent;margin-left: 20px;");
             gcash.setAttribute("style", "margin-left: 20px;");
             cash.setAttribute("style", "background: transparent;");
 

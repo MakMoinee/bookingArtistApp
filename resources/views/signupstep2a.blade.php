@@ -307,14 +307,14 @@
                                                 <label for="location" class="for">Location</label>
                                                 <br>
                                                 <select name="location" id="" style="width: 100%;">
-                                                    <option value="Valencia City">Valencia City</option>
-                                                    <option value="Malaybalay City">Malaybalay City</option>
-                                                    <option value="Kibawe">Kibawe</option>
-                                                    <option value="Cabanglasan">Cabanglasan</option>
-                                                    <option value="Quezon">Quezon</option>
-                                                    <option value="Maramag">Maramag</option>
-                                                    <option value="Lantapan">Lantapan</option>
-                                                    <option value="San Fernando">San Fernando</option>
+                                                    <option value="Valencia City">Valencia City, Bukidnon</option>
+                                                    <option value="Malaybalay City">Malaybalay City, Bukidnon</option>
+                                                    <option value="Kibawe">Kibawe, Bukidnon</option>
+                                                    <option value="Cabanglasan">Cabanglasan, Bukidnon</option>
+                                                    <option value="Quezon">Quezon, Bukidnon</option>
+                                                    <option value="Maramag">Maramag, Bukidnon</option>
+                                                    <option value="Lantapan">Lantapan, Bukidnon</option>
+                                                    <option value="San Fernando">San Fernando, Bukidnon</option>
                                                 </select>
                                             </div>
                                             <br>

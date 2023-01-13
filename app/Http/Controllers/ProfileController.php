@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BandProfile;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,11 +16,45 @@ class ProfileController extends Controller
      */
     public function index(Request $request)
     {
-        if (session()->exists('tmpUser')) {
-            $tmpUser = session()->pull('tmpUser');
-            session()->forget('tmpUser');
+        if (session()->exists("users")) {
+            $user = session()->pull("users");
+            session()->put("users", $user);
+            $uType = $user['userType'];
+            $uid = $user['userID'];
+
+            if ($uType == 3) {
+                $queryResult = DB::table('band_profiles')->where(['userID' => $uid])->get();
+                $pic = "";
+                if (count($queryResult) > 0) {
+                    $profiles = json_decode($queryResult, true);
+                    $pic = $profiles[0]['bandPic'];
+                }
+
+                $allBands = BandProfile::all();
+                return view('artist.profile', [
+                    'pic' => $pic,
+                    'bands' => $allBands,
+                    'profiles' => $profiles
+                ]);
+            }
+
+            if ($uType == 2) {
+                $queryResult = DB::table('profiles')->where(['userID' => $uid])->get();
+                $pic = "";
+                if (count($queryResult) > 0) {
+                    $profiles = json_decode($queryResult, true);
+                    $pic = $profiles[0]['userPic'];
+                }
+
+                $allBands = BandProfile::all();
+                return view('artist.profile', [
+                    'pic' => $pic,
+                    'bands' => $allBands,
+                    'profiles' => $profiles
+                ]);
+            }
         } else {
-            return redirect('/signup?as=' . $request['as'] . '&step=1');
+            return redirect("/");
         }
     }
 

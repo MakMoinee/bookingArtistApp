@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BandProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class BookingsController extends Controller
+class ArtistsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         if (session()->exists("users")) {
             $user = session()->pull("users");
@@ -20,30 +21,18 @@ class BookingsController extends Controller
             $uType = $user['userType'];
             $uid = $user['userID'];
 
-
             if ($uType == 3) {
-
                 $queryResult = DB::table('band_profiles')->where(['userID' => $uid])->get();
                 $pic = "";
                 if (count($queryResult) > 0) {
                     $profiles = json_decode($queryResult, true);
                     $pic = $profiles[0]['bandPic'];
                 }
-                return view('artist.bookings', [
-                    'pic' => $pic
-                ]);
-            }
 
-            if ($uType == 2) {
-
-                $queryResult = DB::table('profiles')->where(['userID' => $uid])->get();
-                $pic = "";
-                if (count($queryResult) > 0) {
-                    $profiles = json_decode($queryResult, true);
-                    $pic = $profiles[0]['userPic'];
-                }
-                return view('artist.bookings', [
-                    'pic' => $pic
+                $allBands = BandProfile::all();
+                return view('artist.artist', [
+                    'pic' => $pic,
+                    'bands' => $allBands
                 ]);
             }
         } else {

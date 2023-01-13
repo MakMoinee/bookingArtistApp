@@ -25,7 +25,8 @@ class PaymentMethodController extends Controller
             $phoneNum = $tmpUser[0]['phonenum'];
             if ($request->query('as') == "HOST") {
                 return view('paymentmethod', [
-                    'as' => $request->query('as')
+                    'as' => $request->query('as'),
+                    'phoneNum' => $phoneNum
                 ]);
             } else if ($request->query('as') == "BAND") {
                 $queryResult = DB::table('services')->where([['userID', '=', $uid]])->get();

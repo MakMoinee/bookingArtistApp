@@ -33,6 +33,7 @@ class ArtistDashboardController extends Controller
                     'pic' => $pic
                 ]);
             }
+            return redirect("/");
         } else {
             return redirect("/");
         }

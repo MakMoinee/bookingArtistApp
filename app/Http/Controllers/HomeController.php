@@ -20,6 +20,10 @@ class HomeController extends Controller
                 return redirect("/artistdash");
             }
 
+            if ($uType == 2) {
+                return redirect("/hostdash");
+            }
+
             if ($uType == 0) {
                 return redirect("/admin");
             }

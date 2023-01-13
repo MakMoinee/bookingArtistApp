@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArtistDashboardController;
+use App\Http\Controllers\ArtistsController;
 use App\Http\Controllers\BandProfileController;
 use App\Http\Controllers\BookingsController;
+use App\Http\Controllers\EventsController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\ProfileController;
@@ -36,3 +39,6 @@ Route::resource('/artistdash', ArtistDashboardController::class);
 Route::get("/logout", [SignoutController::class, 'index']);
 Route::resource("/bookings", BookingsController::class);
 Route::resource("/admin", AdminController::class);
+Route::resource("/artists", ArtistsController::class);
+Route::resource("/events", EventsController::class);
+Route::resource("/hostdash",HostController::class);

@@ -5,34 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class BookingsController extends Controller
+class HostController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         if (session()->exists("users")) {
             $user = session()->pull("users");
             session()->put("users", $user);
             $uType = $user['userType'];
             $uid = $user['userID'];
-
-
-            if ($uType == 3) {
-
-                $queryResult = DB::table('band_profiles')->where(['userID' => $uid])->get();
-                $pic = "";
-                if (count($queryResult) > 0) {
-                    $profiles = json_decode($queryResult, true);
-                    $pic = $profiles[0]['bandPic'];
-                }
-                return view('artist.bookings', [
-                    'pic' => $pic
-                ]);
-            }
 
             if ($uType == 2) {
 
@@ -42,9 +28,11 @@ class BookingsController extends Controller
                     $profiles = json_decode($queryResult, true);
                     $pic = $profiles[0]['userPic'];
                 }
-                return view('artist.bookings', [
+                return view('host.dashboard', [
                     'pic' => $pic
                 ]);
+            } else {
+                return redirect("/");
             }
         } else {
             return redirect("/");

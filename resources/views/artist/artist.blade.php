@@ -32,6 +32,7 @@
     <script type="text/javascript" async="" src="./Dashboard_files/fbevents.js.download"></script>
     <script type="text/javascript" async="" src="./Dashboard_files/analytics.js.download"></script>
     <script async="" src="./Dashboard_files/gtm.js.download"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
     <script>
         (function(w, d, s, l, i) {
@@ -53,31 +54,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
         .sidebar {
-            --cui-sidebar-bg: #FFFFFF !important;
-            --cui-sidebar-color: black !important;
-            --cui-sidebar-brand-color: black !important;
-        }
-
-        .nav-link,
-        .nav-icon {
-            color: black !important;
+            --cui-sidebar-bg: #2D2E2E !important;
         }
     </style>
 </head>
 
 <body>
     <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
-        <div class="sidebar-brand d-none d-md-flex">
-            <svg class="sidebar-brand-full" width="118" height="46" alt="CoreUI
-          Logo">
-                <use xlink:href="assets/brand/coreui.svg#full"></use>
-            </svg>
-            <svg class="sidebar-brand-narrow" width="46" height="46" alt="CoreUI
-          Logo">
-                <use xlink:href="assets/brand/coreui.svg#signet"></use>
-            </svg>
+        <div class="sidebar-brand d-none d-md-flex" style="font-family: 'Bebas Neue', cursive">
+            <h3>Bukidnon Groove</h3>
         </div>
         <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="init">
             <div class="simplebar-wrapper" style="margin: 0px;">
@@ -89,42 +77,42 @@
               0px; bottom: 0px;">
                         <div class="simplebar-content-wrapper" tabindex="0" role="region"
                             aria-label="scrollable content" style="height: 100%; overflow: hidden scroll;">
-                            <div class="simplebar-content" style="padding: 0px;">
-                                <li class="nav-item">
-                                    <a href="#"></a>
+                            <div class="simplebar-content" style="padding: 10px;color:white;">
+                                <h2 style="font-family: 'Bebas Neue', cursive">Filter By:</h2>
+                                <hr style="margin-top: -5px;color:white;font-weight: 4px;">
+                                <li class="nav-group">
+                                    <a href="#" class="nav-link nav-group-toggle" style="background:transparent;">
+                                        Location
+                                    </a>
+                                    <ul class="nav-group-items">
+                                        <select name="location" id=""
+                                            style="padding:5px;background:white;border:none;">
+                                            <option value="Valencia City, Bukidnon">Valencia City, Bukidnon</option>
+                                        </select>
+                                    </ul>
                                 </li>
-                                <li class="nav-item"><a class="nav-link active" href="/artistdash">
-                                        <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="16"
-                                            height="16" fill="currentColor" class="bi bi-speedometer2"
-                                            viewBox="0 0 16 16">
-                                            <path
-                                                d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z" />
-                                            <path fill-rule="evenodd"
-                                                d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z" />
-                                        </svg> Dashboard</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/bookings">
-                                        <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="16"
-                                            height="16" fill="currentColor" class="bi bi-journal-text"
-                                            viewBox="0 0 16 16">
-                                            <path
-                                                d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
-                                            <path
-                                                d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
-                                            <path
-                                                d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
-                                        </svg> View Bookings</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/events">
-                                        <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="16"
-                                            height="16" fill="currentColor" class="bi bi-calendar4-event"
-                                            viewBox="0 0 16 16">
-                                            <path
-                                                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1H2zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5z" />
-                                            <path
-                                                d="M11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
-                                        </svg> Manage Events</a></li>
-
-
-
+                                <hr style="color:white;font-weight: 4px;">
+                                <li class="nav-group">
+                                    <a href="#" class="nav-link nav-group-toggle">
+                                        Genre
+                                    </a>
+                                    <ul class="nav-group-items">
+                                        <input style="margin-left: 20px;margin-bottom: 5px;" type="search"
+                                            name="genre" id="" multiple placeholder="Filter Genre ...">
+                                    </ul>
+                                </li>
+                                <hr style="color:white;font-weight: 4px;">
+                                <div class="nav-group">
+                                    <a href="#" class="nav-link nav-group-toggle">
+                                        Profile Type
+                                    </a>
+                                    <ul class="nav-group-items">
+                                        <input type="checkbox" name="band" id="">&nbsp;<span>Band</span>
+                                        <br>
+                                        <input type="checkbox" name="singer" id=""
+                                            value="Music/Singer">&nbsp;<span>Music/Singer</span>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -161,13 +149,22 @@
                         {{--  --}}
                     </ul>
                     <ul class="header-nav d-none d-md-flex ms-auto" style="font-family: 'Roboto', sans-serif;">
-                        {{--  --}}
+                        <li class="nav-item"><a class="nav-link" href="/artistdash">Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="/artists">Artist</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/events">Events</a></li>
                     </ul>
-                    <ul class="header-nav ms-3" style="font-family: 'Roboto', sans-serif;">
+                    <ul class="header-nav ms-3">
                         <li class="nav-item dropdown"><a class="nav-link py-0" data-coreui-toggle="dropdown"
                                 href="https://coreui.io/demos/bootstrap/4.2/free/#" role="button"
                                 aria-haspopup="true" aria-expanded="false">
-                                Admin
+                                <div class="avatar avatar-md">
+                                    @if ($pic == '')
+                                        <img class="avatar-img" src="./Dashboard_files/8.jpg" alt="user@email.com">
+                                    @else
+                                        <img class="avatar-img" src="/storage/profiles/{{ $pic }}"
+                                            alt="user@email.com">
+                                    @endif
+                                </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end pt-0">
 
@@ -217,97 +214,109 @@
 
             </div>
         </header>
-        <div class="body flex-grow-1 px-3" style="background: #EDEDED; padding-top: 20px;">
+        <div class="body flex-grow-1 px-3" style="background: #504c4c; padding-top: 20px;">
             <div class="container-lg">
                 <div class="row">
                     <div class="col-lg-12">
-                        {{-- verified --}}
-                        <div class="col-md-4" style="float: left;margin-right: 20px;">
-                            <div class="card mb-4" style="background:white">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="row">
-                                                <div class="col-6" style="width: 100%">
-                                                    <svg style="float:left;margin-left: 15px;"xmlns="http://www.w3.org/2000/svg"
-                                                        width="56" height="56" fill="currentColor"
-                                                        class="bi bi-person-square" viewBox="0 0 16 16">
-                                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                                                        <path
-                                                            d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z" />
-                                                    </svg>
-                                                    <h6 style="margin-left: 80px;font-family: 'Bebas Neue', cursive">
-                                                        <b>10</b>
-                                                    </h6>
-                                                    <h6
-                                                        style="margin-left: 80px;width: 100%;font-size:12px;font-family: 'Roboto', sans-serif;">
-                                                        Verified Artist</h6>
+                        <form action="" autocomplete="off">
+                            <div class="form-group" style="width: 80%">
+
+                                <input class="form-control" type="text" name="search" id=""
+                                    style="float:left;width: 50%;font-size:15px;background: #e3e2da;"
+                                    placeholder="Search Artist">
+                                <button class="btn btn-primary" style="background: #5F939A;border:none;"><i
+                                        class="bi bi-search" style="cursor: pointer;"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-12">
+                        @foreach ($bands as $b)
+                            <div class="col-lg-5" style="float:left;margin-right: 20px;">
+                                <div class="card mb-4" style="background: #e3e2da;">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <center>
+                                                        <img style="height: 100px; width: 100px;"
+                                                            src="/images/person.svg" alt="" srcset="">
+                                                    </center>
+                                                </div>
+                                                <br>
+                                                <div class="row">
+                                                    <center>
+                                                        <h3>{{ $b['bandName'] }}</h3>
+                                                    </center>
+                                                </div>
+                                                <div class="row">
+                                                    <center>
+                                                        <label>Band</label>
+                                                    </center>
+                                                </div>
+                                                <br>
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <center>
+                                                            <div class="col-lg-6" style="float: left;">
+                                                                <h6><i class="bi bi-geo-alt-fill"
+                                                                        style="margin-right: 5px;"></i>{{ $b['address'] }}
+                                                                </h6>
+                                                                <br>
+                                                                <h6><i class="bi bi-file-earmark-music-fill"
+                                                                        style="margin-right: 5px;"></i>{{ $b['genres'] }}
+                                                                </h6>
+                                                            </div>
+                                                            <div class="col-lg-6" style="float: left;">
+                                                                <h6><i class="bi bi-people-fill"
+                                                                        style="margin-right: 5px;"></i>{{ $b['bandSize'] }}
+                                                                    Members</h6>
+                                                                <br>
+                                                                <h6><i class="bi bi-star-fill"
+                                                                        style="margin-right: 5px;"></i>
+                                                                    <i class="bi bi-star-fill"
+                                                                        style="color:yellow;"></i>
+                                                                    <i class="bi bi-star-fill"
+                                                                        style="color:yellow;"></i>
+                                                                    <i class="bi bi-star-fill"
+                                                                        style="color:yellow;"></i>
+                                                                    <i class="bi bi-star-fill"
+                                                                        style="color:yellow;"></i>
+                                                                    <i class="bi bi-star-fill"
+                                                                        style="color:yellow;"></i>
+                                                                </h6>
+                                                            </div>
+                                                        </center>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <center>
+                                                            <div class="col-lg-6" style="float:left;">
+                                                                <button class="btn btn-primary rounded-pill"
+                                                                    style="background: transparent; color:black;border: 1px solid black;">View
+                                                                    Services</button>
+                                                            </div>
+                                                            <div class="col-lg-6" style="float:left;">
+                                                                <button class="btn btn-primary rounded-pill"
+                                                                    style="background: #5F939A;border:none;">Send
+                                                                    Booking
+                                                                    Request</button>
+                                                            </div>
+                                                        </center>
+                                                    </div>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        {{-- Unverified --}}
-                        <div class="col-md-4" style="float: left;margin-right: 20px;">
-                            <div class="card mb-4" style="background:white">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="row">
-                                                <div class="col-6" style="width: 100%">
-                                                    <svg style="float:left;margin-left: 15px;"xmlns="http://www.w3.org/2000/svg"
-                                                        width="56" height="56" fill="currentColor"
-                                                        class="bi bi-person-square" viewBox="0 0 16 16">
-                                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                                                        <path
-                                                            d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z" />
-                                                    </svg>
-                                                    <h6 style="margin-left: 80px;font-family: 'Bebas Neue', cursive">
-                                                        <b>0</b>
-                                                    </h6>
-                                                    <h6
-                                                        style="margin-left: 80px;width: 100%;font-size:12px;font-family: 'Roboto', sans-serif;">
-                                                        Unverified Artist</h6>
-                                                </div>
-                                            </div>
+                        @endforeach
 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {{-- Registered Clients --}}
-                        <div class="col-md-4" style="float: left;margin-right: 20px;">
-                            <div class="card mb-4" style="background:white">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="row">
-                                                <div class="col-6" style="width: 100%">
-                                                    <svg style="float:left;margin-left: 15px;"xmlns="http://www.w3.org/2000/svg"
-                                                        width="56" height="56" fill="currentColor"
-                                                        class="bi bi-person-square" viewBox="0 0 16 16">
-                                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                                                        <path
-                                                            d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z" />
-                                                    </svg>
-                                                    <h6 style="margin-left: 80px;font-family: 'Bebas Neue', cursive">
-                                                        <b>0</b>
-                                                    </h6>
-                                                    <h6
-                                                        style="margin-left: 80px;width: 100%;font-size:12px;font-family: 'Roboto', sans-serif;">
-                                                        Registered Clients</h6>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

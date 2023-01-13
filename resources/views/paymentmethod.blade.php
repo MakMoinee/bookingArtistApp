@@ -242,15 +242,20 @@
                                         <div class="col-md-12">
                                             <center>
                                                 <div class="form-group">
+                                                    <a class="btn btn-primary" style="background: transparent;"
+                                                        id="cash">
+                                                        <img src="/images/cash.svg" alt="" srcset=""
+                                                            width="150px" height="50px" onclick="cashClick()">
+                                                    </a>
                                                     <a class="btn btn-primary" id="gcash"
                                                         style="background: transparent;"><img src="/images/gcash.png"
                                                             alt="" srcset="" width="150px"
                                                             height="50px" onclick="gcashClick()"></a>
-                                                    <a class="btn btn-primary" id="credit"
+                                                    {{-- <a class="btn btn-primary" id="credit"
                                                         style="background: transparent;margin-left: 20px;"><img
                                                             src="/images/mastercard.png" alt=""
                                                             srcset="" width="150px" height="50px"
-                                                            onclick="creditClick()"></a>
+                                                            onclick="creditClick()"></a> --}}
                                                     <input required type="hidden" name="paymentmethod"
                                                         id="payment">
                                                 </div>
@@ -288,6 +293,8 @@
             id="btnGcash"></button>
         <button style="visibility: hidden;" data-bs-toggle="modal" data-bs-target="#creditModal"
             id="btnCredit"></button>
+        <button style="visibility: hidden;" data-bs-toggle="modal" data-bs-target="#cashModal"
+            id="btnCashPayment"></button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -295,13 +302,32 @@
     </script>
     <script src="js/jquery-2.1.0.min.js"></script>
     <script>
-        function gcashClick() {
+        function cashClick() {
+            let cash = document.getElementById('cash');
             let gcash = document.getElementById('gcash');
-            let credit = document.getElementById('credit');
+            // let credit = document.getElementById('credit');
 
+            cash.removeAttribute("style");
             gcash.removeAttribute("style");
-            credit.removeAttribute("style");
-            credit.setAttribute("style", "background: transparent;");
+            // credit.removeAttribute("style");
+            // credit.setAttribute("style", "background: transparent;margin-left: 20px;");
+            gcash.setAttribute("style", "background: transparent;margin-left: 20px;");
+
+            let pment = document.getElementById('payment');
+            pment.value = "cash";
+        }
+
+        function gcashClick() {
+            let cash = document.getElementById('cash');
+            let gcash = document.getElementById('gcash');
+            // let credit = document.getElementById('credit');
+
+            cash.removeAttribute("style");
+            gcash.removeAttribute("style");
+            // credit.removeAttribute("style");
+            // credit.setAttribute("style", "background: transparent;margin-left: 20px;");
+            gcash.setAttribute("style", "margin-left: 20px;");
+            cash.setAttribute("style", "background: transparent;");
 
             let pment = document.getElementById('payment');
             pment.value = "gcash";
@@ -338,10 +364,9 @@
                     let btnGcash = document.getElementById('btnGcash');
                     btnGcash.click();
 
-                } else {
-                    let btnCredit = document.getElementById('btnCredit');
-                    btnCredit.click();
-
+                } else if (pment.value == "cash") {
+                    let btnCashPayment = document.getElementById('btnCashPayment');
+                    btnCashPayment.click();
                 }
             }
         }
@@ -428,6 +453,40 @@
                     <div class="modal-footer" style="background: #EDEDED;border:none;">
                         <button type="submit" class="btn btn-primary" style="background: #5F939A;border:none;"
                             name="btnGcash" value="true">Proceed</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="cashModal" tabindex="-1" role="dialog" aria-labelledby="cashModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="{{ route('paymentmethod.store') }}" method="POST">
+                    @csrf
+                    <div class="modal-body" style="background: #EDEDED;border:none;">
+                        <div class="row">
+                            <div class="form-group" style="margin-left: 30px;">
+                                <label for="accountname" class="for">Full Name</label>
+                                <br>
+                                <input required type="text" name="accountname" id=""
+                                    style="background: #EDEDED;width: 85%;">
+                            </div>
+                            <br>
+                            <div class="form-group" style="margin-left: 30px;">
+                                <label for="acountnumber" class="for">Phone Number</label>
+                                <br>
+                                <input required type="number" name="accountnumber" id=""
+                                    style="background: #EDEDED;width: 85%;" value="{{ $phoneNum }}">
+                            </div>
+                            <br>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="background: #EDEDED;border:none;">
+                        <button type="submit" class="btn btn-primary" style="background: #5F939A;border:none;"
+                            name="btnCashPayment" value="true">Proceed</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </form>

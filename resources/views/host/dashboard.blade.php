@@ -53,31 +53,38 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <script src='/js/index.global.js'></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css"
+        integrity="sha512-KXkS7cFeWpYwcoXxyfOumLyRGXMp7BTMTjwrgjMg0+hls4thG2JGzRgQtRfnAuKTn2KWTDZX4UdPg+xTs8k80Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     var calendarEl = document.getElementById('calendar');
+        //     var calendar = new FullCalendar.Calendar(calendarEl, {
+        //         initialView: 'dayGridMonth'
+        //     });
+        //     calendar.render();
+
+        //     // calendar.fullCalendar('renderEvent', {
+        //     //     title: 'dynamic event',
+        //     //     start: '2023-01-02',
+        //     //     allDay: true
+        //     // });
+        // });
+    </script>
     <style>
         .sidebar {
-            --cui-sidebar-bg: #FFFFFF !important;
-            --cui-sidebar-color: black !important;
-            --cui-sidebar-brand-color: black !important;
-        }
-
-        .nav-link,
-        .nav-icon {
-            color: black !important;
+            --cui-sidebar-bg: #2D2E2E !important;
         }
     </style>
 </head>
 
 <body>
     <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
-        <div class="sidebar-brand d-none d-md-flex">
-            <svg class="sidebar-brand-full" width="118" height="46" alt="CoreUI
-          Logo">
-                <use xlink:href="assets/brand/coreui.svg#full"></use>
-            </svg>
-            <svg class="sidebar-brand-narrow" width="46" height="46" alt="CoreUI
-          Logo">
-                <use xlink:href="assets/brand/coreui.svg#signet"></use>
-            </svg>
+        <div class="sidebar-brand d-none d-md-flex" style="font-family: 'Bebas Neue', cursive">
+            <h3>Bukidnon Groove</h3>
         </div>
         <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="init">
             <div class="simplebar-wrapper" style="margin: 0px;">
@@ -112,7 +119,7 @@
                                                 d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
                                             <path
                                                 d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
-                                        </svg> View Bookings</a></li>
+                                        </svg> Bookings</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/events">
                                         <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="16"
                                             height="16" fill="currentColor" class="bi bi-calendar4-event"
@@ -121,7 +128,33 @@
                                                 d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1H2zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5z" />
                                             <path
                                                 d="M11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
-                                        </svg> Manage Events</a></li>
+                                        </svg> Events</a></li>
+                                <div class="nav-group">
+                                    <a class="nav-link nav-group-toggle" href="#">
+                                        <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="16"
+                                            height="16" fill="currentColor" class="bi bi-gear-wide-connected"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M7.068.727c.243-.97 1.62-.97 1.864 0l.071.286a.96.96 0 0 0 1.622.434l.205-.211c.695-.719 1.888-.03 1.613.931l-.08.284a.96.96 0 0 0 1.187 1.187l.283-.081c.96-.275 1.65.918.931 1.613l-.211.205a.96.96 0 0 0 .434 1.622l.286.071c.97.243.97 1.62 0 1.864l-.286.071a.96.96 0 0 0-.434 1.622l.211.205c.719.695.03 1.888-.931 1.613l-.284-.08a.96.96 0 0 0-1.187 1.187l.081.283c.275.96-.918 1.65-1.613.931l-.205-.211a.96.96 0 0 0-1.622.434l-.071.286c-.243.97-1.62.97-1.864 0l-.071-.286a.96.96 0 0 0-1.622-.434l-.205.211c-.695.719-1.888.03-1.613-.931l.08-.284a.96.96 0 0 0-1.186-1.187l-.284.081c-.96.275-1.65-.918-.931-1.613l.211-.205a.96.96 0 0 0-.434-1.622l-.286-.071c-.97-.243-.97-1.62 0-1.864l.286-.071a.96.96 0 0 0 .434-1.622l-.211-.205c-.719-.695-.03-1.888.931-1.613l.284.08a.96.96 0 0 0 1.187-1.186l-.081-.284c-.275-.96.918-1.65 1.613-.931l.205.211a.96.96 0 0 0 1.622-.434l.071-.286zM12.973 8.5H8.25l-2.834 3.779A4.998 4.998 0 0 0 12.973 8.5zm0-1a4.998 4.998 0 0 0-7.557-3.779l2.834 3.78h4.723zM5.048 3.967c-.03.021-.058.043-.087.065l.087-.065zm-.431.355A4.984 4.984 0 0 0 3.002 8c0 1.455.622 2.765 1.615 3.678L7.375 8 4.617 4.322zm.344 7.646.087.065-.087-.065z" />
+                                        </svg> Settings</a>
+                                    <ul class="nav-group-items">
+                                        <li class="nav-item">
+                                            <a href="/profile" class="nav-link">
+                                                Profile
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/account" class="nav-link">
+                                                Account
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/billing" class="nav-link">
+                                                Billing Info
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
 
 
 
@@ -161,13 +194,22 @@
                         {{--  --}}
                     </ul>
                     <ul class="header-nav d-none d-md-flex ms-auto" style="font-family: 'Roboto', sans-serif;">
-                        {{--  --}}
+                        <li class="nav-item"><a class="nav-link active" href="/artistdash">Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/artists">Artist</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/events">Events</a></li>
                     </ul>
-                    <ul class="header-nav ms-3" style="font-family: 'Roboto', sans-serif;">
+                    <ul class="header-nav ms-3">
                         <li class="nav-item dropdown"><a class="nav-link py-0" data-coreui-toggle="dropdown"
                                 href="https://coreui.io/demos/bootstrap/4.2/free/#" role="button"
                                 aria-haspopup="true" aria-expanded="false">
-                                Admin
+                                <div class="avatar avatar-md">
+                                    @if ($pic == '')
+                                        <img class="avatar-img" src="./Dashboard_files/8.jpg" alt="user@email.com">
+                                    @else
+                                        <img class="avatar-img" src="/storage/profiles/{{ $pic }}"
+                                            alt="user@email.com">
+                                    @endif
+                                </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end pt-0">
 
@@ -217,93 +259,17 @@
 
             </div>
         </header>
-        <div class="body flex-grow-1 px-3" style="background: #EDEDED; padding-top: 20px;">
+        <div class="body flex-grow-1 px-3" style="background: #504c4c; padding-top: 20px;">
             <div class="container-lg">
+
                 <div class="row">
                     <div class="col-lg-12">
-                        {{-- verified --}}
-                        <div class="col-md-4" style="float: left;margin-right: 20px;">
-                            <div class="card mb-4" style="background:white">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="row">
-                                                <div class="col-6" style="width: 100%">
-                                                    <svg style="float:left;margin-left: 15px;"xmlns="http://www.w3.org/2000/svg"
-                                                        width="56" height="56" fill="currentColor"
-                                                        class="bi bi-person-square" viewBox="0 0 16 16">
-                                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                                                        <path
-                                                            d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z" />
-                                                    </svg>
-                                                    <h6 style="margin-left: 80px;font-family: 'Bebas Neue', cursive">
-                                                        <b>10</b>
-                                                    </h6>
-                                                    <h6
-                                                        style="margin-left: 80px;width: 100%;font-size:12px;font-family: 'Roboto', sans-serif;">
-                                                        Verified Artist</h6>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {{-- Unverified --}}
-                        <div class="col-md-4" style="float: left;margin-right: 20px;">
-                            <div class="card mb-4" style="background:white">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="row">
-                                                <div class="col-6" style="width: 100%">
-                                                    <svg style="float:left;margin-left: 15px;"xmlns="http://www.w3.org/2000/svg"
-                                                        width="56" height="56" fill="currentColor"
-                                                        class="bi bi-person-square" viewBox="0 0 16 16">
-                                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                                                        <path
-                                                            d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z" />
-                                                    </svg>
-                                                    <h6 style="margin-left: 80px;font-family: 'Bebas Neue', cursive">
-                                                        <b>0</b>
-                                                    </h6>
-                                                    <h6
-                                                        style="margin-left: 80px;width: 100%;font-size:12px;font-family: 'Roboto', sans-serif;">
-                                                        Unverified Artist</h6>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {{-- Registered Clients --}}
-                        <div class="col-md-4" style="float: left;margin-right: 20px;">
-                            <div class="card mb-4" style="background:white">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="row">
-                                                <div class="col-6" style="width: 100%">
-                                                    <svg style="float:left;margin-left: 15px;"xmlns="http://www.w3.org/2000/svg"
-                                                        width="56" height="56" fill="currentColor"
-                                                        class="bi bi-person-square" viewBox="0 0 16 16">
-                                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                                                        <path
-                                                            d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z" />
-                                                    </svg>
-                                                    <h6 style="margin-left: 80px;font-family: 'Bebas Neue', cursive">
-                                                        <b>0</b>
-                                                    </h6>
-                                                    <h6
-                                                        style="margin-left: 80px;width: 100%;font-size:12px;font-family: 'Roboto', sans-serif;">
-                                                        Registered Clients</h6>
-                                                </div>
-                                            </div>
-
-                                        </div>
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="calendar" id="calendar"
+                                            style="width: 100%;padding:10px;text-decoration: none;"></div>
                                     </div>
                                 </div>
                             </div>
@@ -339,6 +305,53 @@
                 </div>
             </div>
         </div>
+
+        @if (session()->pull('successLogin'))
+            <script>
+                setTimeout(() => {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Login Successfully',
+                        showConfirmButton: false,
+                        timer: 800
+                    });
+                }, 500);
+            </script>;
+            {{ session()->forget('successLogin') }}
+        @endif
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+        <!-- ✅ load moment.js ✅ -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+            integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <!-- ✅ load FullCalendar ✅ -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"
+            integrity="sha512-o0rWIsZigOfRAgBxl4puyd0t6YKzeAw9em/29Ag7lhCQfaaua/mDwnpE2PVzwqJ08N7/wqrgdjc2E0mwdSY2Tg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        {{-- <script src="{{ mix('js/app.js') }}"></script> --}}
+
+        <script>
+            $(document).ready(function() {
+                $('#calendar').fullCalendar({
+                    initialView: 'dayGridMonth',
+                    // events: [{
+                    //     title: 'My Event',
+                    //     start: '2023-01-02',
+                    //     url: 'http://google.com/'
+                    // }]
+                });
+
+                // $('#calendar').fullCalendar('renderEvent', {
+                //     title: 'dynamic event',
+                //     start: '2023-01-02',
+                //     allDay: true
+                // });
+            });
+        </script>
 </body>
 
 </html>

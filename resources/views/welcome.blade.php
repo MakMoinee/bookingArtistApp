@@ -612,11 +612,25 @@
                     icon: 'success',
                     title: 'Successfully Created Account',
                     showConfirmButton: false,
-                    timer: 1300
+                    timer: 800
                 });
-            }, 1500);
+            }, 500);
         </script>;
         {{ session()->forget('successCreate') }}
+    @endif
+    @if (session()->pull('errorLogin'))
+        <script>
+            setTimeout(() => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'warning',
+                    title: 'Wrong email or password, Please Try Again!',
+                    showConfirmButton: false,
+                    timer: 800
+                });
+            }, 500);
+        </script>;
+        {{ session()->forget('errorLogin') }}
     @endif
     @if (session()->pull('errorCreate'))
         <script>
@@ -626,9 +640,9 @@
                     icon: 'warning',
                     title: 'Failed to Create Account, Please Try Again!',
                     showConfirmButton: false,
-                    timer: 1300
+                    timer: 800
                 });
-            }, 1500);
+            }, 500);
         </script>;
         {{ session()->forget('errorCreate') }}
     @endif

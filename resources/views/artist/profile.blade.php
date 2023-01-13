@@ -54,9 +54,41 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <script src='/js/index.global.js'></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth'
+            });
+            calendar.render();
+        });
+    </script>
     <style>
         .sidebar {
             --cui-sidebar-bg: #2D2E2E !important;
+        }
+
+        input[type="text"] {
+            background: transparent;
+            border: 0;
+            border-bottom: 1.5px solid #5F939A;
+            outline: 0;
+        }
+
+        input[type="number"] {
+            background: transparent;
+            border: 0;
+            border-bottom: 1.5px solid #5F939A;
+            outline: 0;
+        }
+
+        select {
+            background: transparent;
+            border: 0;
+            border-bottom: 1.5px solid #5F939A;
+            outline: 0;
         }
     </style>
 </head>
@@ -89,7 +121,7 @@
                                             <path fill-rule="evenodd"
                                                 d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z" />
                                         </svg> Dashboard</a></li>
-                                <li class="nav-item"><a class="nav-link active" href="/bookings">
+                                <li class="nav-item"><a class="nav-link" href="/bookings">
                                         <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="16"
                                             height="16" fill="currentColor" class="bi bi-journal-text"
                                             viewBox="0 0 16 16">
@@ -119,7 +151,7 @@
                                         </svg> Settings</a>
                                     <ul class="nav-group-items">
                                         <li class="nav-item">
-                                            <a href="/profile" class="nav-link">
+                                            <a href="/profile" class="nav-link active">
                                                 Profile
                                             </a>
                                         </li>
@@ -135,6 +167,7 @@
                                         </li>
                                     </ul>
                                 </div>
+
 
 
                             </div>
@@ -173,7 +206,7 @@
                         {{--  --}}
                     </ul>
                     <ul class="header-nav d-none d-md-flex ms-auto" style="font-family: 'Roboto', sans-serif;">
-                        <li class="nav-item"><a class="nav-link active" href="/artistdash">Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/artistdash">Dashboard</a></li>
                         <li class="nav-item"><a class="nav-link" href="/artists">Artist</a></li>
                         <li class="nav-item"><a class="nav-link" href="/events">Events</a></li>
                     </ul>
@@ -241,68 +274,155 @@
         <div class="body flex-grow-1 px-3" style="background: #504c4c; padding-top: 20px;">
             <div class="container-lg">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-5"
-                            style="float: left;margin-right: 20px;font-family: 'Bebas Neue', cursive;color:white;">
-                            <h1>BOOKINGS</h1>
-                            <h6 style="margin-top: -10px;font-family: 'Roboto', sans-serif;">
-                                {{ date('M d, Y', strtotime(now())) }}</h6>
-                        </div>
-                    </div>
+
                 </div>
-                <br>
-                <select name="filter" id="filter" class="rounded-pill"
-                    style="background:#e3e2da;width: 150px;padding;10px;font-family: 'Roboto', sans-serif;border:none;">
-                    <option value="All">All</option>
-                    <option value="Booked">Booked</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Cancelled">Cancelled</option>
-                </select>
-                <br>
-                <br>
+
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="table-responsive">
-                                            <table class="table border mb-0">
-                                                <thead class="table-light fw-semibold">
-                                                    <tr class="align-middle">
-                                                        <th>
-                                                            Artist
-                                                        </th>
-                                                        <th>
-                                                            Event
-                                                        </th>
-                                                        <th>
-                                                            Time & Date
-                                                        </th>
-                                                        <th>
-                                                            Location
-                                                        </th>
-                                                        <th>
-                                                            Services
-                                                        </th>
-                                                        <th>
-                                                            Payment Method
-                                                        </th>
-                                                        <th>
-                                                            Status
-                                                        </th>
-                                                        <th>
-                                                            Action
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody></tbody>
-                                            </table>
+                        <center>
+                            <form action="/profile" method="post">
+                                <div class="col-lg-10">
+                                    <div class="card mb-4" style="background:#EDEDED">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="row">
+                                                        <h1
+                                                            style="font-family: 'Bebas Neue', cursive;text-align: start;">
+                                                            Profile
+                                                        </h1>
+                                                        <hr>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="col-lg-6" style="float:left;">
+                                                        <img src="/images/person.svg"
+                                                            style="width: 150px; height: 150px;" alt=""
+                                                            srcset="">
+                                                        <br>
+                                                        <br>
+                                                        <input class="form-control" type="file" name="file"
+                                                            id="" accept=".jpg, .png, .jpeg, .gif, .bitmap">
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-lg-12" style="text-align: start">
+                                                                <label for="bandName" class="for"
+                                                                    style="text-align:start;font-family: 'Roboto', sans-serif; "><b>Artist/Band
+                                                                        Name:</b></label>
+                                                                <br>
+                                                                <input required type="text" name="bandName"
+                                                                    id="" style="width: 100%;">
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-lg-12" style="text-align: start">
+                                                                <label for="bandSize" class="for"
+                                                                    style="text-align:start;font-family: 'Roboto', sans-serif; "><b>Band
+                                                                        Size:</b></label>
+                                                                <br>
+                                                                <input required type="number" name="bandSize"
+                                                                    id="" style="width: 100%;">
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-lg-12" style="text-align: start">
+                                                                <label for="location" class="for"
+                                                                    style="text-align:start;font-family: 'Roboto', sans-serif; "><b>Location:</b></label>
+                                                                <br>
+                                                                <select name="location" id=""
+                                                                    style="width: 100%;">
+                                                                    <option value="Valencia City">Valencia City
+                                                                    </option>
+                                                                    <option value="Malaybalay City">Malaybalay City
+                                                                    </option>
+                                                                    <option value="Kibawe">Kibawe</option>
+                                                                    <option value="Cabanglasan">Cabanglasan</option>
+                                                                    <option value="Quezon">Quezon</option>
+                                                                    <option value="Maramag">Maramag</option>
+                                                                    <option value="Lantapan">Lantapan</option>
+                                                                    <option value="San Fernando">San Fernando</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-lg-12" style="text-align: start">
+                                                                <label for="reper" class="for"
+                                                                    style="text-align:start;font-family: 'Roboto', sans-serif; "><b>Repertoire:</b></label>
+                                                                <br>
+                                                                <input required type="text" name="reper"
+                                                                    id="" style="width: 100%;">
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <br>
+                                                    </div>
+                                                    <div class="col-lg-6" style="float:left;">
+                                                        <div class="row">
+                                                            <div class="col-lg-12"
+                                                                style="text-align: start;padding-left:25px;">
+                                                                <label for="bio" class="for"
+                                                                    style="text-align:start;font-family: 'Roboto', sans-serif; "><b>Bio:</b></label>
+                                                                <br>
+                                                                <input required type="text" name="bio"
+                                                                    id="" style="width: 100%;">
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row" style="margin-top: 155px;">
+                                                            <div class="col-lg-12"
+                                                                style="text-align: start;padding-left:25px;">
+                                                                <label for="type" class="for"
+                                                                    style="text-align:start;font-family: 'Roboto', sans-serif; "><b>Artist
+                                                                        Type:</b></label>
+                                                                <br>
+                                                                <input required type="text" name="type"
+                                                                    id=""
+                                                                    style="width: 100%;margin-top: 5px;">
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-lg-12"
+                                                                style="text-align: start;padding-left:25px;">
+                                                                <label for="genre" class="for"
+                                                                    style="text-align:start;font-family: 'Roboto', sans-serif; "><b>Genre:</b></label>
+                                                                <br>
+                                                                <input required type="text" name="genre"
+                                                                    id="" style="width: 100%;" multiple>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-lg-12"
+                                                                style="text-align: start;padding-left:25px;">
+                                                                <label for="exp" class="for"
+                                                                    style="text-align:start;font-family: 'Roboto', sans-serif; "><b>Years
+                                                                        of Experience:</b></label>
+                                                                <br>
+                                                                <select name="exp" id="exp"
+                                                                    style="width: 100%;">
+                                                                    <option value="1-2 years">1-2 years</option>
+                                                                    <option value="2-3 years">2-3 years</option>
+                                                                    <option value="3-5 years">3-5 years</option>
+                                                                    <option value="5 years above">5 years above
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </form>
+                        </center>
                     </div>
                 </div>
             </div>
@@ -334,6 +454,21 @@
                 </div>
             </div>
         </div>
+
+        @if (session()->pull('successLogin'))
+            <script>
+                setTimeout(() => {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Login Successfully',
+                        showConfirmButton: false,
+                        timer: 800
+                    });
+                }, 500);
+            </script>;
+            {{ session()->forget('successLogin') }}
+        @endif
 </body>
 
 </html>
