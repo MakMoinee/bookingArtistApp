@@ -479,7 +479,7 @@
                                                                         <div class="modal-dialog" role="document">
                                                                             <div class="modal-content">
                                                                                 <form
-                                                                                    action="{{ route('bookings.destroy', ['booking' => 1]) }}"
+                                                                                    action="{{ route('bookings.destroy', ['booking' => $b['eventID']]) }}"
                                                                                     method="POST">
                                                                                     @method('delete')
                                                                                     @csrf
@@ -523,7 +523,7 @@
                                                                             <div class="modal-dialog" role="document">
                                                                                 <div class="modal-content">
                                                                                     <form
-                                                                                        action="{{ route('bookings.update', ['booking' => 1]) }}"
+                                                                                        action="{{ route('bookings.update', ['booking' => $b['eventID']]) }}"
                                                                                         method="POST">
                                                                                         @method('put')
                                                                                         @csrf

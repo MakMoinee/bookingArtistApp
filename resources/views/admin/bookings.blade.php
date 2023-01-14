@@ -297,7 +297,7 @@
                                                                             <div class="modal-dialog" role="document">
                                                                                 <div class="modal-content">
                                                                                     <form
-                                                                                        action="{{ route('bookings.update', ['booking' => 1]) }}"
+                                                                                        action="{{ route('bookings.update', ['booking' => $b['eventID']]) }}"
                                                                                         method="POST">
                                                                                         @method('put')
                                                                                         @csrf
@@ -373,7 +373,7 @@
                                                                             <div class="modal-dialog" role="document">
                                                                                 <div class="modal-content">
                                                                                     <form
-                                                                                        action="{{ route('bookings.update', ['booking' => 1]) }}"
+                                                                                        action="{{ route('bookings.update', ['booking' => $b['eventID']]) }}"
                                                                                         method="POST">
                                                                                         @method('put')
                                                                                         @csrf
@@ -417,7 +417,7 @@
                                                                                     role="document">
                                                                                     <div class="modal-content">
                                                                                         <form
-                                                                                            action="{{ route('bookings.update', ['booking' => 1]) }}"
+                                                                                            action="{{ route('bookings.update', ['booking' => $b['eventID']]) }}"
                                                                                             method="POST">
                                                                                             @method('put')
                                                                                             @csrf
