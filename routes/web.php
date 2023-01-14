@@ -15,6 +15,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SignoutController;
 use App\Http\Controllers\SignupController;
+use App\Http\Controllers\VerifyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,3 +45,4 @@ Route::resource("/artists", ArtistsController::class);
 Route::resource("/events", EventsController::class);
 Route::resource("/hostdash", HostController::class);
 Route::resource("/invoice", InvoiceController::class);
+Route::resource("/verify", VerifyController::class);

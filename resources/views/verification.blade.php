@@ -56,28 +56,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <script src='/js/index.global.js'></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        let sdEvents = {!! json_encode($events, JSON_HEX_TAG) !!};
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                events: sdEvents
-            });
-            calendar.render();
-
-            //     // calendar.fullCalendar('renderEvent', {
-            //     //     title: 'dynamic event',
-            //     //     start: '2023-01-02',
-            //     //     allDay: true
-            //     // });
-        });
-    </script>
-    <style>
-        .sidebar {
-            --cui-sidebar-bg: #352858 !important;
-        }
-    </style>
+    <script></script>
+    @if ($uType == 3)
+        <style>
+            .sidebar {
+                --cui-sidebar-bg: #2D2E2E !important;
+            }
+        </style>
+    @else
+        <style>
+            .sidebar {
+                --cui-sidebar-bg: #352858 !important;
+            }
+        </style>
+    @endif
 </head>
 
 <body>
@@ -101,13 +93,13 @@
                                 </li>
                                 <li class="nav-item"><a class="nav-link active" href="/artistdash">
                                         <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="16"
-                                            height="16" fill="currentColor" class="bi bi-calendar-week"
+                                            height="16" fill="currentColor" class="bi bi-speedometer2"
                                             viewBox="0 0 16 16">
                                             <path
-                                                d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
-                                            <path
-                                                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
-                                        </svg> Calendar</a></li>
+                                                d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z" />
+                                            <path fill-rule="evenodd"
+                                                d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z" />
+                                        </svg> Dashboard</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/bookings">
                                         <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="16"
                                             height="16" fill="currentColor" class="bi bi-journal-text"
@@ -260,21 +252,9 @@
         </header>
         <div class="body flex-grow-1 px-3" style="background: #504c4c; padding-top: 20px;">
             <div class="container-lg">
-
                 <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="calendar" id="calendar"
-                                            style="width: 100%;padding:10px;text-decoration: none;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+
             </div>
         </div>
 
@@ -319,29 +299,6 @@
             </script>;
             {{ session()->forget('successLogin') }}
         @endif
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        {{-- <script src="{{ mix('js/app.js') }}"></script> --}}
-
-        <script>
-            // $(document).ready(function() {
-            //     $('#calendar').fullCalendar({
-            //         initialView: 'dayGridMonth',
-            //         events: sdEvents
-            //         // events: [{
-            //         //     title: 'My Event',
-            //         //     start: '2023-01-02',
-            //         //     url: 'http://google.com/'
-            //         // }]
-            //     });
-
-            //     // $('#calendar').fullCalendar('renderEvent', {
-            //     //     title: 'dynamic event',
-            //     //     start: '2023-01-02',
-            //     //     allDay: true
-            //     // });
-            // });
-        </script>
 </body>
 
 </html>
