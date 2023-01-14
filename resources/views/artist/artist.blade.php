@@ -33,7 +33,8 @@
     <script type="text/javascript" async="" src="./Dashboard_files/analytics.js.download"></script>
     <script async="" src="./Dashboard_files/gtm.js.download"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <script>
         (function(w, d, s, l, i) {
             w[l] = w[l] || [];
@@ -55,9 +56,42 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+        integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         .sidebar {
             --cui-sidebar-bg: #2D2E2E !important;
+        }
+
+        .table-condensed {
+            width: 100%;
+            margin-left: 30px;
+            background: #EDEDED;
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            background: #FFFFFF;
+            border: 0;
+            border-bottom: 1.5px solid #5F939A;
+            outline: 0;
+        }
+
+        .today {
+            background: #5F939A;
+            color: white;
+        }
+
+        .active.day {
+            background: blue;
+            color: white;
+        }
+
+        .old.disabled.day,
+        .disabled.day {
+            background: gray;
         }
     </style>
 </head>
@@ -275,7 +309,7 @@
                                                                         style="margin-right: 5px;"></i>{{ $b['bandSize'] }}
                                                                     Members</h6>
                                                                 <br>
-                                                                <h6><i class="bi bi-star-fill"
+                                                                {{-- <h6><i class="bi bi-star-fill"
                                                                         style="margin-right: 5px;"></i>
                                                                     <i class="bi bi-star-fill"
                                                                         style="color:yellow;"></i>
@@ -287,7 +321,7 @@
                                                                         style="color:yellow;"></i>
                                                                     <i class="bi bi-star-fill"
                                                                         style="color:yellow;"></i>
-                                                                </h6>
+                                                                </h6> --}}
                                                             </div>
                                                         </center>
                                                     </div>
@@ -302,7 +336,10 @@
                                                                     Services</button>
                                                             </div>
                                                             <div class="col-lg-6" style="float:left;">
-                                                                <button class="btn btn-primary rounded-pill"
+                                                                <button onclick="sendRequest('{{ $b['profileID'] }}')"
+                                                                    data-coreui-toggle="modal"
+                                                                    data-coreui-target="#addEventModal"
+                                                                    class="btn btn-primary rounded-pill"
                                                                     style="background: #5F939A;border:none;">Send
                                                                     Booking
                                                                     Request</button>
@@ -316,21 +353,25 @@
                                 </div>
                             </div>
                         @endforeach
-
+                        <input type="hidden" name="artistid" id="artistid">
                     </div>
                 </div>
             </div>
         </div>
-
+        <div>
+            <button id="btnShowArtist" class="btn btn-primary" style="visibility: hidden;"
+                data-coreui-toggle="modal" data-coreui-target="#addArtistForEventModal"></button>
+            <button id="btnShowEvent" class="btn btn-primary" style="visibility: hidden;" data-coreui-toggle="modal"
+                data-coreui-target="#addEventModal"></button>
+            <button id="btnShowServicesModal" class="btn btn-primary" style="visibility: hidden;"
+                data-coreui-toggle="modal" data-coreui-target="#showServiceModal"></button>
+            <button id="btnShowPaymentModal" class="btn btn-primary" style="visibility: hidden;"
+                data-coreui-toggle="modal" data-coreui-target="#cashModal"></button>
+        </div>
         <script src="./Dashboard_files/coreui.bundle.min.js.download"></script>
         <script src="./Dashboard_files/simplebar.min.js.download"></script>
 
-        <script src="./Dashboard_files/chart.min.js.download"></script>
-        <script src="./Dashboard_files/coreui-chartjs.js.download"></script>
         <script src="./Dashboard_files/coreui-utils.js.download"></script>
-        <script src="./Dashboard_files/main.js.download"></script>
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
         <div class="modal fade" id="logOutModal" tabindex="-1" role="dialog" aria-labelledby="logOutModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -348,6 +389,356 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="addEventModal" tabindex="-1" role="dialog"
+            aria-labelledby="addEventModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <form action="#" method="POST" autocomplete="off" onsubmit="return false;">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <div class="row">
+                                    <label for="eventnames" class="for"
+                                        style="font-family: 'Roboto', sans-serif;"><b>Event Name</b><span
+                                            style="color:red;">*</span></label>
+                                    <br>
+                                    <input required type="text" name="event" id="eventName"
+                                        style="width: 150px;">
+                                </div>
+                                <br>
+                                <br>
+                                <h2 style="font-family: 'Bebas Neue', cursive">BOOKING REQUEST</h2>
+                                <hr style="margin-top: -5px; font-weight: 2px; color:#2D2E2E;">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="col-lg-6" style="float: left;">
+                                            <label for="selectdate" class="for">Select Date:</label>
+                                            <input required type="text" name="eventdate" id="eventdate"
+                                                style="cursor: not-allowed" onkeypress="return false;"
+                                                onclick="return false;"
+                                                pattern="[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]">
+                                            <br>
+                                            <div class="date" style="width: 80%;cursor:pointer;" id="datepicker">
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-6" style="float: left;">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="col-lg-6" style="float:left;">
+                                                        <label for="fromTime" class="for"><b>From
+                                                                (hh:mm):</b></label>
+                                                        <input required type="text" class="form-control"
+                                                            name="fromTime" id="fromTime" style="width: 80%;">
+                                                    </div>
+                                                    <div class="col-lg-6" style="float:left;">
+                                                        <label for="toTime" class="for"><b>To
+                                                                (hh:mm):</b></label>
+                                                        <input required type="text" class="form-control"
+                                                            name="toTime" id="toTime" style="width: 80%;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <label for="location" class="for"><b>Location</b></label>
+                                                    <center>
+                                                        <div class="col-lg-6">
+                                                            <select required class="form-control" name="location"
+                                                                id="location">
+                                                                <option value=""></option>
+                                                                <option value="Valencia City">Valencia City, Bukidnon
+                                                                </option>
+                                                                <option value="Malaybalay City">Malaybalay City,
+                                                                    Bukidnon</option>
+                                                                <option value="Kibawe">Kibawe, Bukidnon</option>
+                                                                <option value="Cabanglasan">Cabanglasan, Bukidnon
+                                                                </option>
+                                                                <option value="Quezon">Quezon, Bukidnon</option>
+                                                                <option value="Maramag">Maramag, Bukidnon</option>
+                                                                <option value="Lantapan">Lantapan, Bukidnon</option>
+                                                                <option value="San Fernando">San Fernando, Bukidnon
+                                                                </option>
+                                                            </select>
+                                                            <br>
+                                                            <label for="add" class="for">Additional
+                                                                Info:</label>
+                                                            <br>
+
+                                                            <textarea required style="text-align: start;" name="add" id="addInfo" cols="30" rows="5"
+                                                                value="">
+                                                        </textarea>
+                                                        </div>
+                                                    </center>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer" style="border:none;">
+                            <div class="col-lg-12">
+                                <div class="col-lg-6" style="float: left;">
+                                    <button class="btn btn-secondary" data-coreui-dismiss="modal">Cancel</button>
+                                </div>
+                                <div class="col-lg-6"style="float: right;">
+                                    <button id="btnContinueShowArtist" type="submit" class="btn btn-primary"
+                                        style="float: right;background: transparent;border:none;float:right;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
+                                            fill="#5F939A" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="showServiceModal" tabindex="-1" role="dialog"
+            aria-labelledby="showServiceModalLabel" aria-hidden="true" data-coreui-backdrop="static"
+            data-coreui-keyboard="false">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <form action="/artists" method="POST" autocomplete="off" onsubmit="return false;">
+                        @csrf
+                        <div class="modal-header">
+                            <h3 style="font-family: 'Bebas Neue', cursive">
+                                Services
+                            </h3>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-12" id="serviceCol">
+                                        <center>
+                                            {{-- <div class="col-md-6" style="float: left;">
+
+                                                <button class="btn btn-primary"
+                                                    style="background:transparent;font-family: 'Bebas Neue', cursive;color:black; width:100%; text-align: start;">
+                                                    <div class="row">
+                                                        <div class="col-md-3" style="font-size: 20px;">
+                                                            serviceName
+                                                        </div>
+                                                        <div class="col-md-2" style="font-size: 20px;">
+                                                            price
+                                                        </div>
+                                                        <div class="col-md-4"
+                                                            style="display: inline-block;margin-left: 45px;">
+                                                            <h6 style="margin-top: 7px;float:left;">view details
+                                                            </h6>
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </button>
+                                            </div> --}}
+                                        </center>
+                                    </div>
+                                    <input type="hidden" name="services" id="listofservice" multiple>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer" style="border:none;">
+                            <div class="col-lg-12">
+                                <div class="col-lg-6" style="float: left;">
+                                    <button class="btn btn-secondary" data-coreui-dismiss="modal"
+                                        onclick="document.getElementById('btnShowArtist').click();">back</button>
+                                </div>
+                                <div class="col-lg-6"style="float: right;">
+                                    <a id="btnSelectServices" class="btn btn-primary"
+                                        style="float: right;background: transparent;border:none;float:right;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
+                                            fill="#5F939A" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                                <button class="btn btn-primary" style="visibility: hidden" id="btnSubmitEvent"
+                                    type="submit"></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            let idData = {!! json_encode($idData, JSON_HEX_TAG) !!};
+            let bandData = {!! json_encode($bandData, JSON_HEX_TAG) !!};
+            let serviceMap = {!! json_encode($serviceMap, JSON_HEX_TAG) !!};
+            let selectedID = 0;
+            $(document).ready(function() {
+                $.ajaxSetup({
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                });
+                $('#datepicker').datepicker({
+                    format: "yyyy-mm-dd",
+                    todayHighlight: true,
+                    startDate: new Date(),
+                    autoclose: "true"
+                });
+                $('#datepicker').on('changeDate', function() {
+                    $('#eventdate').val(
+                        $('#datepicker').datepicker('getFormattedDate')
+                    );
+                    document.getElementById('eventdate').setAttribute("value", $('#datepicker').datepicker(
+                        'getFormattedDate'));
+                });
+
+                $('#btnContinueShowArtist').on("click", function() {
+                    let btnShowArtist = document.getElementById('btnShowArtist');
+                    btnShowArtist.click();
+                });
+
+                $('#eventName').on('change', function(e) {
+                    console.log(e);
+                });
+
+                $('#btnSelectServices').on('click', function() {
+                    let panels = document.querySelectorAll(".panelService");
+                    let ids = "";
+                    panels.forEach(element => {
+                        console.log(element);
+                        if (element.getAttribute('senabled')) {
+                            let serviceID = element.getAttribute('serviceid');
+                            if (ids == "") {
+                                ids = serviceID;
+                            } else {
+                                ids += "," + serviceID;
+                            }
+                            let listService = document.getElementById('listofservice');
+                            listService.setAttribute("value", ids);
+                        }
+                    });
+
+                    let formData = new FormData();
+                    formData.append("eventname", document.getElementById('eventName').value);
+                    formData.append("eventdate", document.getElementById('eventdate').getAttribute('value'));
+                    formData.append("fromTime", document.getElementById('fromTime').value);
+                    formData.append("toTime", document.getElementById('toTime').value);
+                    formData.append("location", document.getElementById('location').value);
+                    formData.append("addInfo", document.getElementById('addInfo').value);
+                    formData.append("artistid", document.getElementById('artistid').value);
+                    formData.append("services", ids);
+
+                    let rBody = {};
+                    for (let [k, v] of formData.entries()) {
+                        rBody[k] = v;
+                    }
+                    $.ajax({
+                        url: "/artists",
+                        type: "POST",
+                        data: rBody,
+                        error: function(xhr, status, error) {
+                            if (xhr.responseJSON) {
+                                Swal.fire({
+                                    position: "center",
+                                    icon: "warning",
+                                    title: "Failed to add Event",
+                                    showConfirmButton: false,
+                                    timer: 800,
+                                });
+                            } else {}
+                        },
+                    }).done(function(data) {
+                        window.location = "/artists";
+                    });
+                });
+                $('#btnShowArtist').on("click", function() {
+                    let searchKey = $('#artistid').val();
+                    let bData = bandData.length === 0 ? [] : JSON.parse(JSON.stringify(bandData));
+                    let fData = bData[searchKey];
+                    let userID = fData['userID'];
+                    let serviceData = serviceMap[userID];
+                    serviceData.forEach(element => {
+                        let el = $('#serviceCol');
+                        el.append(`<div class="col-md-6 panelService" style="float: left;"  id="servicePanel${element['serviceID']}" serviceID="${element['serviceID']}">
+                    <button class="btn btn-primary"
+                        style="background:transparent;font-family: 'Bebas Neue', cursive;color:black; width:100%; text-align: start;">
+                        <div class="row">
+                            <div class="col-md-3" style="font-size: 20px;">
+                                ${element['serviceName']}
+                            </div>
+                            <div class="col-md-2" style="font-size: 20px;">
+                                ${element['price']}
+                            </div>
+                            
+                            <div class="col-md-4"
+                                style="display: inline-block;margin-left: 45px;">
+                                <h6 style="margin-top: 7px;float:left;">view details
+                                </h6>
+                            </div>
+                            
+                        </div>
+                    </button>
+                    </div>`);
+
+
+
+                        $(`#servicePanel${element['serviceID']}`).on('click', function() {
+                            console.log(this.getAttribute("serviceid"));
+
+                            let mStyle = this.style;
+                            if (mStyle[0] != "float") {
+                                this.style = "float:left;"
+                                this.removeAttribute('senabled');
+                            } else {
+                                this.style = "background: #5F939A;float:left;";
+                                this.setAttribute('senabled', 'true');
+                            }
+                        });
+                    });
+
+
+                    let btnShowServicesModal = document.getElementById('btnShowServicesModal');
+                    btnShowServicesModal.click();
+                });
+            });
+
+            function sendRequest(id) {
+                document.getElementById('artistid').value = id
+            }
+        </script>
+        @if (session()->pull('successAddBooking'))
+            <script>
+                setTimeout(() => {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Successfully Added Booking',
+                        showConfirmButton: false,
+                        timer: 800
+                    });
+                }, 500);
+            </script>;
+            {{ session()->forget('successAddBooking') }}
+        @endif
+        @if (session()->pull('errorAddBooking'))
+            <script>
+                setTimeout(() => {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'warning',
+                        title: 'Failed To Add Event',
+                        showConfirmButton: false,
+                        timer: 800
+                    });
+                }, 500);
+            </script>;
+            {{ session()->forget('errorAddBooking') }}
+        @endif
 </body>
 
 </html>

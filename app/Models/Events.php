@@ -14,6 +14,8 @@ class Events extends Model
 
 
     protected $fillable = [
+        'userID',
+        'eventname',
         'artistID',
         'eventdate',
         'addinfo',
@@ -21,5 +23,6 @@ class Events extends Model
         'fromTime',
         'toTime',
         'services',
+        'status'
     ];
 }

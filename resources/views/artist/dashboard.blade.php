@@ -57,10 +57,12 @@
     <script src='/js/index.global.js'></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        let sdEvents = {!! json_encode($events, JSON_HEX_TAG) !!};
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth'
+                initialView: 'dayGridMonth',
+                events: sdEvents
             });
             calendar.render();
         });

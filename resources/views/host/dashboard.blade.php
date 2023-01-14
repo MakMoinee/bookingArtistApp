@@ -56,27 +56,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <script src='/js/index.global.js'></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css"
-        integrity="sha512-KXkS7cFeWpYwcoXxyfOumLyRGXMp7BTMTjwrgjMg0+hls4thG2JGzRgQtRfnAuKTn2KWTDZX4UdPg+xTs8k80Q=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script>
-        // document.addEventListener('DOMContentLoaded', function() {
-        //     var calendarEl = document.getElementById('calendar');
-        //     var calendar = new FullCalendar.Calendar(calendarEl, {
-        //         initialView: 'dayGridMonth'
-        //     });
-        //     calendar.render();
+        let sdEvents = {!! json_encode($events, JSON_HEX_TAG) !!};
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: sdEvents
+            });
+            calendar.render();
 
-        //     // calendar.fullCalendar('renderEvent', {
-        //     //     title: 'dynamic event',
-        //     //     start: '2023-01-02',
-        //     //     allDay: true
-        //     // });
-        // });
+            //     // calendar.fullCalendar('renderEvent', {
+            //     //     title: 'dynamic event',
+            //     //     start: '2023-01-02',
+            //     //     allDay: true
+            //     // });
+        });
     </script>
     <style>
         .sidebar {
-            --cui-sidebar-bg: #2D2E2E !important;
+            --cui-sidebar-bg: #352858 !important;
         }
     </style>
 </head>
@@ -102,13 +101,13 @@
                                 </li>
                                 <li class="nav-item"><a class="nav-link active" href="/artistdash">
                                         <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="16"
-                                            height="16" fill="currentColor" class="bi bi-speedometer2"
+                                            height="16" fill="currentColor" class="bi bi-calendar-week"
                                             viewBox="0 0 16 16">
                                             <path
-                                                d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z" />
-                                            <path fill-rule="evenodd"
-                                                d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z" />
-                                        </svg> Dashboard</a></li>
+                                                d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
+                                            <path
+                                                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                                        </svg> Calendar</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/bookings">
                                         <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="16"
                                             height="16" fill="currentColor" class="bi bi-journal-text"
@@ -322,35 +321,26 @@
         @endif
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
-        <!-- ✅ load moment.js ✅ -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
-            integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-        <!-- ✅ load FullCalendar ✅ -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"
-            integrity="sha512-o0rWIsZigOfRAgBxl4puyd0t6YKzeAw9em/29Ag7lhCQfaaua/mDwnpE2PVzwqJ08N7/wqrgdjc2E0mwdSY2Tg=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         {{-- <script src="{{ mix('js/app.js') }}"></script> --}}
 
         <script>
-            $(document).ready(function() {
-                $('#calendar').fullCalendar({
-                    initialView: 'dayGridMonth',
-                    // events: [{
-                    //     title: 'My Event',
-                    //     start: '2023-01-02',
-                    //     url: 'http://google.com/'
-                    // }]
-                });
+            // $(document).ready(function() {
+            //     $('#calendar').fullCalendar({
+            //         initialView: 'dayGridMonth',
+            //         events: sdEvents
+            //         // events: [{
+            //         //     title: 'My Event',
+            //         //     start: '2023-01-02',
+            //         //     url: 'http://google.com/'
+            //         // }]
+            //     });
 
-                // $('#calendar').fullCalendar('renderEvent', {
-                //     title: 'dynamic event',
-                //     start: '2023-01-02',
-                //     allDay: true
-                // });
-            });
+            //     // $('#calendar').fullCalendar('renderEvent', {
+            //     //     title: 'dynamic event',
+            //     //     start: '2023-01-02',
+            //     //     allDay: true
+            //     // });
+            // });
         </script>
 </body>
 

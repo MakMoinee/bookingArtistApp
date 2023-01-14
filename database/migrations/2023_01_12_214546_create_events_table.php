@@ -15,13 +15,16 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id('eventID')->autoIncrement();
+            $table->integer('userID');
             $table->integer('artistID');
+            $table->string('eventname');
             $table->string('eventdate');
             $table->string('addinfo');
             $table->string('location');
             $table->string('fromTime');
             $table->string('toTime');
             $table->string('services');
+            $table->integer('status');
             $table->timestamps();
         });
     }

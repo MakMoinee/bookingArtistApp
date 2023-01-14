@@ -186,13 +186,11 @@
             </div>
             <div class="row" style="margin-top: 50px;">
                 <div class="d-flex justify-content-center">
-                    <h4 class="text-center" style="color:#2D2E2E;font-family: 'Roboto Light',sans-serif;">Lorem
-                        ipsum dolor sit amet,
-                        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                        non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h4>
+                    <h4 class="text-center" style="color:#2D2E2E;font-family: 'Roboto Light',sans-serif;">Many people
+                        strive to have a music career, to perform on stage, and to share their talent with the public.
+                        The reality for most artist, however, is far from glamorous. The Bukidnon Groove aims to help
+                        musicians develop their talent and careers and pursue passion by connecting talent buyers with
+                        the right talent for their venue or event.</h4>
                 </div>
             </div>
         </div>

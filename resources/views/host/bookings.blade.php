@@ -54,6 +54,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <script src='/js/index.global.js'></script>
     @if ($uType == 3)
         <style>
             .sidebar {
@@ -308,7 +309,7 @@
                                                             Services
                                                         </th>
                                                         <th>
-                                                            Payment Method
+                                                            Artist Payment Method
                                                         </th>
                                                         <th>
                                                             Status
@@ -335,47 +336,6 @@
                                                             </td>
                                                             <td>{{ $b['type'] }}</td>
                                                             <td>
-                                                                @if ($b['status'] == 3)
-                                                                    <a href="#" data-coreui-toggle="modal"
-                                                                        data-coreui-target="#confirmModal{{ $b['eventID'] }}"><span
-                                                                            class="btn btn-warning"
-                                                                            style="color: white;">Confirm</span></a>
-
-                                                                    <div class="modal fade"
-                                                                        id="confirmModal{{ $b['eventID'] }}"
-                                                                        tabindex="-1" role="dialog"
-                                                                        aria-labelledby="confirmModalLabel{{ $b['eventID'] }}"
-                                                                        aria-hidden="true">
-                                                                        <div class="modal-dialog" role="document">
-                                                                            <div class="modal-content">
-                                                                                <form
-                                                                                    action="{{ route('bookings.update', ['booking' => 1]) }}"
-                                                                                    method="POST">
-                                                                                    @method('put')
-                                                                                    @csrf
-                                                                                    <div class="modal-body">
-                                                                                        <h5 class="modal-title"
-                                                                                            id="confirmModalLabel{{ $b['eventID'] }}">
-                                                                                            Do
-                                                                                            you want to proceed
-                                                                                            confirming book?</h5>
-                                                                                    </div>
-                                                                                    <div class="modal-footer">
-                                                                                        <button type="submit"
-                                                                                            class="btn btn-primary"
-                                                                                            name="btnUpdateConfirm"
-                                                                                            value="yes">Yes,
-                                                                                            Proceed</button>
-                                                                                        <button type="button"
-                                                                                            class="btn btn-secondary"
-                                                                                            data-coreui-dismiss="modal">Close</button>
-                                                                                    </div>
-                                                                                </form>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                @endif
-
                                                                 @if ($b['status'] == 1)
                                                                     <a href="/invoice?id={{ $b['eventID'] }}"
                                                                         target="_blank">
@@ -383,60 +343,147 @@
                                                                             style="color: white;">Completed</span>
                                                                     </a>
                                                                 @endif
-
-                                                                @if ($b['status'] == 2)
-                                                                    <button class="btn btn-primary"
-                                                                        style="color:white;">Booked</button>
+                                                                @if ($b['status'] == 3)
+                                                                    <span class="btn btn-warning"
+                                                                        style="color: white;">Pending</span>
                                                                 @endif
 
-                                                                @if ($b['status'] == 4)
-                                                                    <span class="btn btn-danger"
-                                                                        style="color: white;">Cancelled</span>
+                                                                @if ($b['status'] == 2)
+                                                                    <span class="btn btn-primary"
+                                                                        style="color: white;">Booked</span>
                                                                 @endif
 
                                                                 @if ($b['status'] == 5)
                                                                     <span class="btn btn-warning"
-                                                                        style="color: white;font-size: 12px;">Payment
-                                                                        Pending</span>
+                                                                        style="color: white;">Pending</span>
                                                                 @endif
                                                             </td>
                                                             <td>
-
-
-
-                                                                @if ($b['status'] == 3)
-                                                                    <button class="btn btn-danger"
-                                                                        style="color:white;">Decline</button>
-                                                                @endif
-
-                                                                @if ($b['status'] == 2)
+                                                                @if ($b['status'] == 5)
                                                                     <a href="#" data-coreui-toggle="modal"
-                                                                        data-coreui-target="#doneModal{{ $b['eventID'] }}"><button
-                                                                            class="btn btn-info"
-                                                                            style="color:white;">Done</button></a>
+                                                                        data-coreui-target="#cashModal{{ $b['eventID'] }}"><span
+                                                                            class="btn btn-success"
+                                                                            style="color: white;">Pay</span></a>
                                                                     <div class="modal fade"
-                                                                        id="doneModal{{ $b['eventID'] }}"
+                                                                        id="cashModal{{ $b['eventID'] }}"
                                                                         tabindex="-1" role="dialog"
-                                                                        aria-labelledby="doneModalLabel{{ $b['eventID'] }}"
+                                                                        aria-labelledby="cashModalLabel{{ $b['eventID'] }}"
                                                                         aria-hidden="true">
                                                                         <div class="modal-dialog" role="document">
                                                                             <div class="modal-content">
                                                                                 <form
-                                                                                    action="{{ route('bookings.update', ['booking' => 1]) }}"
+                                                                                    action="{{ route('invoice.store') }}"
                                                                                     method="POST">
-                                                                                    @method('put')
+                                                                                    @csrf
+                                                                                    <div class="modal-body"
+                                                                                        style="background: #EDEDED;border:none;">
+                                                                                        <div class="row">
+                                                                                            <div class="form-group"
+                                                                                                style="margin-left: 30px;">
+                                                                                                <h3
+                                                                                                    style="font-family: 'Roboto', sans-serif;">
+                                                                                                    GCASH
+                                                                                                    Scan to Pay:</h3>
+                                                                                                <br>
+                                                                                                <img class="img-responsive"
+                                                                                                    src="/images/qr.jpg"
+                                                                                                    alt=""
+                                                                                                    srcset=""
+                                                                                                    width="250px"
+                                                                                                    height="250px">
+                                                                                                <br>
+                                                                                                <br>
+                                                                                                <h3 style="font-family: 'Roboto', sans-serif;">Amount To
+                                                                                                    Pay:
+                                                                                                    <b>PHP{{ $amount + $amount * 0.12 }}</b>
+                                                                                                </h3>
+                                                                                            </div>
+                                                                                            <br>
+                                                                                            <div class="form-group"
+                                                                                                style="margin-left: 30px;">
+                                                                                                <label
+                                                                                                    for="accountname"
+                                                                                                    class="for">Reference
+                                                                                                    Number:</label>
+                                                                                                <br>
+                                                                                                <input required
+                                                                                                    type="text"
+                                                                                                    name="reference"
+                                                                                                    id="reference"
+                                                                                                    style="background: #EDEDED;width: 85%;">
+                                                                                                <input type="hidden"
+                                                                                                    name="eventID"
+                                                                                                    value="{{ $b['eventID'] }}">
+                                                                                            </div>
+                                                                                            <br>
+                                                                                            <div class="form-group"
+                                                                                                style="margin-left: 30px;">
+                                                                                                <label for="phoneNum"
+                                                                                                    class="for">Phone
+                                                                                                    Number</label>
+                                                                                                <br>
+                                                                                                <input required
+                                                                                                    type="number"
+                                                                                                    name="phoneNum"
+                                                                                                    id=""
+                                                                                                    style="background: #EDEDED;width: 85%;"">
+                                                                                            </div>
+                                                                                            <br>
+
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="modal-footer"
+                                                                                        style="background: #EDEDED;border:none;">
+                                                                                        <button type="submit"
+                                                                                            class="btn btn-primary"
+                                                                                            style="background: #5F939A;border:none;"
+                                                                                            name="btnCashPayment"
+                                                                                            value="true">Proceed</button>
+                                                                                        <button type="button"
+                                                                                            class="btn btn-secondary"
+                                                                                            data-coreui-dismiss="modal">Close</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <a href="/invoice?id={{ $b['eventID'] }}"
+                                                                        target="_blank">
+                                                                        <span class="btn btn-info"
+                                                                            style="color: white;">See
+                                                                            Invoice</span>
+                                                                    </a>
+                                                                @endif
+                                                                @if ($b['status'] == 3)
+                                                                    <a href="#" data-coreui-toggle="modal"
+                                                                        data-coreui-target="#deleteModal{{ $b['eventID'] }}"><button
+                                                                            class="btn btn-danger"
+                                                                            style="color:white;">Delete</button></a>
+
+                                                                    <div class="modal fade"
+                                                                        id="deleteModal{{ $b['eventID'] }}"
+                                                                        tabindex="-1" role="dialog"
+                                                                        aria-labelledby="deleteModalLabel{{ $b['eventID'] }}"
+                                                                        aria-hidden="true">
+                                                                        <div class="modal-dialog" role="document">
+                                                                            <div class="modal-content">
+                                                                                <form
+                                                                                    action="{{ route('bookings.destroy', ['booking' => 1]) }}"
+                                                                                    method="POST">
+                                                                                    @method('delete')
                                                                                     @csrf
                                                                                     <div class="modal-body">
                                                                                         <h5 class="modal-title"
-                                                                                            id="doneModalLabel{{ $b['eventID'] }}">
+                                                                                            id="deleteModalLabel{{ $b['eventID'] }}">
                                                                                             Do
                                                                                             you want to proceed
-                                                                                            marking this book done?</h5>
+                                                                                            deleting book?</h5>
                                                                                     </div>
                                                                                     <div class="modal-footer">
                                                                                         <button type="submit"
                                                                                             class="btn btn-primary"
-                                                                                            name="btnUpdateDone"
+                                                                                            name="btnDelete"
                                                                                             value="yes">Yes,
                                                                                             Proceed</button>
                                                                                         <button type="button"
@@ -447,48 +494,11 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    @if (date('Y-m-d', strtotime(now() . '+1 day')) == $b['eventdate'])
-                                                                        <button class="btn btn-secondary disabled"
-                                                                            style="color:white;">Cancel</button>
-                                                                    @else
-                                                                        <a href="#" data-coreui-toggle="modal"
-                                                                            data-coreui-target="#cancelModal{{ $b['eventID'] }}"><button
-                                                                                class="btn btn-danger"
-                                                                                style="color:white;">Cancel</button></a>
-                                                                        <div class="modal fade"
-                                                                            id="cancelModal{{ $b['eventID'] }}"
-                                                                            tabindex="-1" role="dialog"
-                                                                            aria-labelledby="cancelModalLabel{{ $b['eventID'] }}"
-                                                                            aria-hidden="true">
-                                                                            <div class="modal-dialog" role="document">
-                                                                                <div class="modal-content">
-                                                                                    <form
-                                                                                        action="{{ route('bookings.update', ['booking' => 1]) }}"
-                                                                                        method="POST">
-                                                                                        @method('put')
-                                                                                        @csrf
-                                                                                        <div class="modal-body">
-                                                                                            <h5 class="modal-title"
-                                                                                                id="cancelModalLabel{{ $b['eventID'] }}">
-                                                                                                Do
-                                                                                                you want to proceed
-                                                                                                Cancelling book?</h5>
-                                                                                        </div>
-                                                                                        <div class="modal-footer">
-                                                                                            <button type="submit"
-                                                                                                class="btn btn-primary"
-                                                                                                name="btnUpdateCancel"
-                                                                                                value="yes">Yes,
-                                                                                                Proceed</button>
-                                                                                            <button type="button"
-                                                                                                class="btn btn-secondary"
-                                                                                                data-coreui-dismiss="modal">Close</button>
-                                                                                        </div>
-                                                                                    </form>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    @endif
+                                                                @endif
+
+                                                                @if ($b['status'] == 2)
+                                                                    <button class="btn btn-danger"
+                                                                        style="color:white;">Cancel</button>
                                                                 @endif
 
                                                             </td>
@@ -515,8 +525,6 @@
         <script src="./Dashboard_files/main.js.download"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-
-
         <div class="modal fade" id="logOutModal" tabindex="-1" role="dialog" aria-labelledby="logOutModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -534,96 +542,47 @@
                 </div>
             </div>
         </div>
-
-        @if (session()->pull('successUpdateConfirm'))
+        @if (session()->pull('successSaveTrans'))
             <script>
                 setTimeout(() => {
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
-                        title: 'Successfully Confirmed Book',
+                        title: 'Successfully Paid Book',
                         showConfirmButton: false,
                         timer: 800
                     });
                 }, 500);
             </script>;
-            {{ session()->forget('successUpdateConfirm') }}
+            {{ session()->forget('successSaveTrans') }}
         @endif
-
-        @if (session()->pull('errorUpdateConfirm'))
+        @if (session()->pull('errorSaveTrans'))
             <script>
                 setTimeout(() => {
                     Swal.fire({
                         position: 'center',
                         icon: 'warning',
-                        title: 'Failed to Confirm Book',
+                        title: 'Failed to Paid Book Please Try Again Later',
                         showConfirmButton: false,
                         timer: 800
                     });
                 }, 500);
             </script>;
-            {{ session()->forget('errorUpdateConfirm') }}
+            {{ session()->forget('errorSaveTrans') }}
         @endif
-
-        @if (session()->pull('successCancel'))
-            <script>
-                setTimeout(() => {
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'success',
-                        title: 'Successfully Cancelled Book',
-                        showConfirmButton: false,
-                        timer: 800
-                    });
-                }, 500);
-            </script>;
-            {{ session()->forget('successCancel') }}
-        @endif
-
-        @if (session()->pull('errorCancel'))
+        @if (session()->pull('errorDeleteStatusChange'))
             <script>
                 setTimeout(() => {
                     Swal.fire({
                         position: 'center',
                         icon: 'warning',
-                        title: 'Failed to Cancel Book',
+                        title: 'Failed to Delete Book, Status got updated',
                         showConfirmButton: false,
                         timer: 800
                     });
                 }, 500);
             </script>;
-            {{ session()->forget('errorCancel') }}
-        @endif
-
-
-        @if (session()->pull('successDone'))
-            <script>
-                setTimeout(() => {
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'success',
-                        title: 'Successfully Done Book',
-                        showConfirmButton: false,
-                        timer: 800
-                    });
-                }, 500);
-            </script>;
-            {{ session()->forget('successDone') }}
-        @endif
-
-        @if (session()->pull('errorDone'))
-            <script>
-                setTimeout(() => {
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'warning',
-                        title: 'Failed to Mark Book As Done',
-                        showConfirmButton: false,
-                        timer: 800
-                    });
-                }, 500);
-            </script>;
-            {{ session()->forget('errorDone') }}
+            {{ session()->forget('errorDeleteStatusChange') }}
         @endif
 
 </body>

@@ -29,9 +29,26 @@ class ArtistDashboardController extends Controller
                     $profiles = json_decode($queryResult, true);
                     $pic = $profiles[0]['bandPic'];
                 }
+
+                $queryResult2 = DB::table('vwalleventsforbands')->where([['bandUserID', '=', $uid], ['status', '=', 2]])->get();
+                $rawEvents = json_decode($queryResult2, true);
+                $eventsArr = array();
+                foreach ($rawEvents as $r) {
+                    $tmpArr = array();
+                    $tmpArr['title'] = $r['eventname'];
+                    $tmpArr['start'] = $r['eventdate'];
+                    array_push($eventsArr, $tmpArr);
+                }
+
                 return view('artist.dashboard', [
-                    'pic' => $pic
+                    'pic' => $pic,
+                    'events' => $eventsArr
                 ]);
+            }
+
+            if ($uType == 2) {
+
+                return redirect("/hostdash");
             }
             return redirect("/");
         } else {

@@ -59,12 +59,17 @@ class EventsController extends Controller
                     }
                 }
 
+                $queryResult = DB::table('vwalleventsforbands')->get();
+                $event = json_decode($queryResult, true);
+
                 return view('artist.events', [
                     'pic' => $pic,
                     'allnames' => $allnames,
                     'idData' => $idData,
                     'bandData' => $bandData,
-                    'serviceMap' => $serviceMap
+                    'serviceMap' => $serviceMap,
+                    'uType' => $uType,
+                    'events' => $event
                 ]);
             }
 
@@ -103,7 +108,7 @@ class EventsController extends Controller
                     }
                 }
 
-                $queryResult = DB::table('vwalleventsforhost')->get();
+                $queryResult = DB::table('vwalleventsforhost')->where([['status', '<>', 3]])->get();
                 $event = json_decode($queryResult, true);
 
                 return view('artist.events', [
@@ -112,7 +117,8 @@ class EventsController extends Controller
                     'idData' => $idData,
                     'bandData' => $bandData,
                     'serviceMap' => $serviceMap,
-                    'events' => $event
+                    'events' => $event,
+                    'uType' => $uType
                 ]);
             }
         } else {
@@ -150,6 +156,7 @@ class EventsController extends Controller
             $event->fromTime = $request->fromTime;
             $event->toTime = $request->toTime;
             $event->services = $request->services;
+            $event->status = 3;
 
             $isSave = $event->save();
             if ($isSave) {

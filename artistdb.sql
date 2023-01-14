@@ -11,7 +11,7 @@
  Target Server Version : 80030 (8.0.30)
  File Encoding         : 65001
 
- Date: 13/01/2023 15:48:38
+ Date: 14/01/2023 08:39:02
 */
 
 SET NAMES utf8mb4;
@@ -37,12 +37,12 @@ CREATE TABLE `band_profiles`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`profileID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of band_profiles
 -- ----------------------------
-INSERT INTO `band_profiles` VALUES (1, 2, 5, 'Cover', 'Valencia City', 'GNX', 'GNX', 'Band', 'Reggae', '1-2 years', 'https://youtube.com', '223011307.JPG', '2023-01-13 07:10:58', '2023-01-13 07:10:58');
+INSERT INTO `band_profiles` VALUES (1, 3, 5, 'Cover', 'Valencia City', 'Cueshe', 'Cueshe Yarn', 'Band', 'Reggae,Sample', '1-2 years', 'https://youtube.com', '323011304.jpg', '2023-01-13 16:09:07', '2023-01-13 16:09:07');
 
 -- ----------------------------
 -- Table structure for events
@@ -50,22 +50,25 @@ INSERT INTO `band_profiles` VALUES (1, 2, 5, 'Cover', 'Valencia City', 'GNX', 'G
 DROP TABLE IF EXISTS `events`;
 CREATE TABLE `events`  (
   `eventID` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `userID` int NOT NULL,
   `artistID` int NOT NULL,
+  `eventname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `eventdate` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `addinfo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `fromTime` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `toTime` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `services` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`eventID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of events
 -- ----------------------------
-INSERT INTO `events` VALUES (1, 1, '01/28/2023', 'asd', 'Valencia City', '12', '123', '1', '2023-01-13 07:29:25', '2023-01-13 07:29:25');
+INSERT INTO `events` VALUES (1, 2, 1, 'Kaamulan', '2023-01-14', 'ddd', 'Valencia City', '10:01', '20:01', '1', 5, '2023-01-13 16:42:55', '2023-01-13 16:42:55');
 
 -- ----------------------------
 -- Table structure for failed_jobs
@@ -81,7 +84,7 @@ CREATE TABLE `failed_jobs`  (
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `failed_jobs_uuid_unique`(`uuid` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of failed_jobs
@@ -100,14 +103,14 @@ CREATE TABLE `iusers`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`userID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of iusers
 -- ----------------------------
-INSERT INTO `iusers` VALUES (1, 'superadmin@demo.com', '$2y$10$BkC1xo6y0UA42FvRDVjra.WUeYqppjP4Mox.lFsRXK0KaZ8DOurLW', NULL, 0, '2023-01-13 07:10:11', '2023-01-13 07:10:11');
-INSERT INTO `iusers` VALUES (2, 'sample@gmail.com', '$2y$10$M2VxV3j.JH0yCVrTgnltXOv0sQS2aVgsKDAoir/qFTjT7muLtN/vu', '09269440075', 3, '2023-01-13 07:10:30', '2023-01-13 07:10:30');
-INSERT INTO `iusers` VALUES (3, 'user@gmail.com', '$2y$10$YA243poRAOJhIXRF8MlfguXXsE7Z1tNuFmCv6ZiwuecAEQtsqhpYy', '09090464399', 2, '2023-01-13 07:11:43', '2023-01-13 07:11:43');
+INSERT INTO `iusers` VALUES (1, 'superadmin@demo.com', '$2y$10$7iBFL83eaXM8B8Qma67zl.F5oTNDgGZUK4YIEgAh/wYa8EOugTT/q', NULL, 0, '2023-01-13 14:06:39', '2023-01-13 14:06:39');
+INSERT INTO `iusers` VALUES (2, 'host@demo.com', '$2y$10$dcJMHZppUhJN7nOnoVgBN.qrK4e9WsIl8fKSY2Wp1YN00Go/Mdhp6', '09269440075', 2, '2023-01-13 16:07:00', '2023-01-13 16:07:00');
+INSERT INTO `iusers` VALUES (3, 'artist@demo.com', '$2y$10$2E5eIUV.zBP2OEKXzaMsTOuWYBCFTDQCIYUUACOR7r/MS/xoYAiCy', '09090464399', 3, '2023-01-13 16:08:24', '2023-01-13 16:08:24');
 
 -- ----------------------------
 -- Table structure for migrations
@@ -118,7 +121,7 @@ CREATE TABLE `migrations`  (
   `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of migrations
@@ -143,7 +146,7 @@ CREATE TABLE `password_resets`  (
   `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   INDEX `password_resets_email_index`(`email` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of password_resets
@@ -163,13 +166,13 @@ CREATE TABLE `payment_methods`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`paymentID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of payment_methods
 -- ----------------------------
-INSERT INTO `payment_methods` VALUES (1, 2, 'cash', '09269440075', 'Kennen C. Borbon', NULL, '2023-01-13 07:11:20', '2023-01-13 07:11:20');
-INSERT INTO `payment_methods` VALUES (2, 3, 'cash', '09090464399', 'Kennen C. Borbon', NULL, '2023-01-13 07:13:27', '2023-01-13 07:13:27');
+INSERT INTO `payment_methods` VALUES (1, 2, 'gcash', '09269440075', 'Kennen C. Borbon', NULL, '2023-01-13 16:07:42', '2023-01-13 16:07:42');
+INSERT INTO `payment_methods` VALUES (2, 3, 'cash', '09090464399', 'Kennen C. Borbon', NULL, '2023-01-13 16:09:55', '2023-01-13 16:09:55');
 
 -- ----------------------------
 -- Table structure for personal_access_tokens
@@ -188,7 +191,7 @@ CREATE TABLE `personal_access_tokens`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `personal_access_tokens_token_unique`(`token` ASC) USING BTREE,
   INDEX `personal_access_tokens_tokenable_type_tokenable_id_index`(`tokenable_type` ASC, `tokenable_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of personal_access_tokens
@@ -209,12 +212,12 @@ CREATE TABLE `profiles`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`profileID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of profiles
 -- ----------------------------
-INSERT INTO `profiles` VALUES (1, 3, 'Event Planner', 'Freelance', 'Sample', 'Valencia City', '3230113.JPG', '2023-01-13 07:12:00', '2023-01-13 07:12:00');
+INSERT INTO `profiles` VALUES (1, 2, 'Event Planner', 'TS Mix', 'Sample', 'Valencia City', '2230113.jpg', '2023-01-13 16:07:18', '2023-01-13 16:07:18');
 
 -- ----------------------------
 -- Table structure for services
@@ -229,12 +232,12 @@ CREATE TABLE `services`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`serviceID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of services
 -- ----------------------------
-INSERT INTO `services` VALUES (1, 2, 'Gig', 'Set', 2500.00, '2023-01-13 07:11:10', '2023-01-13 07:11:10');
+INSERT INTO `services` VALUES (1, 3, 'Gig', 'Complete Set With Drummers', 2589.00, '2023-01-13 16:09:38', '2023-01-13 16:09:38');
 
 -- ----------------------------
 -- Table structure for users
@@ -251,7 +254,7 @@ CREATE TABLE `users`  (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `users_email_unique`(`email` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of users
@@ -264,15 +267,21 @@ DROP VIEW IF EXISTS `vwallbandnames`;
 CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `vwallbandnames` AS select `band_profiles`.`bandName` AS `bandName` from `band_profiles`;
 
 -- ----------------------------
+-- View structure for vwallevents
+-- ----------------------------
+DROP VIEW IF EXISTS `vwallevents`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `vwallevents` AS select `events`.`eventID` AS `eventID`,`band_profiles`.`bandName` AS `bandName`,`band_profiles`.`bandPic` AS `bandPic`,`events`.`eventdate` AS `eventdate`,`events`.`addinfo` AS `addinfo`,`events`.`location` AS `location`,`events`.`fromTime` AS `fromTime`,`events`.`toTime` AS `toTime`,`events`.`eventname` AS `eventname` from (`events` join `band_profiles` on((`events`.`artistID` = `band_profiles`.`profileID`)));
+
+-- ----------------------------
 -- View structure for vwalleventsforbands
 -- ----------------------------
 DROP VIEW IF EXISTS `vwalleventsforbands`;
-CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `vwalleventsforbands` AS select `events`.`eventID` AS `eventID`,`events`.`eventdate` AS `eventdate`,`events`.`addinfo` AS `addinfo`,`band_profiles`.`bandName` AS `bandName`,`profiles`.`company` AS `company`,`events`.`location` AS `location`,`events`.`fromTime` AS `fromTime`,`events`.`toTime` AS `toTime` from (((`events` join `profiles` on((`events`.`artistID` = `profiles`.`profileID`))) join `iusers` on((`profiles`.`userID` = `iusers`.`userID`))) join `band_profiles` on((`events`.`artistID` = `band_profiles`.`profileID`)));
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `vwalleventsforbands` AS select `events`.`eventID` AS `eventID`,`events`.`eventdate` AS `eventdate`,`events`.`addinfo` AS `addinfo`,`band_profiles`.`bandName` AS `bandName`,`events`.`location` AS `location`,`events`.`fromTime` AS `fromTime`,`events`.`toTime` AS `toTime`,`events`.`services` AS `services`,`events`.`eventname` AS `eventname`,`events`.`status` AS `status`,`band_profiles`.`profileID` AS `profileID`,`band_profiles`.`userID` AS `bandUserID`,`payment_methods`.`type` AS `type`,`iusers`.`userID` AS `hostUserID` from (((`events` join `band_profiles` on((`events`.`artistID` = `band_profiles`.`profileID`))) join `payment_methods` on((`band_profiles`.`userID` = `payment_methods`.`userID`))) join `iusers` on((`events`.`userID` = `iusers`.`userID`)));
 
 -- ----------------------------
 -- View structure for vwalleventsforhost
 -- ----------------------------
 DROP VIEW IF EXISTS `vwalleventsforhost`;
-CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `vwalleventsforhost` AS select `events`.`eventID` AS `eventID`,`band_profiles`.`bandName` AS `bandName`,`band_profiles`.`bandPic` AS `bandPic`,`events`.`eventdate` AS `eventdate`,`events`.`addinfo` AS `addinfo`,`events`.`location` AS `location`,`events`.`fromTime` AS `fromTime`,`events`.`toTime` AS `toTime` from (`events` join `band_profiles` on((`events`.`artistID` = `band_profiles`.`profileID`)));
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `vwalleventsforhost` AS select `events`.`eventID` AS `eventID`,`band_profiles`.`bandName` AS `bandName`,`band_profiles`.`bandPic` AS `bandPic`,`events`.`eventdate` AS `eventdate`,`events`.`addinfo` AS `addinfo`,`events`.`location` AS `location`,`events`.`fromTime` AS `fromTime`,`events`.`toTime` AS `toTime`,`events`.`eventname` AS `eventname`,`events`.`services` AS `services`,`payment_methods`.`type` AS `type`,`events`.`status` AS `status`,`events`.`userID` AS `userID` from ((`events` join `band_profiles` on((`events`.`artistID` = `band_profiles`.`profileID`))) join `payment_methods` on((`band_profiles`.`userID` = `payment_methods`.`userID`)));
 
 SET FOREIGN_KEY_CHECKS = 1;
