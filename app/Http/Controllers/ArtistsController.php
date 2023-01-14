@@ -30,7 +30,7 @@ class ArtistsController extends Controller
             $bandData = array();
 
             foreach ($bands as $b) {
-                if ($b['verified'] == 2) {
+                if ($b['verified'] != 1) {
                     continue;
                 }
                 array_push($allnames, $b['bandName']);

@@ -22,10 +22,13 @@ class VerifyController extends Controller
             $uid = $user['userID'];
 
             $isSubmittedVerify = false;
-            $queryResult2 = DB::table('verifieds')->where([['userID' ,'=', $uid]])->get();
+            $queryResult2 = DB::table('verifieds')->where([['userID', '=', $uid]])->get();
             if (count($queryResult2) > 0) {
                 $isSubmittedVerify = true;
             }
+
+            $isApprove = false;
+            $disApprove = false;
 
             if ($uType == 3) {
                 $queryResult = DB::table('band_profiles')->where(['userID' => $uid])->get();
@@ -33,6 +36,14 @@ class VerifyController extends Controller
                 if (count($queryResult) > 0) {
                     $profiles = json_decode($queryResult, true);
                     $pic = $profiles[0]['bandPic'];
+
+                    if ($profiles[0]['verified'] == 1) {
+                        $isApprove = true;
+                    }
+
+                    if ($profiles[0]['verified'] == 3) {
+                        $disApprove = true;
+                    }
                 }
             } else if ($uType == 2) {
                 $queryResult = DB::table('profiles')->where(['userID' => $uid])->get();
@@ -40,12 +51,18 @@ class VerifyController extends Controller
                 if (count($queryResult) > 0) {
                     $profiles = json_decode($queryResult, true);
                     $pic = $profiles[0]['userPic'];
+
+                    if ($profiles[0]['verified'] == 3) {
+                        $disApprove = true;
+                    }
                 }
+
             }
             return view('verification', [
                 'pic' => $pic,
                 'uType' => $uType,
-                'isDoneVerify' => $isSubmittedVerify
+                'isDoneVerify' => $isApprove == false ? $isSubmittedVerify : "yes",
+                'disapprove' => $disApprove
             ]);
         } else {
             return redirect("/");

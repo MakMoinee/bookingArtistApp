@@ -291,7 +291,46 @@
                                                                             </div>
                                                                         </div>
                                                                         <button class="btn btn-danger"
-                                                                            style="color:white;">Disapprove</button>
+                                                                            style="color:white;"
+                                                                            data-coreui-toggle="modal"
+                                                                            data-coreui-target="#disapproveModal{{ $item['verifyID'] }}">Disapprove</button>
+                                                                        <div class="modal fade"
+                                                                            id="disapproveModal{{ $item['verifyID'] }}"
+                                                                            tabindex="-1" role="dialog"
+                                                                            aria-labelledby="disapproveModal{{ $item['verifyID'] }}"
+                                                                            aria-hidden="true">
+                                                                            <div class="modal-dialog" role="document">
+                                                                                <div class="modal-content">
+                                                                                    <form
+                                                                                        action="{{ route('adminverify.update', ['adminverify' => $item['verifyID']]) }}"
+                                                                                        method="POST">
+                                                                                        @method('put');
+                                                                                        @csrf
+                                                                                        <div class="modal-body">
+                                                                                            <h5 class="modal-title"
+                                                                                                id="disapproveModal{{ $item['verifyID'] }}">
+                                                                                                Do you want to proceed
+                                                                                                disapproving
+                                                                                                verification ?
+                                                                                            </h5>
+                                                                                            <input type="hidden"
+                                                                                                name="profileID"
+                                                                                                value="{{ $item['profileID'] }}">
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="submit"
+                                                                                                class="btn btn-primary"
+                                                                                                name="btnDisapprove"
+                                                                                                value="Yes">Yes,
+                                                                                                Proceed</button>
+                                                                                            <button type="button"
+                                                                                                class="btn btn-secondary"
+                                                                                                data-coreui-dismiss="modal">Close</button>
+                                                                                        </div>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                     </td>
                                                                 </tr>
                                                             @endforeach
@@ -335,6 +374,36 @@
                 </div>
             </div>
         </div>
+
+        @if (session()->pull('successUpdateDisapprove'))
+            <script>
+                setTimeout(() => {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Successfully Disapproved Verification',
+                        showConfirmButton: false,
+                        timer: 800
+                    });
+                }, 500);
+            </script>;
+            {{ session()->forget('successUpdateDisapprove') }}
+        @endif
+
+        @if (session()->pull('errorUpdateDisapprove'))
+            <script>
+                setTimeout(() => {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'warning',
+                        title: 'Failed To Disapprove Verification, Please Try Again Later',
+                        showConfirmButton: false,
+                        timer: 800
+                    });
+                }, 500);
+            </script>;
+            {{ session()->forget('errorUpdateDisapprove') }}
+        @endif
 
         @if (session()->pull('successUpdateApprove'))
             <script>

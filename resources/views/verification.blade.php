@@ -253,84 +253,100 @@
         <div class="body flex-grow-1 px-3" style="background: #504c4c; padding-top: 20px;">
             <div class="container-lg">
 
-                @if ($isDoneVerify)
+                @if ($isDoneVerify == 'yes')
                     <div class="row">
-                        <h3 style="font-family: 'Bebas Neue', cursive;color:white;">Waiting for Admin to Approve
-                            Verification</h3>
+                        <h3 style="font-family: 'Bebas Neue', cursive;color:white;">Status: Fully Verified</h3>
                     </div>
                 @else
-                    <div class="row">
-                        <h3 style="font-family: 'Bebas Neue', cursive;color:white;">Apply for Verification</h3>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-lg-12 ">
-                            <center>
-                                <div class="col-lg-6">
-                                    <div class="card mb-4" style="background: #e3e2da;width: 100%">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <form action="/verify" method="POST" enctype="multipart/form-data">
-                                                    @csrf
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <label for="idnum" class="for"
-                                                                style="font-family: 'Roboto', sans-serif;text-align: start">
-                                                                <b>ID
-                                                                    Number:</b></label>
-                                                            <br>
-                                                            <input required class="form-control" required
-                                                                type="number" name="idnumber" id=""
-                                                                style="margin-left: 10px;margin-top: 10px; width: 40%;">
-
-                                                        </div>
-                                                        <br>
+                    @if ($isDoneVerify == true)
+                        <div class="row">
+                            <h3 style="font-family: 'Bebas Neue', cursive;color:white;">Waiting for Admin to Approve
+                                Verification</h3>
+                        </div>
+                    @else
+                        @if ($disapprove)
+                            <div class="row">
+                                <h3 style="font-family: 'Bebas Neue', cursive;color:white;">Status: <b
+                                        style="color: red;">Disapproved</b></h3>
+                            </div>
+                        @endif
+                        <div class="row">
+                            <h3 style="font-family: 'Bebas Neue', cursive;color:white;">Apply for Verification</h3>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-12 ">
+                                <center>
+                                    <div class="col-lg-6">
+                                        <div class="card mb-4" style="background: #e3e2da;width: 100%">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <form action="/verify" method="POST"
+                                                        enctype="multipart/form-data">
+                                                        @csrf
                                                         <div class="form-group">
                                                             <div class="row">
-                                                                <label for="idname" class="for"
+                                                                <label for="idnum" class="for"
                                                                     style="font-family: 'Roboto', sans-serif;text-align: start">
-                                                                    <b>Valid ID Owner's Name:</b></label>
+                                                                    <b>ID
+                                                                        Number:</b></label>
                                                                 <br>
                                                                 <input required class="form-control" required
-                                                                    type="text" name="idname" id=""
+                                                                    type="number" name="idnumber" id=""
                                                                     style="margin-left: 10px;margin-top: 10px; width: 40%;">
 
                                                             </div>
-                                                        </div>
-                                                        <br>
-                                                        <div class="row">
-                                                            <label for="idpic" class="for"
-                                                                style="font-family: 'Roboto', sans-serif;text-align: start"><b>ID
-                                                                    Picture:</b></label>
-                                                            <img class="file-upload-image " src="/images/person.svg"
-                                                                alt="" srcset=""
-                                                                style="width: 150px;height: 150px;">
                                                             <br>
+                                                            <div class="form-group">
+                                                                <div class="row">
+                                                                    <label for="idname" class="for"
+                                                                        style="font-family: 'Roboto', sans-serif;text-align: start">
+                                                                        <b>Valid ID Owner's Name:</b></label>
+                                                                    <br>
+                                                                    <input required class="form-control" required
+                                                                        type="text" name="idname" id=""
+                                                                        style="margin-left: 10px;margin-top: 10px; width: 40%;">
+
+                                                                </div>
+                                                            </div>
                                                             <br>
                                                             <div class="row">
-                                                                <input class="form-control" required type="file"
-                                                                    name="files" id=""
-                                                                    accept=".jpg, .png, .jpeg, .svg"
-                                                                    style="margin-left: 10px;margin-top: 10px;width:300px;height:40px;"
-                                                                    onchange="readURL(this)">
-                                                            </div>
+                                                                <label for="idpic" class="for"
+                                                                    style="font-family: 'Roboto', sans-serif;text-align: start"><b>ID
+                                                                        Picture:</b></label>
+                                                                <img class="file-upload-image "
+                                                                    src="/images/person.svg" alt=""
+                                                                    srcset=""
+                                                                    style="width: 150px;height: 150px;">
+                                                                <br>
+                                                                <br>
+                                                                <div class="row">
+                                                                    <input class="form-control" required
+                                                                        type="file" name="files" id=""
+                                                                        accept=".jpg, .png, .jpeg, .svg"
+                                                                        style="margin-left: 10px;margin-top: 10px;width:300px;height:40px;"
+                                                                        onchange="readURL(this)">
+                                                                </div>
 
+                                                            </div>
+                                                            <br>
+                                                            <div class="row">
+                                                                <button class="btn btn-primary" type="submit">Submit
+                                                                    Verification</button>
+                                                            </div>
                                                         </div>
-                                                        <br>
-                                                        <div class="row">
-                                                            <button class="btn btn-primary" type="submit">Submit
-                                                                Verification</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </center>
+                                </center>
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 @endif
+
+
 
 
             </div>

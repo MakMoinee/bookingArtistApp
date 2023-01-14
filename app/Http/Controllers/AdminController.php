@@ -31,7 +31,7 @@ class AdminController extends Controller
             $verified = 0;
             $unverified = 0;
             foreach ($bands as $b) {
-                if ($b['verified'] == 2) {
+                if ($b['verified'] != 1) {
                     $unverified++;
                 }
                 if ($b['verified'] == 1) {

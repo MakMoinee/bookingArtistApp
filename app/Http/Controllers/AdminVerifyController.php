@@ -96,7 +96,7 @@ class AdminVerifyController extends Controller
      */
     public function update(Request $request, $id)
     {
-    
+
 
         if (session()->exists("users")) {
             $user = session()->pull("users");
@@ -108,14 +108,29 @@ class AdminVerifyController extends Controller
                 return redirect("/");
             }
 
-            $affectedRows = DB::table('band_profiles')->where(['profileID' => $request->profileID])->update([
-                'verified' => 1
-            ]);
-            if ($affectedRows > 0) {
-                session()->put('successUpdateApprove', true);
+            if ($request->btnDisapprove) {
+                $affectedRows = DB::table('band_profiles')->where(['profileID' => $request->profileID])->update([
+                    'verified' => 3
+                ]);
+
+                if ($affectedRows > 0) {
+                    $affectedRows2 = DB::table('verifieds')->where(['verifyID' => $id])->delete();
+                    session()->put('successUpdateDisapprove', true);
+                } else {
+                    session()->put('errorUpdateDisapprove', true);
+                }
             } else {
-                session()->put('errorUpdateApprove', true);
+                $affectedRows = DB::table('band_profiles')->where(['profileID' => $request->profileID])->update([
+                    'verified' => 1
+                ]);
+                if ($affectedRows > 0) {
+                    session()->put('successUpdateApprove', true);
+                } else {
+                    session()->put('errorUpdateApprove', true);
+                }
             }
+
+
             return redirect("/adminverify");
         } else {
             return redirect("/");

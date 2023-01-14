@@ -11,7 +11,7 @@
  Target Server Version : 80030 (8.0.30)
  File Encoding         : 65001
 
- Date: 14/01/2023 12:28:39
+ Date: 14/01/2023 13:34:24
 */
 
 SET NAMES utf8mb4;
@@ -43,7 +43,7 @@ CREATE TABLE `band_profiles`  (
 -- ----------------------------
 -- Records of band_profiles
 -- ----------------------------
-INSERT INTO `band_profiles` VALUES (1, 2, 5, 'Cover', 'Valencia City', 'Sine', 'Sine', 'Band', 'Reggae', '3-5 years', 'https://youtube.com', '223011403.JPG', 2, '2023-01-14 03:44:20', '2023-01-14 03:44:20');
+INSERT INTO `band_profiles` VALUES (1, 2, 5, 'Cover', 'Valencia City', 'Sine', 'Sine', 'Band', 'Reggae', '3-5 years', 'https://youtube.com', '223011403.JPG', 3, '2023-01-14 03:44:20', '2023-01-14 03:44:20');
 
 -- ----------------------------
 -- Table structure for events
@@ -289,10 +289,11 @@ CREATE TABLE `verifieds`  (
   `userID` int NOT NULL,
   `idnumber` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `idPic` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`verifyID`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of verifieds
@@ -321,5 +322,11 @@ CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `vwalleventsforbands` AS 
 -- ----------------------------
 DROP VIEW IF EXISTS `vwalleventsforhost`;
 CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `vwalleventsforhost` AS select `events`.`eventID` AS `eventID`,`band_profiles`.`bandName` AS `bandName`,`band_profiles`.`bandPic` AS `bandPic`,`events`.`eventdate` AS `eventdate`,`events`.`addinfo` AS `addinfo`,`events`.`location` AS `location`,`events`.`fromTime` AS `fromTime`,`events`.`toTime` AS `toTime`,`events`.`eventname` AS `eventname`,`events`.`services` AS `services`,`payment_methods`.`type` AS `type`,`events`.`status` AS `status`,`events`.`userID` AS `userID` from ((`events` join `band_profiles` on((`events`.`artistID` = `band_profiles`.`profileID`))) join `payment_methods` on((`band_profiles`.`userID` = `payment_methods`.`userID`)));
+
+-- ----------------------------
+-- View structure for vwallverify
+-- ----------------------------
+DROP VIEW IF EXISTS `vwallverify`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `vwallverify` AS select `verifieds`.`verifyID` AS `verifyID`,`band_profiles`.`bandName` AS `bandName`,`verifieds`.`idnumber` AS `idnumber`,`verifieds`.`idPic` AS `idPic`,`verifieds`.`name` AS `name`,`band_profiles`.`profileID` AS `profileID` from (`verifieds` join `band_profiles` on((`verifieds`.`userID` = `band_profiles`.`userID`))) where (`band_profiles`.`verified` <> 1);
 
 SET FOREIGN_KEY_CHECKS = 1;
