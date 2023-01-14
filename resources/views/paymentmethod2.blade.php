@@ -376,11 +376,11 @@
                                         <div class="col-md-12">
                                             <center>
                                                 <div class="form-group">
-                                                    {{-- <a class="btn btn-primary" style="background: transparent;"
+                                                    <a class="btn btn-primary" style="background: transparent;"
                                                         id="cash">
                                                         <img src="/images/cash.svg" alt="" srcset=""
                                                             width="150px" height="50px" onclick="cashClick()">
-                                                    </a> --}}
+                                                    </a>
                                                     <a class="btn btn-primary" id="gcash"
                                                         style="background: transparent;margin-left: 20px;"><img
                                                             src="/images/gcash.png" alt="" srcset=""
@@ -437,11 +437,11 @@
     <script src="js/jquery-2.1.0.min.js"></script>
     <script>
         function cashClick() {
-            // let cash = document.getElementById('cash');
+            let cash = document.getElementById('cash');
             let gcash = document.getElementById('gcash');
             // let credit = document.getElementById('credit');
 
-            // cash.removeAttribute("style");
+            cash.removeAttribute("style");
             gcash.removeAttribute("style");
             // credit.removeAttribute("style");
             // credit.setAttribute("style", "background: transparent;margin-left: 20px;");
@@ -452,11 +452,11 @@
         }
 
         function gcashClick() {
-            // let cash = document.getElementById('cash');
+            let cash = document.getElementById('cash');
             let gcash = document.getElementById('gcash');
             // let credit = document.getElementById('credit');
 
-            // cash.removeAttribute("style");
+            cash.removeAttribute("style");
             gcash.removeAttribute("style");
             // credit.removeAttribute("style");
             // credit.setAttribute("style", "background: transparent;margin-left: 20px;");

@@ -55,6 +55,7 @@ class ArtistsController extends Controller
             }
 
             if ($uType == 3) {
+                return redirect("/");
                 $queryResult = DB::table('band_profiles')->where(['userID' => $uid])->get();
                 $pic = "";
                 if (count($queryResult) > 0) {
