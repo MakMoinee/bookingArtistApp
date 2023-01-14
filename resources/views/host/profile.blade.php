@@ -319,17 +319,12 @@
                                                         <div class="row">
                                                             <div class="col-lg-12" style="text-align: start">
                                                                 <label for="bandName" class="for"
-                                                                    style="text-align:start;font-family: 'Roboto', sans-serif; "><b>Artist/Band
+                                                                    style="text-align:start;font-family: 'Roboto', sans-serif; "><b>Company
                                                                         Name:</b></label>
                                                                 <br>
-                                                                @if ($uType == 3)
-                                                                    <input required type="text" name="bandName"
-                                                                        id="" style="width: 100%;"
-                                                                        value="{{ $profiles['bandName'] }}">
-                                                                @else
-                                                                    <input required type="text" name="bandName"
-                                                                        id="" style="width: 100%;">
-                                                                @endif
+                                                                <input required type="text" name="bandName"
+                                                                    id="" style="width: 100%;"
+                                                                    value="{{ $profiles['company'] }}">
                                                             </div>
                                                         </div>
                                                         <br>
@@ -340,8 +335,7 @@
                                                                         Size:</b></label>
                                                                 <br>
                                                                 <input required type="number" name="bandSize"
-                                                                    id="" style="width: 100%;"
-                                                                    value="{{ $profiles['bandSize'] }}">
+                                                                    id="" style="width: 100%;">
                                                             </div>
                                                         </div>
                                                         <br>
@@ -372,8 +366,7 @@
                                                                     style="text-align:start;font-family: 'Roboto', sans-serif; "><b>Repertoire:</b></label>
                                                                 <br>
                                                                 <input required type="text" name="reper"
-                                                                    id="" style="width: 100%;"
-                                                                    value="{{ $profiles['reper'] }}">
+                                                                    id="" style="width: 100%;">
                                                             </div>
                                                         </div>
                                                         <br>
@@ -387,8 +380,7 @@
                                                                     style="text-align:start;font-family: 'Roboto', sans-serif; "><b>Bio:</b></label>
                                                                 <br>
                                                                 <input required type="text" name="bio"
-                                                                    id="" style="width: 100%;"
-                                                                    value="{{ $profiles['bio'] }}">
+                                                                    id="" style="width: 100%;" value="{{ $profiles['bio'] }}">
                                                             </div>
                                                         </div>
                                                         <br>
@@ -396,13 +388,12 @@
                                                             <div class="col-lg-12"
                                                                 style="text-align: start;padding-left:25px;">
                                                                 <label for="type" class="for"
-                                                                    style="text-align:start;font-family: 'Roboto', sans-serif; "><b>Artist
-                                                                        Type:</b></label>
+                                                                    style="text-align:start;font-family: 'Roboto', sans-serif; "><b>Profile:</b></label>
                                                                 <br>
                                                                 <input required type="text" name="type"
                                                                     id=""
                                                                     style="width: 100%;margin-top: 5px;"
-                                                                    value="{{ $profiles['artistType'] }}">
+                                                                    value="{{ $profiles['profile'] }}">
                                                             </div>
                                                         </div>
                                                         <br>
@@ -413,8 +404,7 @@
                                                                     style="text-align:start;font-family: 'Roboto', sans-serif; "><b>Genre:</b></label>
                                                                 <br>
                                                                 <input required type="text" name="genre"
-                                                                    id="" style="width: 100%;" multiple
-                                                                    value="{{ $profiles['genres'] }}">
+                                                                    id="" style="width: 100%;" multiple>
                                                             </div>
                                                         </div>
                                                         <br>
@@ -427,33 +417,11 @@
                                                                 <br>
                                                                 <select name="exp" id="exp"
                                                                     style="width: 100%;">
-                                                                    @if ($profiles['exp'] == '1-2 years')
-                                                                        <option value="1-2 years" selected>1-2 years
-                                                                        </option>
-                                                                    @else
-                                                                        <option value="1-2 years">1-2 years</option>
-                                                                    @endif
-
-                                                                    @if ($profiles['exp'] == '2-3 years')
-                                                                        <option value="2-3 years" selected>2-3 years
-                                                                        </option>
-                                                                    @else
-                                                                        <option value="2-3 years">2-3 years</option>
-                                                                    @endif
-
-                                                                    @if ($profiles['exp'] == '3-5 years')
-                                                                        <option value="3-5 years" selected>3-5 years
-                                                                        </option>
-                                                                    @else
-                                                                        <option value="3-5 years">3-5 years</option>
-                                                                    @endif
-
-                                                                    @if ($profiles['exp'] == '5 years above')
-                                                                        <option value="5 years above" selected>5 years above
-                                                                        </option>
-                                                                    @else
-                                                                        <option value="5 years above">5 years above</option>
-                                                                    @endif
+                                                                    <option value="1-2 years">1-2 years</option>
+                                                                    <option value="2-3 years">2-3 years</option>
+                                                                    <option value="3-5 years">3-5 years</option>
+                                                                    <option value="5 years above">5 years above
+                                                                    </option>
                                                                 </select>
                                                             </div>
                                                         </div>

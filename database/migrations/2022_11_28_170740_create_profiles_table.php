@@ -21,6 +21,7 @@ class CreateProfilesTable extends Migration
             $table->string('bio');
             $table->string('location');
             $table->string('userPic')->nullable(true);
+            $table->integer('verified');
             $table->timestamps();
         });
     }

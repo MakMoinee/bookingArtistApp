@@ -72,6 +72,7 @@ class BandProfileController extends Controller
             $profile->youtube = $request->youtube;
             $profile->genres = $request->genre;
             $profile->bandPic = $fileName;
+            $profile->verified = 2;
 
             $isSave = $profile->save();
 

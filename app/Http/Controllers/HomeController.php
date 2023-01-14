@@ -84,7 +84,11 @@ class HomeController extends Controller
                 $user = session()->pull('users');
                 session()->put('users', $user);
             } else {
-                return view('welcome');
+                $queryResult3 = DB::table('band_profiles')->where([['verified', '=', 1]])->get();
+                $bands = json_decode($queryResult3, true);
+                return view('welcome', [
+                    'bands' => $bands
+                ]);
             }
         }
     }

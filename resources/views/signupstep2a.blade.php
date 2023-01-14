@@ -241,7 +241,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <center>
-                                                <img class="file-upload-image" src="/storage/images/user.png"
+                                                <img class="file-upload-image avatar-img" src="/storage/images/user.png"
                                                     alt="" srcset="" width="150px" height="150px"
                                                     style="margin-bottom: 20px;">
                                                 <p>Add Picture <a onclick="fileOpen()"

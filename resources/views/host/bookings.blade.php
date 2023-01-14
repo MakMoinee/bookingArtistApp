@@ -357,6 +357,10 @@
                                                                     <span class="btn btn-warning"
                                                                         style="color: white;">Pending</span>
                                                                 @endif
+                                                                @if ($b['status'] == 4)
+                                                                    <span class="btn btn-danger"
+                                                                        style="color: white;">Cancelled</span>
+                                                                @endif
                                                             </td>
                                                             <td>
                                                                 @if ($b['status'] == 5)
@@ -393,7 +397,9 @@
                                                                                                     height="250px">
                                                                                                 <br>
                                                                                                 <br>
-                                                                                                <h3 style="font-family: 'Roboto', sans-serif;">Amount To
+                                                                                                <h3
+                                                                                                    style="font-family: 'Roboto', sans-serif;">
+                                                                                                    Amount To
                                                                                                     Pay:
                                                                                                     <b>PHP{{ $amount + $amount * 0.12 }}</b>
                                                                                                 </h3>
@@ -496,9 +502,47 @@
                                                                     </div>
                                                                 @endif
 
-                                                                @if ($b['status'] == 2)
-                                                                    <button class="btn btn-danger"
+                                                                @if (date('Y-m-d', strtotime(now())) == $b['eventdate'])
+                                                                    <button class="btn btn-secondary disabled"
                                                                         style="color:white;">Cancel</button>
+                                                                @else
+                                                                    <a href="#" data-coreui-toggle="modal"
+                                                                        data-coreui-target="#cancelModal{{ $b['eventID'] }}"><button
+                                                                            class="btn btn-danger"
+                                                                            style="color:white;">Cancel</button></a>
+                                                                    <div class="modal fade"
+                                                                        id="cancelModal{{ $b['eventID'] }}"
+                                                                        tabindex="-1" role="dialog"
+                                                                        aria-labelledby="cancelModalLabel{{ $b['eventID'] }}"
+                                                                        aria-hidden="true">
+                                                                        <div class="modal-dialog" role="document">
+                                                                            <div class="modal-content">
+                                                                                <form
+                                                                                    action="{{ route('bookings.update', ['booking' => 1]) }}"
+                                                                                    method="POST">
+                                                                                    @method('put')
+                                                                                    @csrf
+                                                                                    <div class="modal-body">
+                                                                                        <h5 class="modal-title"
+                                                                                            id="cancelModalLabel{{ $b['eventID'] }}">
+                                                                                            Do
+                                                                                            you want to proceed
+                                                                                            Cancelling book?</h5>
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                        <button type="submit"
+                                                                                            class="btn btn-primary"
+                                                                                            name="btnUpdateCancel"
+                                                                                            value="yes">Yes,
+                                                                                            Proceed</button>
+                                                                                        <button type="button"
+                                                                                            class="btn btn-secondary"
+                                                                                            data-coreui-dismiss="modal">Close</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 @endif
 
                                                             </td>

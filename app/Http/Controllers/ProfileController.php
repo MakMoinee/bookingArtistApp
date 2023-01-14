@@ -34,7 +34,8 @@ class ProfileController extends Controller
                 return view('artist.profile', [
                     'pic' => $pic,
                     'bands' => $allBands,
-                    'profiles' => $profiles
+                    'profiles' => count($profiles) == 0 ? [] : $profiles[0],
+                    'uType' => $uType
                 ]);
             }
 
@@ -47,10 +48,11 @@ class ProfileController extends Controller
                 }
 
                 $allBands = BandProfile::all();
-                return view('artist.profile', [
+                return view('host.profile', [
                     'pic' => $pic,
                     'bands' => $allBands,
-                    'profiles' => $profiles
+                    'profiles' => count($profiles) == 0 ? [] : $profiles[0],
+                    'uType' => $uType
                 ]);
             }
         } else {
@@ -98,6 +100,7 @@ class ProfileController extends Controller
             $newProfile->bio = $request->bio;
             $newProfile->company = $request->company;
             $newProfile->location = $request->location;
+            $newProfile->verified = 2;
             if ($fileName != "") {
                 $newProfile->userPic = $fileName;
             }

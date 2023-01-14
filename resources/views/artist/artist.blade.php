@@ -184,7 +184,9 @@
                     </ul>
                     <ul class="header-nav d-none d-md-flex ms-auto" style="font-family: 'Roboto', sans-serif;">
                         <li class="nav-item"><a class="nav-link" href="/artistdash">Dashboard</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="/artists">Artist</a></li>
+                        @if ($uType == 2)
+                            <li class="nav-item"><a class="nav-link active" href="/artists">Artist</a></li>
+                        @endif
                         <li class="nav-item"><a class="nav-link" href="/events">Events</a></li>
                     </ul>
                     <ul class="header-nav ms-3">
@@ -275,8 +277,9 @@
                                             <div class="col-lg-12">
                                                 <div class="row">
                                                     <center>
-                                                        <img style="height: 100px; width: 100px;"
-                                                            src="/images/person.svg" alt="" srcset="">
+                                                        <img class="avatar-img" style="height: 150px; width: 150px;"
+                                                            src="/storage/profiles/{{ $b['bandPic'] }}" alt=""
+                                                            srcset="">
                                                     </center>
                                                 </div>
                                                 <br>
@@ -332,8 +335,53 @@
                                                         <center>
                                                             <div class="col-lg-6" style="float:left;">
                                                                 <button class="btn btn-primary rounded-pill"
+                                                                    data-coreui-toggle="modal"
+                                                                    data-coreui-target="#viewServicesModal{{ $b['profileID'] }}"
                                                                     style="background: transparent; color:black;border: 1px solid black;">View
                                                                     Services</button>
+
+                                                                <div class="modal fade"
+                                                                    id="viewServicesModal{{ $b['profileID'] }}"
+                                                                    tabindex="-1" role="dialog"
+                                                                    aria-labelledby="viewServicesModalLabel{{ $b['profileID'] }}"
+                                                                    aria-hidden="true">
+                                                                    <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-body">
+                                                                                <h5 class="modal-title"
+                                                                                    id="viewServicesModalLabel{{ $b['profileID'] }}">
+                                                                                    Services
+                                                                                </h5>
+                                                                                <br>
+                                                                                <br>
+                                                                                <div class="row">
+                                                                                    <div class="col-lg-12">
+                                                                                        <div class="col-lg-6"
+                                                                                            style="float:left;margin-left: 30px;">
+                                                                                            @if (array_key_exists($b['userID'], $serviceMap))
+                                                                                                @foreach ($serviceMap[$b['userID']] as $item)
+                                                                                                    <h5
+                                                                                                        style="text-align: start">
+                                                                                                        {{ $item['serviceName'] }}
+                                                                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                                        {{ $item['price'] }}
+                                                                                                    </h5>
+                                                                                                @endforeach
+                                                                                            @endif
+
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer"
+                                                                                style="border:none;">
+                                                                                <button type="button"
+                                                                                    class="btn btn-secondary"
+                                                                                    data-coreui-dismiss="modal">Close</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                             <div class="col-lg-6" style="float:left;">
                                                                 <button onclick="sendRequest('{{ $b['profileID'] }}')"

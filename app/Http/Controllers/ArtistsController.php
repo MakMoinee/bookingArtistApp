@@ -23,12 +23,16 @@ class ArtistsController extends Controller
             $uType = $user['userType'];
             $uid = $user['userID'];
 
-            $bands = BandProfile::all();
+            $queryResult = DB::table('band_profiles')->where(['verified' => 1])->get();
+            $bands = json_decode($queryResult, true);
             $allnames = array();
             $idData = array();
             $bandData = array();
 
             foreach ($bands as $b) {
+                if ($b['verified'] == 2) {
+                    continue;
+                }
                 array_push($allnames, $b['bandName']);
                 array_push($idData, $b['profileID']);
                 $bandData[$b['profileID']] = $b;
@@ -64,7 +68,8 @@ class ArtistsController extends Controller
                     'bands' => $allBands,
                     'idData' => $idData,
                     'bandData' => $bandData,
-                    'serviceMap' => $serviceMap
+                    'serviceMap' => $serviceMap,
+                    'uType' => $uType
                 ]);
             }
 
@@ -77,12 +82,21 @@ class ArtistsController extends Controller
                 }
 
                 $allBands = BandProfile::all();
+                // dd([
+                //     'pic' => $pic,
+                //     'bands' => $allBands,
+                //     'idData' => $idData,
+                //     'bandData' => $bandData,
+                //     'serviceMap' => $serviceMap,
+                //     'uType' => $uType
+                // ]);
                 return view('artist.artist', [
                     'pic' => $pic,
-                    'bands' => $allBands,
+                    'bands' => $bands ,
                     'idData' => $idData,
                     'bandData' => $bandData,
-                    'serviceMap' => $serviceMap
+                    'serviceMap' => $serviceMap,
+                    'uType' => $uType
                 ]);
             }
         } else {

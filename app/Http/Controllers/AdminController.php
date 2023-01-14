@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BandProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -24,6 +25,21 @@ class AdminController extends Controller
                 return redirect("/");
             }
 
+            $bands = BandProfile::all();
+            $clients = DB::table('iusers')->where([['userType', '<>', 0]])->get();
+            $allClient = count($clients);
+            $verified = 0;
+            $unverified = 0;
+            foreach ($bands as $b) {
+                if ($b['verified'] == 2) {
+                    $unverified++;
+                }
+                if ($b['verified'] == 1) {
+                    $verified++;
+                }
+            }
+
+
             $queryResult = DB::table('profiles')->where(['userID' => $uid])->get();
             $pic = "";
             if (count($queryResult) > 0) {
@@ -31,9 +47,11 @@ class AdminController extends Controller
                 $pic = $profiles[0]['userPic'];
             }
             return view('admin.dashboard', [
-                'pic' => $pic
+                'pic' => $pic,
+                'verified' => $verified,
+                'unverified' => $unverified,
+                'allClient' => $allClient
             ]);
-            
         } else {
             return redirect("/");
         }

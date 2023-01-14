@@ -19,6 +19,7 @@ class Profile extends Model
         'userID',
         'bio',
         'location',
-        'userPic'
+        'userPic',
+        'verified'
     ];
 }

@@ -53,31 +53,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
         .sidebar {
-            --cui-sidebar-bg: #FFFFFF !important;
-            --cui-sidebar-color: black !important;
-            --cui-sidebar-brand-color: black !important;
+            --cui-sidebar-bg: #5F939A !important;
+            --cui-sidebar-color: white !important;
+            --cui-sidebar-brand-color: white !important;
         }
 
         .nav-link,
         .nav-icon {
-            color: black !important;
+            color: white !important;
         }
     </style>
 </head>
 
 <body>
     <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
-        <div class="sidebar-brand d-none d-md-flex">
-            <svg class="sidebar-brand-full" width="118" height="46" alt="CoreUI
-          Logo">
-                <use xlink:href="assets/brand/coreui.svg#full"></use>
-            </svg>
-            <svg class="sidebar-brand-narrow" width="46" height="46" alt="CoreUI
-          Logo">
-                <use xlink:href="assets/brand/coreui.svg#signet"></use>
-            </svg>
+        <div class="sidebar-brand d-none d-md-flex" style="font-family: 'Bebas Neue', cursive">
+            <h3>Bukidnon Groove</h3>
         </div>
         <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="init">
             <div class="simplebar-wrapper" style="margin: 0px;">
@@ -93,7 +87,7 @@
                                 <li class="nav-item">
                                     <a href="#"></a>
                                 </li>
-                                <li class="nav-item"><a class="nav-link active" href="/artistdash">
+                                <li class="nav-item"><a class="nav-link active" href="/admin">
                                         <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="16"
                                             height="16" fill="currentColor" class="bi bi-speedometer2"
                                             viewBox="0 0 16 16">
@@ -122,6 +116,13 @@
                                             <path
                                                 d="M11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
                                         </svg> Manage Events</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/adminverify">
+                                        <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="16"
+                                            height="16" fill="currentColor" class="bi bi-patch-check-fill"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
+                                        </svg> Verifications</a></li>
 
 
 
@@ -213,7 +214,7 @@
                                                             d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z" />
                                                     </svg>
                                                     <h6 style="margin-left: 80px;font-family: 'Bebas Neue', cursive">
-                                                        <b>10</b>
+                                                        <b>{{ $verified }}</b>
                                                     </h6>
                                                     <h6
                                                         style="margin-left: 80px;width: 100%;font-size:12px;font-family: 'Roboto', sans-serif;">
@@ -242,7 +243,7 @@
                                                             d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z" />
                                                     </svg>
                                                     <h6 style="margin-left: 80px;font-family: 'Bebas Neue', cursive">
-                                                        <b>0</b>
+                                                        <b>{{ $unverified }}</b>
                                                     </h6>
                                                     <h6
                                                         style="margin-left: 80px;width: 100%;font-size:12px;font-family: 'Roboto', sans-serif;">
@@ -271,7 +272,7 @@
                                                             d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z" />
                                                     </svg>
                                                     <h6 style="margin-left: 80px;font-family: 'Bebas Neue', cursive">
-                                                        <b>0</b>
+                                                        <b>{{ $allClient }}</b>
                                                     </h6>
                                                     <h6
                                                         style="margin-left: 80px;width: 100%;font-size:12px;font-family: 'Roboto', sans-serif;">

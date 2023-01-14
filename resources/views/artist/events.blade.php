@@ -237,7 +237,9 @@
                     </ul>
                     <ul class="header-nav d-none d-md-flex ms-auto" style="font-family: 'Roboto', sans-serif;">
                         <li class="nav-item"><a class="nav-link" href="/artistdash">Dashboard</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/artists">Artist</a></li>
+                        @if ($uType == 2)
+                            <li class="nav-item"><a class="nav-link active" href="/artists">Artist</a></li>
+                        @endif
                         <li class="nav-item"><a class="nav-link active" href="/events">Events</a></li>
                     </ul>
                     <ul class="header-nav ms-3">

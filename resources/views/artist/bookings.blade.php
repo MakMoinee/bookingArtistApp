@@ -195,7 +195,9 @@
                     </ul>
                     <ul class="header-nav d-none d-md-flex ms-auto" style="font-family: 'Roboto', sans-serif;">
                         <li class="nav-item"><a class="nav-link active" href="/artistdash">Dashboard</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/artists">Artist</a></li>
+                        @if ($uType == 2)
+                            <li class="nav-item"><a class="nav-link active" href="/artists">Artist</a></li>
+                        @endif
                         <li class="nav-item"><a class="nav-link" href="/events">Events</a></li>
                     </ul>
                     <ul class="header-nav ms-3">
@@ -447,7 +449,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    @if (date('Y-m-d', strtotime(now() . '+1 day')) == $b['eventdate'])
+                                                                    @if (date('Y-m-d', strtotime(now())) == $b['eventdate'])
                                                                         <button class="btn btn-secondary disabled"
                                                                             style="color:white;">Cancel</button>
                                                                     @else

@@ -218,12 +218,8 @@
                                             <h5 style="padding-left:15px;">SET PROFILE</h5>
                                             <h6 class="text-left"
                                                 style="padding-left:15px;font-family: 'Roboto Thin',sans-serif;filter: drop-shadow(0.5px 0.5px 0.5px #2D2E2E);">
-                                                Lorem
-                                                ipsum dolor sit amet,
-                                                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                                exercitation ullamco
-                                                laboris nisi ut aliquip ex ea commodo consequat.</h6>
+                                                Create your profile with your show description and service, and connect
+                                                with talent buyers.</h6>
                                         </div>
 
                                     </div>
@@ -238,12 +234,8 @@
                                             <h5 style="padding-left:15px;">LET VENUE AND HOST FIND YOU</h5>
                                             <h6 class="text-left"
                                                 style="padding-left:15px;font-family: 'Roboto Thin',sans-serif;filter: drop-shadow(0.5px 0.5px 0.5px #2D2E2E);">
-                                                Lorem
-                                                ipsum dolor sit amet,
-                                                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                                exercitation ullamco
-                                                laboris nisi ut aliquip ex ea commodo consequat.</h6>
+                                                Venue managers, promoters, and private hosts can look for ideal artists
+                                                for their venues using Bukidnon Groove</h6>
                                         </div>
 
                                     </div>
@@ -269,12 +261,8 @@
                                             <h5 style="padding-left:15px;">CREATE</h5>
                                             <h6 class="text-left"
                                                 style="padding-left:15px;font-family: 'Roboto Thin',sans-serif;filter: drop-shadow(0.5px 0.5px 0.5px #2D2E2E);">
-                                                Lorem
-                                                ipsum dolor sit amet,
-                                                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                                exercitation ullamco
-                                                laboris nisi ut aliquip ex ea commodo consequat.
+                                                Find local bands and search available artists of all genres, sizes, and
+                                                budgets.
                                         </div>
                                     </div>
                                     <div class="row" style="margin-top: 50px;">
@@ -288,12 +276,8 @@
                                             <h5 style="padding-left:15px;">CHOOSE</h5>
                                             <h6 class="text-left"
                                                 style="padding-left:15px;font-family: 'Roboto Thin',sans-serif;filter: drop-shadow(0.5px 0.5px 0.5px #2D2E2E);">
-                                                Lorem
-                                                ipsum dolor sit amet,
-                                                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                                exercitation ullamco
-                                                laboris nisi ut aliquip ex ea commodo consequat.
+                                                Only pay after a completed gig and receive and invoice after completing
+                                                gig.
                                         </div>
                                     </div>
                                 </div>
@@ -312,73 +296,35 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body p-3" style="background: #444444;color:white;">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="" class="img-fluid rounded-start" alt="...">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This is a wider card with supporting text below as a
-                                            natural lead-in to additional content. This content is a little bit longer.
-                                        </p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
-                                        </p>
+                @foreach ($bands as $item)
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body p-3" style="background: #444444;color:white;">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="/storage/profiles/{{ $item['bandPic'] }}"
+                                            style="width: 100px;height:100px;"
+                                            class="img-fluid rounded-start avatar-img" alt="...">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ $item['bandName'] }}</h5>
+                                            <p class="card-text">{{ $item['bio'] }}
+                                            </p>
+                                            {{-- <p class="card-text"><small class="text-muted">Last updated 3 mins
+                                                    ago</small>
+                                            </p> --}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body p-3" style="background: #444444;color:white;">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="" class="img-fluid rounded-start" alt="...">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This is a wider card with supporting text below as a
-                                            natural lead-in to additional content. This content is a little bit longer.
-                                        </p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body p-3" style="background: #444444;color:white;">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="" class="img-fluid rounded-start" alt="...">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This is a wider card with supporting text below as a
-                                            natural lead-in to additional content. This content is a little bit longer.
-                                        </p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
             <br>
             {{-- SECOND ROW --}}
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-body p-3" style="background: #444444;color:white;">
@@ -442,7 +388,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </section>
     <div>

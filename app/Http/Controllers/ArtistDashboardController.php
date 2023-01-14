@@ -42,7 +42,8 @@ class ArtistDashboardController extends Controller
 
                 return view('artist.dashboard', [
                     'pic' => $pic,
-                    'events' => $eventsArr
+                    'events' => $eventsArr,
+                    'uType' => $uType
                 ]);
             }
 

@@ -350,7 +350,7 @@
                                         <div class="columnBody">
                                             <div class="form-group">
                                                 <center>
-                                                    <img class="file-upload-image" src="/storage/images/user.png"
+                                                    <img class="file-upload-image avatar-img"  src="/storage/images/user.png"
                                                         alt="" srcset="" width="150px" height="150px"
                                                         style="margin-bottom: 25px;">
                                                     <p>Add Picture <a onclick="fileOpen()"
@@ -383,6 +383,8 @@
                                                 <label for="repertoire" class="for">Repertoire</label>
                                                 <br>
                                                 <select name="reper" id="reper" style="width: 100%;">
+                                                    <option value="Cover">Both</option>
+                                                    <option value="Cover">Originals</option>
                                                     <option value="Cover">Cover</option>
                                                 </select>
                                             </div>
