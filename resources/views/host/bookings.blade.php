@@ -405,7 +405,12 @@
                                                                                                     style="font-family: 'Roboto', sans-serif;">
                                                                                                     Amount To
                                                                                                     Pay:
-                                                                                                    <b>PHP{{ $amount + $amount * 0.12 }}</b>
+
+                                                                                                    @if (array_key_exists($b['eventID'], $amountArr))
+                                                                                                        <b>PHP{{ $amountArr[$b['eventID']] + $amountArr[$b['eventID']] * 0.12 }}</b>
+                                                                                                    @else
+                                                                                                    @endif
+
                                                                                                 </h3>
                                                                                             </div>
                                                                                             <br>

@@ -93,6 +93,7 @@ class BookingsController extends Controller
                 }
 
                 $serviceData = array();
+                $amountArr = array();
                 $amount = 0;
                 foreach ($event as $e) {
                     $s =   $e['services'];
@@ -104,12 +105,14 @@ class BookingsController extends Controller
                                     $arr = $serviceData[$e['eventID']];
                                     array_push($arr, $ss);
                                     $serviceData[$e['eventID']] = $arr;
-                                    $amount += $ss['price'];
+                                    $a = $amountArr[$e['eventID']];
+                                    $a += $ss['price'];
+                                    $amountArr[$e['eventID']] = $a;
                                 } else {
                                     $arr = array();
                                     array_push($arr, $ss);
                                     $serviceData[$e['eventID']] = $arr;
-                                    $amount += $ss['price'];
+                                    $amountArr[$e['eventID']] = $ss['price'];
                                 }
                             }
                         }
@@ -121,12 +124,14 @@ class BookingsController extends Controller
                                         $arr = $serviceData[$e['eventID']];
                                         array_push($arr, $ss);
                                         $serviceData[$e['eventID']] = $arr;
-                                        $amount += $ss['price'];
+                                        $a = $amountArr[$e['eventID']];
+                                        $a += $ss['price'];
+                                        $amountArr[$e['eventID']] = $a;
                                     } else {
                                         $arr = array();
                                         array_push($arr, $ss);
                                         $serviceData[$e['eventID']] = $arr;
-                                        $amount += $ss['price'];
+                                        $amountArr[$e['eventID']] = $ss['price'];
                                     }
                                 }
                             }
@@ -146,7 +151,8 @@ class BookingsController extends Controller
                         'bookings' => $event,
                         'services' => $serviceData,
                         'uType' => $uType,
-                        'amount' => $amount
+                        'amount' => $amount,
+                        'amountArr'=> $amountArr
                     ]);
                 } else {
                     return view('host.bookings', [
@@ -154,7 +160,8 @@ class BookingsController extends Controller
                         'bookings' => $event,
                         'services' => $serviceData,
                         'uType' => $uType,
-                        'amount' => $amount
+                        'amount' => $amount,
+                        'amountArr'=> $amountArr
                     ]);
                 }
             }
