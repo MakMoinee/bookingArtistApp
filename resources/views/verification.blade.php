@@ -252,8 +252,86 @@
         </header>
         <div class="body flex-grow-1 px-3" style="background: #504c4c; padding-top: 20px;">
             <div class="container-lg">
-                <div class="row">
-                </div>
+
+                @if ($isDoneVerify)
+                    <div class="row">
+                        <h3 style="font-family: 'Bebas Neue', cursive;color:white;">Waiting for Admin to Approve
+                            Verification</h3>
+                    </div>
+                @else
+                    <div class="row">
+                        <h3 style="font-family: 'Bebas Neue', cursive;color:white;">Apply for Verification</h3>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12 ">
+                            <center>
+                                <div class="col-lg-6">
+                                    <div class="card mb-4" style="background: #e3e2da;width: 100%">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <form action="/verify" method="POST" enctype="multipart/form-data">
+                                                    @csrf
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <label for="idnum" class="for"
+                                                                style="font-family: 'Roboto', sans-serif;text-align: start">
+                                                                <b>ID
+                                                                    Number:</b></label>
+                                                            <br>
+                                                            <input required class="form-control" required
+                                                                type="number" name="idnumber" id=""
+                                                                style="margin-left: 10px;margin-top: 10px; width: 40%;">
+
+                                                        </div>
+                                                        <br>
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <label for="idname" class="for"
+                                                                    style="font-family: 'Roboto', sans-serif;text-align: start">
+                                                                    <b>Valid ID Owner's Name:</b></label>
+                                                                <br>
+                                                                <input required class="form-control" required
+                                                                    type="text" name="idname" id=""
+                                                                    style="margin-left: 10px;margin-top: 10px; width: 40%;">
+
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row">
+                                                            <label for="idpic" class="for"
+                                                                style="font-family: 'Roboto', sans-serif;text-align: start"><b>ID
+                                                                    Picture:</b></label>
+                                                            <img class="file-upload-image " src="/images/person.svg"
+                                                                alt="" srcset=""
+                                                                style="width: 150px;height: 150px;">
+                                                            <br>
+                                                            <br>
+                                                            <div class="row">
+                                                                <input class="form-control" required type="file"
+                                                                    name="files" id=""
+                                                                    accept=".jpg, .png, .jpeg, .svg"
+                                                                    style="margin-left: 10px;margin-top: 10px;width:300px;height:40px;"
+                                                                    onchange="readURL(this)">
+                                                            </div>
+
+                                                        </div>
+                                                        <br>
+                                                        <div class="row">
+                                                            <button class="btn btn-primary" type="submit">Submit
+                                                                Verification</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </center>
+                        </div>
+                    </div>
+                @endif
+
 
             </div>
         </div>
@@ -285,20 +363,67 @@
             </div>
         </div>
 
-        @if (session()->pull('successLogin'))
+        @if (session()->pull('successAddVerify'))
             <script>
                 setTimeout(() => {
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
-                        title: 'Login Successfully',
+                        title: 'Successfully Added Verification',
                         showConfirmButton: false,
                         timer: 800
                     });
                 }, 500);
             </script>;
-            {{ session()->forget('successLogin') }}
+            {{ session()->forget('successAddVerify') }}
         @endif
+
+        @if (session()->pull('errorAddVerify'))
+            <script>
+                setTimeout(() => {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'warning',
+                        title: 'Failed To Add Verification',
+                        showConfirmButton: false,
+                        timer: 800
+                    });
+                }, 500);
+            </script>;
+            {{ session()->forget('errorAddVerify') }}
+        @endif
+
+        <script>
+            function fileOpen() {
+                let tFile = document.getElementById("mFile");
+                tFile.click();
+            }
+
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        // $('.image-upload-wrap').hide();
+
+                        $('.file-upload-image').attr('src', e.target.result);
+                        // $('.file-upload-content').show();
+
+                        // $('.image-title').html(input.files[0].name);
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+
+                } else {
+                    removeUpload();
+                }
+            }
+
+            function removeUpload() {
+                $('.file-upload-image').attr('src', '/storage/images/user.png');
+            }
+        </script>
 </body>
 
 </html>

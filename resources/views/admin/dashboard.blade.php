@@ -164,11 +164,18 @@
                     <ul class="header-nav d-none d-md-flex ms-auto" style="font-family: 'Roboto', sans-serif;">
                         {{--  --}}
                     </ul>
-                    <ul class="header-nav ms-3" style="font-family: 'Roboto', sans-serif;">
+                    <ul class="header-nav ms-3">
                         <li class="nav-item dropdown"><a class="nav-link py-0" data-coreui-toggle="dropdown"
                                 href="https://coreui.io/demos/bootstrap/4.2/free/#" role="button"
                                 aria-haspopup="true" aria-expanded="false">
-                                Admin
+                                <div class="avatar avatar-md">
+                                    @if ($pic == '')
+                                        <img class="avatar-img" src="/images/person.svg" alt="user@email.com">
+                                    @else
+                                        <img class="avatar-img" src="/storage/profiles/{{ $pic }}"
+                                            alt="user@email.com">
+                                    @endif
+                                </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end pt-0">
 

@@ -73,7 +73,7 @@ class EventsController extends Controller
                 ]);
             }
 
-            if ($uType == 2) {
+            if ($uType == 2 || $uType == 0) {
                 $queryResult = DB::table('profiles')->where(['userID' => $uid])->get();
                 $pic = "";
                 if (count($queryResult) > 0) {
@@ -111,15 +111,27 @@ class EventsController extends Controller
                 $queryResult = DB::table('vwalleventsforhost')->where([['status', '<>', 3]])->get();
                 $event = json_decode($queryResult, true);
 
-                return view('artist.events', [
-                    'pic' => $pic,
-                    'allnames' => $allnames,
-                    'idData' => $idData,
-                    'bandData' => $bandData,
-                    'serviceMap' => $serviceMap,
-                    'events' => $event,
-                    'uType' => $uType
-                ]);
+                if ($uType == 0) {
+                    return view('admin.events', [
+                        'pic' => $pic,
+                        'allnames' => $allnames,
+                        'idData' => $idData,
+                        'bandData' => $bandData,
+                        'serviceMap' => $serviceMap,
+                        'events' => $event,
+                        'uType' => $uType
+                    ]);
+                } else {
+                    return view('artist.events', [
+                        'pic' => $pic,
+                        'allnames' => $allnames,
+                        'idData' => $idData,
+                        'bandData' => $bandData,
+                        'serviceMap' => $serviceMap,
+                        'events' => $event,
+                        'uType' => $uType
+                    ]);
+                }
             }
         } else {
             return redirect("/");

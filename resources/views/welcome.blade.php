@@ -76,7 +76,7 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#">Home</a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="#">Artist</a>
                         </li>
                         <li class="nav-item">
@@ -84,7 +84,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">About</a>
-                        </li>
+                        </li> --}}
                     </ul>
                     <div class="d-flex" style="background: #afafafc5">
                         <button
@@ -309,6 +309,9 @@
                                     <div class="col-md-8">
                                         <div class="card-body">
                                             <h5 class="card-title">{{ $item['bandName'] }}</h5>
+                                            <p class="card-text">{{ $item['artistType'] }}
+                                            </p>
+                                            <br>
                                             <p class="card-text">{{ $item['bio'] }}
                                             </p>
                                             {{-- <p class="card-text"><small class="text-muted">Last updated 3 mins

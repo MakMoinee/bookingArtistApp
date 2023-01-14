@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Verified;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,6 +21,12 @@ class VerifyController extends Controller
             $uType = $user['userType'];
             $uid = $user['userID'];
 
+            $isSubmittedVerify = false;
+            $queryResult2 = DB::table('verifieds')->where([['userID' ,'=', $uid]])->get();
+            if (count($queryResult2) > 0) {
+                $isSubmittedVerify = true;
+            }
+
             if ($uType == 3) {
                 $queryResult = DB::table('band_profiles')->where(['userID' => $uid])->get();
                 $pic = "";
@@ -37,7 +44,8 @@ class VerifyController extends Controller
             }
             return view('verification', [
                 'pic' => $pic,
-                'uType' => $uType
+                'uType' => $uType,
+                'isDoneVerify' => $isSubmittedVerify
             ]);
         } else {
             return redirect("/");
@@ -62,7 +70,38 @@ class VerifyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (session()->exists("users")) {
+            $user = session()->pull("users");
+            session()->put("users", $user);
+            $uid = $user['userID'];
+            $file = $request->file('files');
+
+            if ($file) {
+                $mimetype = $file->getMimeType();
+
+                if ($mimetype == "image/jpg" || $mimetype == "image/jpeg" || $mimetype == "image/png" || $mimetype == "image/bitmap") {
+                    $destinationPath = $_SERVER['DOCUMENT_ROOT'] . '/storage/ids';
+                    $fileName = $uid . "" . date('ymd', strtotime(now())) . "." . $file->getClientOriginalExtension();
+                    $isFile = $file->move($destinationPath,  $fileName);
+                }
+                $verify = new Verified();
+                $verify->userID = $user['userID'];
+                $verify->idnumber = $request->idnumber;
+                $verify->name = $request->idname;
+                $verify->idPic = $fileName;
+                $isSave = $verify->save();
+                if ($isSave) {
+                    session()->put('successAddVerify', true);
+                } else {
+                    session()->put('errorAddVerify', true);
+                }
+            } else {
+                session()->put('errorFileRequire', true);
+            }
+            return redirect("/verify");
+        } else {
+            return redirect("/");
+        }
     }
 
     /**

@@ -32,7 +32,7 @@
     <script type="text/javascript" async="" src="./Dashboard_files/fbevents.js.download"></script>
     <script type="text/javascript" async="" src="./Dashboard_files/analytics.js.download"></script>
     <script async="" src="./Dashboard_files/gtm.js.download"></script>
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         (function(w, d, s, l, i) {
             w[l] = w[l] || [];
@@ -54,7 +54,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         .sidebar {
             --cui-sidebar-bg: #5F939A !important;
@@ -67,6 +66,7 @@
             color: white !important;
         }
     </style>
+
 </head>
 
 <body>
@@ -88,7 +88,7 @@
                                 <li class="nav-item">
                                     <a href="#"></a>
                                 </li>
-                                <li class="nav-item"><a class="nav-link active" href="/artistdash">
+                                <li class="nav-item"><a class="nav-link" href="/admin">
                                         <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="16"
                                             height="16" fill="currentColor" class="bi bi-speedometer2"
                                             viewBox="0 0 16 16">
@@ -108,7 +108,7 @@
                                             <path
                                                 d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
                                         </svg> View Bookings</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/events">
+                                <li class="nav-item"><a class="nav-link active" href="/events">
                                         <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="16"
                                             height="16" fill="currentColor" class="bi bi-calendar4-event"
                                             viewBox="0 0 16 16">
@@ -163,7 +163,7 @@
                         {{--  --}}
                     </ul>
                     <ul class="header-nav d-none d-md-flex ms-auto" style="font-family: 'Roboto', sans-serif;">
-                        {{--  --}}
+
                     </ul>
                     <ul class="header-nav ms-3">
                         <li class="nav-item dropdown"><a class="nav-link py-0" data-coreui-toggle="dropdown"
@@ -202,108 +202,73 @@
 
             </div>
         </header>
-        <div class="body flex-grow-1 px-3" style="background: #EDEDED; padding-top: 20px;">
+        <div class="body flex-grow-1 px-3" style="background: #504c4c; padding-top: 20px;">
             <div class="container-lg">
                 <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-5"
+                            style="float: left;margin-right: 20px;font-family: 'Bebas Neue', cursive;color:white;">
+                            <h1>Events</h1>
+                            <h6 style="margin-top: -10px;font-family: 'Roboto', sans-serif;">
+                                {{ date('M d, Y', strtotime(now())) }}</h6>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+
+                <div class="row">
                     <div class="col-lg-12">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="card mb-4">
+                        @foreach ($events as $e)
+                            <div class="col-lg-5" style="float:left;margin-right: 20px;">
+                                <div class="card mb-4" style="background: #e3e2da;">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <div class="table-responsive">
-                                                    <table class="table border mb-0">
-                                                        <thead class="table-light fw-semibold">
-                                                            <tr class="align-middle">
-                                                                <th>
-                                                                    ID Owner
-                                                                </th>
-                                                                <th>
-                                                                    ID Number
-                                                                </th>
-                                                                <th>
-                                                                    Band/Artist
-                                                                </th>
-                                                                <th>
-                                                                    ID Pic
-                                                                </th>
-
-                                                                <th>
-                                                                    Action
-                                                                </th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @foreach ($verifieds as $item)
-                                                                <tr>
-                                                                    <td>
-                                                                        {{ $item['name'] }}
-                                                                    </td>
-                                                                    <td>
-                                                                        {{ $item['idnumber'] }}
-                                                                    </td>
-                                                                    <td>
-                                                                        {{ $item['bandName'] }}
-                                                                    </td>
-                                                                    <td>
-                                                                        <a target="_blank"
-                                                                            href="/storage/ids/{{ $item['idPic'] }}">View
-                                                                            Picture</a>
-                                                                    </td>
-                                                                    <td>
-                                                                        <button class="btn btn-info"
-                                                                            style="color:white;"
-                                                                            data-coreui-toggle="modal"
-                                                                            data-coreui-target="#approveModal{{ $item['verifyID'] }}">Approve</button>
-                                                                        <div class="modal fade"
-                                                                            id="approveModal{{ $item['verifyID'] }}"
-                                                                            tabindex="-1" role="dialog"
-                                                                            aria-labelledby="approveModalLabel{{ $item['verifyID'] }}"
-                                                                            aria-hidden="true">
-                                                                            <div class="modal-dialog" role="document">
-                                                                                <div class="modal-content">
-                                                                                    <form
-                                                                                        action="{{ route('adminverify.update', ['adminverify' => $item['verifyID']]) }}"
-                                                                                        method="POST">
-                                                                                        @method('put');
-                                                                                        @csrf
-                                                                                        <div class="modal-body">
-                                                                                            <h5 class="modal-title"
-                                                                                                id="approveModalLabel">
-                                                                                                Do you want to proceed
-                                                                                                approving verification ?
-                                                                                            </h5>
-                                                                                            <input type="hidden"
-                                                                                                name="profileID"
-                                                                                                value="{{ $item['profileID'] }}">
-                                                                                        </div>
-                                                                                        <div class="modal-footer">
-                                                                                            <button type="submit"
-                                                                                                class="btn btn-primary">Yes,
-                                                                                                Proceed</button>
-                                                                                            <button type="button"
-                                                                                                class="btn btn-secondary"
-                                                                                                data-coreui-dismiss="modal">Close</button>
-                                                                                        </div>
-                                                                                    </form>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <button class="btn btn-danger"
-                                                                            style="color:white;">Disapprove</button>
-                                                                    </td>
-                                                                </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
+                                                <div class="row">
+                                                    <center>
+                                                        <img style="height: 150px; width: 100%"
+                                                            src="/images/landingpageimg.jpg" alt=""
+                                                            srcset="">
+                                                    </center>
                                                 </div>
+                                                <br>
+                                                <div class="row">
+                                                    <h5>{{ $e['bandName'] }} at {{ $e['location'] }}</h5>
+                                                </div>
+                                                <br>
+                                                <div class="row">
+                                                    <h6 style="font-size: 15px;"><i class="bi bi-geo-alt-fill"
+                                                            style="margin-right: 5px;"></i>{{ $e['location'] }}
+                                                    </h6>
+                                                </div>
+                                                <div class="row">
+                                                    <h6 style="font-size: 15px;"><i class="bi bi-calendar3-event-fill"
+                                                            style="margin-right: 5px;"></i>{{ $e['eventdate'] }}
+                                                    </h6>
+                                                </div>
+                                                <div class="row">
+                                                    <h6 style="font-size: 15px;"><i class="bi bi-person-fill"
+                                                            style="margin-right: 5px;"></i>{{ $e['bandName'] }}
+                                                    </h6>
+                                                </div>
+                                                <br>
+                                                {{-- <div class="row">
+                                                    <h6 style="font-size:15px;">Lorem ipsum dolor sit amet consectetur
+                                                        adipisicing elit. Perspiciatis harum voluptate inventore maxime
+                                                        facilis! Magnam aut, dolore voluptatibus consequuntur dolor
+                                                        quae?
+                                                        Impedit, pariatur neque ut molestiae alias est rerum
+                                                        repellendus.
+                                                    </h6>
+                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
+
                     </div>
                 </div>
             </div>
@@ -317,6 +282,8 @@
         <script src="./Dashboard_files/coreui-utils.js.download"></script>
         <script src="./Dashboard_files/main.js.download"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
 
         <div class="modal fade" id="logOutModal" tabindex="-1" role="dialog" aria-labelledby="logOutModalLabel"
             aria-hidden="true">
@@ -336,35 +303,97 @@
             </div>
         </div>
 
-        @if (session()->pull('successUpdateApprove'))
+        @if (session()->pull('successUpdateConfirm'))
             <script>
                 setTimeout(() => {
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
-                        title: 'Successfully Approved Verification',
+                        title: 'Successfully Confirmed Book',
                         showConfirmButton: false,
                         timer: 800
                     });
                 }, 500);
             </script>;
-            {{ session()->forget('successUpdateApprove') }}
+            {{ session()->forget('successUpdateConfirm') }}
         @endif
 
-        @if (session()->pull('errorUpdateApprove'))
+        @if (session()->pull('errorUpdateConfirm'))
             <script>
                 setTimeout(() => {
                     Swal.fire({
                         position: 'center',
                         icon: 'warning',
-                        title: 'Failed To Approve Verification, Please Try Again Later',
+                        title: 'Failed to Confirm Book',
                         showConfirmButton: false,
                         timer: 800
                     });
                 }, 500);
             </script>;
-            {{ session()->forget('errorUpdateApprove') }}
+            {{ session()->forget('errorUpdateConfirm') }}
         @endif
+
+        @if (session()->pull('successCancel'))
+            <script>
+                setTimeout(() => {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Successfully Cancelled Book',
+                        showConfirmButton: false,
+                        timer: 800
+                    });
+                }, 500);
+            </script>;
+            {{ session()->forget('successCancel') }}
+        @endif
+
+        @if (session()->pull('errorCancel'))
+            <script>
+                setTimeout(() => {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'warning',
+                        title: 'Failed to Cancel Book',
+                        showConfirmButton: false,
+                        timer: 800
+                    });
+                }, 500);
+            </script>;
+            {{ session()->forget('errorCancel') }}
+        @endif
+
+
+        @if (session()->pull('successDone'))
+            <script>
+                setTimeout(() => {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Successfully Done Book',
+                        showConfirmButton: false,
+                        timer: 800
+                    });
+                }, 500);
+            </script>;
+            {{ session()->forget('successDone') }}
+        @endif
+
+        @if (session()->pull('errorDone'))
+            <script>
+                setTimeout(() => {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'warning',
+                        title: 'Failed to Mark Book As Done',
+                        showConfirmButton: false,
+                        timer: 800
+                    });
+                }, 500);
+            </script>;
+            {{ session()->forget('errorDone') }}
+        @endif
+
 </body>
 
 </html>

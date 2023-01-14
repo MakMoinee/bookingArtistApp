@@ -158,20 +158,20 @@
                             <a class="nav-link" aria-current="page" href="/"
                                 style="color:#FFFFFF !important;">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" style="color:#FFFFFF !important;">Artist</a>
+                        {{-- <li class="nav-item">
+                            <a class="nav-link" href="#">Artist</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" style="color:#FFFFFF !important;">Events</a>
+                            <a class="nav-link" href="#">Events</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" style="color:#FFFFFF !important;">About</a>
-                        </li>
+                            <a class="nav-link" href="#">About</a>
+                        </li> --}}
                     </ul>
-                    <div class="d-flex" style="background: #464646">
+                     {{-- <div class="d-flex" style="background: #464646">
                         <a class="rounded-pill"
                             style="margin-left: 20px;background: #5F939A;font-family: 'Roboto',sans-serif;color: #FFFFFF;text-decoration:none;padding-left:15px;padding-right:15px;padding-top: 5px;padding-bottom: 5px;">Login</a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </nav>

@@ -297,6 +297,9 @@
                                                             Artist
                                                         </th>
                                                         <th>
+                                                            Host
+                                                        </th>
+                                                        <th>
                                                             Event
                                                         </th>
                                                         <th>
@@ -323,6 +326,7 @@
                                                     @foreach ($bookings as $b)
                                                         <tr>
                                                             <td>{{ $b['bandName'] }}</td>
+                                                            <td>{{ $b['company'] }}</td>
                                                             <td>{{ $b['eventname'] }}</td>
                                                             <td>{{ $b['eventdate'] }} /
                                                                 {{ $b['fromTime'] }}-{{ $b['toTime'] }}</td>
@@ -502,47 +506,49 @@
                                                                     </div>
                                                                 @endif
 
-                                                                @if (date('Y-m-d', strtotime(now())) == $b['eventdate'])
-                                                                    <button class="btn btn-secondary disabled"
-                                                                        style="color:white;">Cancel</button>
-                                                                @else
-                                                                    <a href="#" data-coreui-toggle="modal"
-                                                                        data-coreui-target="#cancelModal{{ $b['eventID'] }}"><button
-                                                                            class="btn btn-danger"
-                                                                            style="color:white;">Cancel</button></a>
-                                                                    <div class="modal fade"
-                                                                        id="cancelModal{{ $b['eventID'] }}"
-                                                                        tabindex="-1" role="dialog"
-                                                                        aria-labelledby="cancelModalLabel{{ $b['eventID'] }}"
-                                                                        aria-hidden="true">
-                                                                        <div class="modal-dialog" role="document">
-                                                                            <div class="modal-content">
-                                                                                <form
-                                                                                    action="{{ route('bookings.update', ['booking' => 1]) }}"
-                                                                                    method="POST">
-                                                                                    @method('put')
-                                                                                    @csrf
-                                                                                    <div class="modal-body">
-                                                                                        <h5 class="modal-title"
-                                                                                            id="cancelModalLabel{{ $b['eventID'] }}">
-                                                                                            Do
-                                                                                            you want to proceed
-                                                                                            Cancelling book?</h5>
-                                                                                    </div>
-                                                                                    <div class="modal-footer">
-                                                                                        <button type="submit"
-                                                                                            class="btn btn-primary"
-                                                                                            name="btnUpdateCancel"
-                                                                                            value="yes">Yes,
-                                                                                            Proceed</button>
-                                                                                        <button type="button"
-                                                                                            class="btn btn-secondary"
-                                                                                            data-coreui-dismiss="modal">Close</button>
-                                                                                    </div>
-                                                                                </form>
+                                                                @if ($b['status'] == 2)
+                                                                    @if (date('Y-m-d', strtotime(now())) == $b['eventdate'])
+                                                                        <button class="btn btn-secondary disabled"
+                                                                            style="color:white;">Cancel</button>
+                                                                    @else
+                                                                        <a href="#" data-coreui-toggle="modal"
+                                                                            data-coreui-target="#cancelModal{{ $b['eventID'] }}"><button
+                                                                                class="btn btn-danger"
+                                                                                style="color:white;">Cancel</button></a>
+                                                                        <div class="modal fade"
+                                                                            id="cancelModal{{ $b['eventID'] }}"
+                                                                            tabindex="-1" role="dialog"
+                                                                            aria-labelledby="cancelModalLabel{{ $b['eventID'] }}"
+                                                                            aria-hidden="true">
+                                                                            <div class="modal-dialog" role="document">
+                                                                                <div class="modal-content">
+                                                                                    <form
+                                                                                        action="{{ route('bookings.update', ['booking' => 1]) }}"
+                                                                                        method="POST">
+                                                                                        @method('put')
+                                                                                        @csrf
+                                                                                        <div class="modal-body">
+                                                                                            <h5 class="modal-title"
+                                                                                                id="cancelModalLabel{{ $b['eventID'] }}">
+                                                                                                Do
+                                                                                                you want to proceed
+                                                                                                Cancelling book?</h5>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="submit"
+                                                                                                class="btn btn-primary"
+                                                                                                name="btnUpdateCancel"
+                                                                                                value="yes">Yes,
+                                                                                                Proceed</button>
+                                                                                            <button type="button"
+                                                                                                class="btn btn-secondary"
+                                                                                                data-coreui-dismiss="modal">Close</button>
+                                                                                        </div>
+                                                                                    </form>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
+                                                                    @endif
                                                                 @endif
 
                                                             </td>

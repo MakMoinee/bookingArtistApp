@@ -81,7 +81,7 @@ class BookingsController extends Controller
                 ]);
             }
 
-            if ($uType == 2) {
+            if ($uType == 2 || $uType == 0) {
                 $queryResult = DB::table('vwalleventsforbands')->where([['hostUserID', '=', $uid]])->get();
                 $event = json_decode($queryResult, true);
 
@@ -140,13 +140,23 @@ class BookingsController extends Controller
                 //     'services' => $serviceData
                 // ]);
 
-                return view('host.bookings', [
-                    'pic' => $pic,
-                    'bookings' => $event,
-                    'services' => $serviceData,
-                    'uType' => $uType,
-                    'amount' => $amount
-                ]);
+                if ($uType == 0) {
+                    return view('admin.bookings', [
+                        'pic' => $pic,
+                        'bookings' => $event,
+                        'services' => $serviceData,
+                        'uType' => $uType,
+                        'amount' => $amount
+                    ]);
+                } else {
+                    return view('host.bookings', [
+                        'pic' => $pic,
+                        'bookings' => $event,
+                        'services' => $serviceData,
+                        'uType' => $uType,
+                        'amount' => $amount
+                    ]);
+                }
             }
         } else {
             return redirect("/");

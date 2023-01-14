@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminVerifyController;
 use App\Http\Controllers\ArtistDashboardController;
 use App\Http\Controllers\ArtistsController;
 use App\Http\Controllers\BandProfileController;
@@ -46,3 +47,4 @@ Route::resource("/events", EventsController::class);
 Route::resource("/hostdash", HostController::class);
 Route::resource("/invoice", InvoiceController::class);
 Route::resource("/verify", VerifyController::class);
+Route::resource("/adminverify", AdminVerifyController::class);
