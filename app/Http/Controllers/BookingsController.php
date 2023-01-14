@@ -218,8 +218,7 @@ class BookingsController extends Controller
         if (session()->exists("users")) {
             $user = session()->pull("users");
             session()->put("users", $user);
-
-            dd($request);
+            // dd($request);
             if ($request->btnUpdateConfirm) {
                 $affectedRows = DB::table('events')->where(['eventID' => $id])->update([
                     'status' => 2
